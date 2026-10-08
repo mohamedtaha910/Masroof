@@ -34,7 +34,8 @@ class MyApp extends StatelessWidget {
             textTheme: GoogleFonts.poppinsTextTheme(
               Theme.of(context).textTheme,
             ),
-            fontFamily: 'Poppins',
+
+            // fontFamily: 'Poppins',
           ),
 
           routerConfig: AppRoutes.router,

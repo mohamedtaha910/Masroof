@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:masroof/features/auth/presentation/pages/login_page.dart';
+import 'package:masroof/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:masroof/features/home/Presentation/pages/home_page.dart';
 import 'package:masroof/features/splash/Presentation/pages/on_boarding2_page.dart';
 import 'package:masroof/features/splash/Presentation/pages/on_boarding_page.dart';
@@ -9,6 +11,8 @@ abstract class AppRoutes {
   static const kHomePage = '/homePage';
   static const kOnBoarding1 = '/onBoarding1';
   static const kOnBoarding2 = '/onBoarding2';
+  static const kLoginPage = '/onLogin';
+  static const kSignUpPage = '/signUp';
 
   static final GoRouter router = GoRouter(
     routes: <RouteBase>[
@@ -28,6 +32,18 @@ abstract class AppRoutes {
         path: kOnBoarding2,
         pageBuilder: (context, state) {
           return const MaterialPage(child: OnBoarding2Page());
+        },
+      ),
+      GoRoute(
+        path: kLoginPage,
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: LoginPage());
+        },
+      ),
+      GoRoute(
+        path: kSignUpPage,
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: SignUpPage());
         },
       ),
       GoRoute(

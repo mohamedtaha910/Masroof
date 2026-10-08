@@ -60,7 +60,8 @@ class OnBoardingPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 10.sp,
                   color: Colors.black54,
-                  fontWeight: FontWeight.w100,
+
+                  // fontWeight: FontWeight.,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -80,7 +81,7 @@ class OnBoardingPage extends StatelessWidget {
                       'Get Started',
                       style: TextStyle(
                         fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w100,
                         color: Colors.white,
                       ),
                       textAlign: TextAlign.center,

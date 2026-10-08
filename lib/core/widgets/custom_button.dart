@@ -11,6 +11,7 @@ class CustomButton extends StatelessWidget {
     required this.verticalPadding,
     required this.onTap,
     this.border,
+    this.width,
   });
 
   final Color color;
@@ -20,13 +21,14 @@ class CustomButton extends StatelessWidget {
   final double verticalPadding;
   final void Function() onTap;
   final BoxBorder? border;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        // width: MediaQuery.of(context).size.width,
+        width: width,
         // margin: EdgeInsets.only(top: 20),
         padding: EdgeInsets.symmetric(
           horizontal: horizontalPadding.w,

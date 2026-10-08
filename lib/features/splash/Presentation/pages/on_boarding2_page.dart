@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:go_router/go_router.dart';
 import 'package:masroof/core/utils/app_colors.dart';
+import 'package:masroof/core/utils/app_routes.dart';
 import 'package:masroof/core/widgets/custom_button.dart';
 
 class OnBoarding2Page extends StatelessWidget {
@@ -17,8 +18,8 @@ class OnBoarding2Page extends StatelessWidget {
         title: CustomButton(
           color: Colors.grey.shade100,
           borderRadius: 200,
-          horizontalPadding: 4,
-          verticalPadding: 4,
+          horizontalPadding: 3,
+          verticalPadding: 3,
           onTap: () {
             GoRouter.of(context).pop();
           },
@@ -90,7 +91,7 @@ class OnBoarding2Page extends StatelessWidget {
                 horizontalPadding: 20,
                 verticalPadding: 10,
                 onTap: () {
-                  // GoRouter.of(context).push();
+                  GoRouter.of(context).push(AppRoutes.kLoginPage);
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
