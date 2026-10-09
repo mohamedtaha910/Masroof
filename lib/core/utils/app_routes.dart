@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:masroof/features/auth/presentation/pages/login_page.dart';
-import 'package:masroof/features/auth/presentation/pages/sign_up_page.dart';
+import 'package:masroof/features/auth/presentation/views/pages/login_page.dart';
+import 'package:masroof/features/auth/presentation/views/pages/sign_up_page.dart';
 import 'package:masroof/features/home/Presentation/pages/home_page.dart';
 import 'package:masroof/features/splash/Presentation/pages/on_boarding2_page.dart';
 import 'package:masroof/features/splash/Presentation/pages/on_boarding_page.dart';

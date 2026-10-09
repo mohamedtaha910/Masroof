@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "145262125390",
+    "project_id": "masroof-661cb",
+    "storage_bucket": "masroof-661cb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145262125390:android:0360cddb179b35f96cbe1f",
+        "android_client_info": {
+          "package_name": "com.example.masroof"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAHSjnTC3tSj0nhGopPAyhMPHn-Yt7m8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

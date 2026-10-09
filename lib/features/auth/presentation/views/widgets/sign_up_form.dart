@@ -5,9 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/utils/app_routes.dart';
 import 'package:masroof/core/widgets/custom_button.dart';
-import 'package:masroof/features/auth/presentation/widgets/auth_text_feild.dart';
-import 'package:masroof/features/auth/presentation/widgets/custom_shift.dart';
-import 'package:masroof/features/auth/presentation/widgets/other_way.dart';
+import 'package:masroof/features/auth/presentation/views/widgets/auth_text_feild.dart';
+import 'package:masroof/features/auth/presentation/views/widgets/custom_shift.dart';
+import 'package:masroof/features/auth/presentation/views/widgets/other_way.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({super.key});

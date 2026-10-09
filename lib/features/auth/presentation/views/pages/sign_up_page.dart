@@ -1,26 +1,23 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-import 'package:go_router/go_router.dart';
 import 'package:masroof/core/utils/app_colors.dart';
-import 'package:masroof/core/widgets/custom_button.dart';
-import 'package:masroof/features/auth/presentation/widgets/auth_body.dart';
-import 'package:masroof/features/auth/presentation/widgets/login_form.dart';
+import 'package:masroof/features/auth/presentation/views/widgets/auth_body.dart';
+import 'package:masroof/features/auth/presentation/views/widgets/sign_up_form.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
-        if (!currentFocus.hasPrimaryFocus) {
-          currentFocus.unfocus();
-        }
-      },
-      child: Scaffold(
-        body: SingleChildScrollView(
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+          }
+        },
+
+        child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: ConstrainedBox(
             constraints: BoxConstraints(
@@ -39,7 +36,7 @@ class LoginPage extends StatelessWidget {
                   ],
                 ),
               ),
-              child: AuthBody(formWidget: LoginForm()),
+              child: AuthBody(formWidget: SignUpForm()),
             ),
           ),
         ),
@@ -47,5 +44,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-
-
