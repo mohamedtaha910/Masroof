@@ -9,8 +9,8 @@ import 'package:masroof/features/auth/presentation/widgets/auth_text_feild.dart'
 import 'package:masroof/features/auth/presentation/widgets/custom_shift.dart';
 import 'package:masroof/features/auth/presentation/widgets/other_way.dart';
 
-class LoginForm extends StatelessWidget {
-  const LoginForm({super.key});
+class SignUpForm extends StatelessWidget {
+  const SignUpForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +28,39 @@ class LoginForm extends StatelessWidget {
         children: [
           SizedBox(height: 6.h),
           SvgPicture.asset(
-            'assets/auth_icons/Log_in_word.svg',
+            'assets/auth_icons/Sign_Up_word.svg',
             height: 26.h,
             colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn),
           ),
           SizedBox(height: 5.h),
           Text(
-            'Welcome back! Login to your account',
+            'Create an account to get started',
             style: TextStyle(fontSize: 12.sp, color: Colors.black38),
           ),
           SizedBox(height: 38.h),
+          Text(
+            'Full Name',
+            style: GoogleFonts.poppins(
+              fontSize: 13.sp,
+              fontWeight: FontWeight.w400,
+              color: Colors.grey.shade800,
+            ),
+          ),
+
+          SizedBox(height: 10.h),
+          AuthTextFeild(
+            height: 10,
+            hintText: 'Your Name',
+            // icon: Icons.email,
+            icon: Icons.person,
+            onChanged: (value) {
+              // email = value;
+            },
+            borderRadius: 100,
+            obscureText: false,
+            paddign: 0,
+          ),
+          SizedBox(height: 16.h),
           Text(
             'Email address',
             style: GoogleFonts.poppins(
@@ -105,7 +128,7 @@ class LoginForm extends StatelessWidget {
             },
             horizontalPadding: 10,
             child: Text(
-              'Log in',
+              'Sign Up',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 13.h,
@@ -118,9 +141,9 @@ class LoginForm extends StatelessWidget {
           OtherWay(),
           SizedBox(height: 24.h),
           CustomShift(
-            destination: AppRoutes.kSignUpPage,
-            text: 'Register Now',
-            text2: 'Don\'t have an account?  ',
+            destination: AppRoutes.kLoginPage,
+            text: 'Log In',
+            text2: 'Already have an account?  ',
           ),
           SizedBox(height: 8.h),
         ],

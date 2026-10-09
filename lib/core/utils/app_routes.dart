@@ -19,13 +19,13 @@ abstract class AppRoutes {
       GoRoute(
         path: '/',
         pageBuilder: (context, state) {
-          return slideTransitionPage(child: const SplashPage());
+          return MaterialPage(child: const SplashPage());
         },
       ),
       GoRoute(
         path: kOnBoarding1,
         pageBuilder: (context, state) {
-          return slideTransitionPage(child: const OnBoardingPage());
+          return MaterialPage(child: const OnBoardingPage());
         },
       ),
       GoRoute(
@@ -49,32 +49,32 @@ abstract class AppRoutes {
       GoRoute(
         path: kHomePage,
         pageBuilder: (context, state) {
-          return slideTransitionPage(child: const HomePage());
+          return const MaterialPage(child: HomePage());
         },
       ),
     ],
   );
 
-  static CustomTransitionPage<T> slideTransitionPage<T>({
-    required Widget child,
-  }) {
-    return CustomTransitionPage<T>(
-      child: child,
+  // static CustomTransitionPage<T> slideTransitionPage<T>({
+  //   required Widget child,
+  // }) {
+  //   return CustomTransitionPage<T>(
+  //     child: child,
 
-      transitionDuration: const Duration(milliseconds: 200),
-      reverseTransitionDuration: const Duration(milliseconds: 150),
+  //     transitionDuration: const Duration(milliseconds: 200),
+  //     reverseTransitionDuration: const Duration(milliseconds: 150),
 
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(1.0, 0.0);
-        const end = Offset.zero;
+  //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+  //       const begin = Offset(1.0, 0.0);
+  //       const end = Offset.zero;
 
-        final tween = Tween<Offset>(
-          begin: begin,
-          end: end,
-        ).chain(CurveTween(curve: Curves.easeOutCubic));
+  //       final tween = Tween<Offset>(
+  //         begin: begin,
+  //         end: end,
+  //       ).chain(CurveTween(curve: Curves.easeOutCubic));
 
-        return SlideTransition(position: animation.drive(tween), child: child);
-      },
-    );
-  }
+  //       return SlideTransition(position: animation.drive(tween), child: child);
+  //     },
+  //   );
+  // }
 }

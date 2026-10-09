@@ -70,7 +70,7 @@ class _AuthTextFeildState extends State<AuthTextFeild> {
           ),
 
           // fillColor: Colors.grey.withAlpha(20),
-          fillColor: Colors.grey.shade50.withAlpha(120),
+          fillColor: Colors.grey.shade50.withAlpha(100),
           filled: true,
           label: Row(
             mainAxisSize: MainAxisSize.min,
@@ -102,7 +102,7 @@ class _AuthTextFeildState extends State<AuthTextFeild> {
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.grey.withAlpha(100),
+              color: Colors.grey.withAlpha(80),
               width: 1.w,
             ),
             borderRadius: BorderRadius.circular(widget.borderRadius.r),

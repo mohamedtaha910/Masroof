@@ -67,6 +67,7 @@ class OnBoardingPage extends StatelessWidget {
               ),
               Spacer(flex: 1),
               CustomButton(
+                width: double.infinity,
                 borderRadius: 100,
                 color: AppColors.primaryColor,
                 horizontalPadding: 20,
@@ -74,19 +75,14 @@ class OnBoardingPage extends StatelessWidget {
                 onTap: () {
                   GoRouter.of(context).push(AppRoutes.kOnBoarding2);
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Get Started',
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w100,
-                        color: Colors.white,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+                child: Text(
+                  'Get Started',
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w100,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
               SizedBox(height: 24),

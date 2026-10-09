@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:masroof/core/utils/app_colors.dart';
 
@@ -10,7 +11,7 @@ class CustomShift extends StatelessWidget {
     required this.text,
     required this.text2,
   });
-  final Widget destination;
+  final String destination;
   final String text;
   final String text2;
 
@@ -30,9 +31,9 @@ class CustomShift extends StatelessWidget {
         // SizedBox(width: 4),
         GestureDetector(
           onTap: () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => destination),
-            );
+           GoRouter.of(context).pushReplacement(
+            destination
+           );
           },
           child: Text(
             text,
