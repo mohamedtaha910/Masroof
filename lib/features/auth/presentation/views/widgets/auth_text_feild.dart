@@ -108,11 +108,17 @@ class _AuthTextFeildState extends State<AuthTextFeild> {
             borderRadius: BorderRadius.circular(widget.borderRadius.r),
           ),
           errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey.shade300, width: 1.w),
+            borderSide: BorderSide(
+              color: Colors.grey.withAlpha(80),
+              width: 1.w,
+            ),
             borderRadius: BorderRadius.circular(widget.borderRadius.r),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red, width: 1.w),
+            borderSide: BorderSide(
+              color: Colors.red.withAlpha(200),
+              width: 1.w,
+            ),
             borderRadius: BorderRadius.circular(widget.borderRadius.r),
           ),
         ),

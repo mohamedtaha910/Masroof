@@ -90,6 +90,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   // @override
   // Future<UserEntity> signInWithGoogle() {
-   
+
   // }
 }

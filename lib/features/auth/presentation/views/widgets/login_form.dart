@@ -29,16 +29,9 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        // if (state is AuthLoading) {
-        //   isLoading = true;
-        //   setState(() {});
-        // }
-
         if (state is AuthSuccess) {
-          setState(() {});
           GoRouter.of(context).push(AppRoutes.kHomePage);
         } else if (state is AuthError) {
-          setState(() {});
           showErrorMessage(context, message: state.error);
         }
       },
