@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_svg/svg.dart';
 
 class OtherWay extends StatelessWidget {
@@ -17,11 +18,11 @@ class OtherWay extends StatelessWidget {
                 child: Divider(thickness: 0.8, color: Colors.grey),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
+                padding: EdgeInsets.symmetric(horizontal: 12.w),
                 child: Text(
                   'or continue with',
-                  style: const TextStyle(
-                    fontSize: 12,
+                  style: TextStyle(
+                    fontSize: 12.sp,
                     color: Colors.black54,
                     fontWeight: FontWeight.w400,
                   ),
@@ -33,7 +34,7 @@ class OtherWay extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
 
           //  Social buttons
           Row(
@@ -50,11 +51,11 @@ class OtherWay extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12.w),
               Expanded(
                 child: _SocialBtn(
                   label: 'Apple',
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.apple_rounded,
                     size: 24,
                     color: Colors.black,
@@ -86,24 +87,24 @@ class _SocialBtn extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 46,
+        height: 42.h,
         decoration: BoxDecoration(
           color: Colors.grey.shade100.withAlpha(120),
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(14.r),
           border: Border.all(
             color: Colors.grey.shade400.withAlpha(120),
-            width: 0.8,
+            width: 0.8.w,
           ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             icon,
-            const SizedBox(width: 8),
+            SizedBox(width: 8.w),
             Text(
               label,
-              style: const TextStyle(
-                fontSize: 13,
+              style: TextStyle(
+                fontSize: 13.sp,
                 fontWeight: FontWeight.w500,
                 // color: _kGray900,
               ),

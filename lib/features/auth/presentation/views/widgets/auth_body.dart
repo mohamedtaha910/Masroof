@@ -125,7 +125,6 @@
 //   }
 // }
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
@@ -196,11 +195,11 @@ class AuthBody extends StatelessWidget {
           top: 80.h,
           left: 65.w,
           child: Container(
-            width: 30,
-            height: 30,
+            width: 30.w,
+            height: 30.h,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.white.withAlpha(40), width: 1),
+              border: Border.all(color: Colors.white.withAlpha(40), width: 1.w),
             ),
           ),
         ),
@@ -209,11 +208,11 @@ class AuthBody extends StatelessWidget {
           top: 130.h,
           right: 40.w,
           child: Container(
-            width: 30,
-            height: 30,
+            width: 30.w,
+            height: 30.h,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.white.withAlpha(40), width: 1),
+              border: Border.all(color: Colors.white.withAlpha(40), width: 1.w),
             ),
           ),
         ),
@@ -222,11 +221,11 @@ class AuthBody extends StatelessWidget {
           top: 32.h,
           right: -40.w,
           child: Container(
-            width: 110,
-            height: 110,
+            width: 100.w,
+            height: 100.h,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.white.withAlpha(65), width: 1),
+              border: Border.all(color: Colors.white.withAlpha(65), width: 1.w),
             ),
           ),
         ),
@@ -235,11 +234,11 @@ class AuthBody extends StatelessWidget {
           top: 70.h,
           left: -43.w,
           child: Container(
-            width: 110,
-            height: 110,
+            width: 100.w,
+            height: 100.h,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.white.withAlpha(65), width: 1),
+              border: Border.all(color: Colors.white.withAlpha(65), width: 1.w),
             ),
           ),
         ),
