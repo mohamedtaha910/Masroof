@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,7 @@ import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/utils/app_routes.dart';
 // import 'package:masroof/features/splash/Presentation/pages/splash_page.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:masroof/features/auth/data/data_sources/auth_remote_data_source.dart';
+import 'package:masroof/core/utils/service_locator.dart';
 import 'package:masroof/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:masroof/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import 'package:masroof/firebase_options.dart';
@@ -22,6 +21,7 @@ void main() async {
     serverClientId:
         '145262125390-asd0iipkull3avkd49k9svhtd8jo4p0e.apps.googleusercontent.com',
   );
+  setUpServiceLocator();
   runApp(const MyApp());
 }
 
@@ -37,14 +37,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return BlocProvider(
-          create: (context) => AuthCubit(
-            authRepo: AuthRepoImpl(
-              remoteDataSource: AuthRemoteDataSourceImpl(
-                firebaseAuth: FirebaseAuth.instance,
-                googleSignIn: GoogleSignIn.instance,
-              ),
-            ),
-          ),
+          create: (context) => AuthCubit(authRepo: getIt.get<AuthRepoImpl>()),
           child: MaterialApp.router(
             theme: ThemeData(
               pageTransitionsTheme: const PageTransitionsTheme(

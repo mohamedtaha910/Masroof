@@ -30,7 +30,7 @@ class _LoginFormState extends State<LoginForm> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
-          GoRouter.of(context).push(AppRoutes.kHomePage);
+          GoRouter.of(context).go(AppRoutes.kHomePage);
         } else if (state is AuthError) {
           showAuthErrorMessage(context, message: state.error);
         }

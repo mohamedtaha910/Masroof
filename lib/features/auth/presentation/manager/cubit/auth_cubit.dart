@@ -72,16 +72,13 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthError('The Prcess is Cancelled.'));
         return;
       }
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        emit(AuthError('No user found for that email.'));
-      } else if (e.code == 'wrong-password') {
-        emit(AuthError('Wrong password provided for that user.'));
-      } else {
-        emit(AuthError('The email or password is incorrect.'));
-      }
+      emit(AuthError('Google sign-in failed. Please try again.'));
     } catch (e) {
       emit(AuthError('Some thing went wrong.'));
     }
+  }
+
+  UserEntity? getCurrentUser() {
+    return authRepo.getCurrentUser();
   }
 }

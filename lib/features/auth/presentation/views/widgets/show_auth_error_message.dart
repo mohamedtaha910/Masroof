@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:masroof/core/utils/app_colors.dart';
+import 'package:masroof/core/widgets/custom_blur.dart';
 import 'package:masroof/core/widgets/custom_button.dart';
 
 void showAuthErrorMessage(BuildContext context, {required String message}) {
@@ -18,89 +19,87 @@ void showAuthErrorMessage(BuildContext context, {required String message}) {
           borderRadius: BorderRadius.circular(22.r),
           side: BorderSide(color: Colors.white.withAlpha(50), width: 0.9.w),
         ),
-        content: ClipRRect(
-          borderRadius: BorderRadius.circular(22.r),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 60.w, sigmaY: 60.h),
-
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(14.dg),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100.r),
-                      // color: Colors.white10,
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.white.withAlpha(90),
-                          Colors.white.withAlpha(60),
-                          Colors.white.withAlpha(30),
-                        ],
-                        begin: AlignmentGeometry.topCenter,
-                        end: AlignmentGeometry.bottomCenter,
-                      ),
-                      border: BoxBorder.fromLTRB(
-                        right: BorderSide(
-                          color: Colors.grey.withAlpha(150),
-                          width: 1.w,
-                        ),
-                        left: BorderSide(
-                          color: Colors.grey.withAlpha(150),
-                          width: 1.w,
-                        ),
-                      ),
+        content: CustomBlur(
+          radius: 22,
+          sigmaX: 60,
+          sigmay: 60,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(14.dg),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100.r),
+                    // color: Colors.white10,
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.white.withAlpha(90),
+                        Colors.white.withAlpha(60),
+                        Colors.white.withAlpha(30),
+                      ],
+                      begin: AlignmentGeometry.topCenter,
+                      end: AlignmentGeometry.bottomCenter,
                     ),
-                    // child: Icon(Icons.error, color: Colors.white, size: 40),
-                    child: Image.asset(
-                      'assets/auth_icons/auth_error.png',
-                      height: 46.h,
+                    border: BoxBorder.fromLTRB(
+                      right: BorderSide(
+                        color: Colors.grey.withAlpha(150),
+                        width: 1.w,
+                      ),
+                      left: BorderSide(
+                        color: Colors.grey.withAlpha(150),
+                        width: 1.w,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 24.h),
-                  Text(
-                    message,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.bold,
+                  // child: Icon(Icons.error, color: Colors.white, size: 40),
+                  child: Image.asset(
+                    'assets/auth_icons/auth_error.png',
+                    height: 46.h,
+                  ),
+                ),
+                SizedBox(height: 24.h),
+                Text(
+                  message,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 24.h),
+                CustomButton(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  verticalPadding: 4,
+                  colors: [
+                    Colors.white.withAlpha(80),
+                    Colors.white.withAlpha(50),
+                    Colors.white.withAlpha(25),
+                  ],
+                  borderRadius: 100,
+                  horizontalPadding: 42,
+                  border: Border(
+                    top: BorderSide(
+                      color: Colors.grey.withAlpha(150),
+                      width: 1.2.w,
                     ),
+                    bottom: BorderSide(
+                      color: Colors.grey.withAlpha(150),
+                      width: 0.4.w,
+                    ),
+                  ),
+                  // width: double.infinity,
+                  child: Text(
+                    'Ok ',
+                    style: TextStyle(fontSize: 14, color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 24.h),
-                  CustomButton(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    verticalPadding: 4,
-                    colors: [
-                      Colors.white.withAlpha(80),
-                      Colors.white.withAlpha(50),
-                      Colors.white.withAlpha(25),
-                    ],
-                    borderRadius: 100,
-                    horizontalPadding: 42,
-                    border: Border(
-                      top: BorderSide(
-                        color: Colors.grey.withAlpha(150),
-                        width: 1.2.w,
-                      ),
-                      bottom: BorderSide(
-                        color: Colors.grey.withAlpha(150),
-                        width: 0.4.w,
-                      ),
-                    ),
-                    // width: double.infinity,
-                    child: Text(
-                      'Ok ',
-                      style: TextStyle(fontSize: 14, color: Colors.white),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

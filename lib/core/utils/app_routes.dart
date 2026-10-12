@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:masroof/features/auth/presentation/views/pages/login_page.dart';
 import 'package:masroof/features/auth/presentation/views/pages/sign_up_page.dart';
+import 'package:masroof/features/dashboard/presentation/views/pages/dashboard_page.dart';
 import 'package:masroof/features/home/Presentation/pages/home_page.dart';
+import 'package:masroof/features/profile/presentation/views/profile_page.dart';
 import 'package:masroof/features/splash/Presentation/pages/on_boarding2_page.dart';
 import 'package:masroof/features/splash/Presentation/pages/on_boarding_page.dart';
 import 'package:masroof/features/splash/Presentation/pages/splash_page.dart';
+import 'package:masroof/features/transaction/presentation/views/pages/transaction_page.dart';
 
 abstract class AppRoutes {
   static const kHomePage = '/homePage';
@@ -13,6 +16,9 @@ abstract class AppRoutes {
   static const kOnBoarding2 = '/onBoarding2';
   static const kLoginPage = '/onLogin';
   static const kSignUpPage = '/signUp';
+  static const kTransactionPage = '/transaction';
+  static const kprofilePage = '/profilePage';
+  static const kdashboardPage = '/dashboardPage';
 
   static final GoRouter router = GoRouter(
     routes: <RouteBase>[
@@ -50,6 +56,24 @@ abstract class AppRoutes {
         path: kHomePage,
         pageBuilder: (context, state) {
           return const MaterialPage(child: HomePage());
+        },
+      ),
+      GoRoute(
+        path: kTransactionPage,
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: TransactionPage());
+        },
+      ),
+      GoRoute(
+        path: kdashboardPage,
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: DashboardPage());
+        },
+      ),
+      GoRoute(
+        path: kprofilePage,
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: ProfilePage());
         },
       ),
     ],
