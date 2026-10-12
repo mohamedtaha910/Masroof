@@ -149,7 +149,11 @@ class AuthBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomButton(
-                color: Colors.white.withAlpha(50),
+                colors: [
+                  Colors.white.withAlpha(170),
+                  Colors.white.withAlpha(125),
+                  Colors.white.withAlpha(40),
+                ],
                 borderRadius: 200,
                 horizontalPadding: 18,
                 verticalPadding: 16,
@@ -174,7 +178,11 @@ class AuthBody extends StatelessWidget {
           top: 32.h,
           left: 16.w,
           child: CustomButton(
-            color: Colors.white.withAlpha(60),
+            colors: [
+              Colors.white.withAlpha(220),
+              Colors.white.withAlpha(120),
+              Colors.white.withAlpha(40),
+            ],
             borderRadius: 200,
             horizontalPadding: 3,
             verticalPadding: 3,

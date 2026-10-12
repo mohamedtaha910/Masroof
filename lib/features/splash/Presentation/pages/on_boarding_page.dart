@@ -69,7 +69,7 @@ class OnBoardingPage extends StatelessWidget {
               CustomButton(
                 width: double.infinity,
                 borderRadius: 100,
-                color: AppColors.primaryColor,
+                colors:[ AppColors.primaryColor],
                 horizontalPadding: 20,
                 verticalPadding: 10,
                 onTap: () {

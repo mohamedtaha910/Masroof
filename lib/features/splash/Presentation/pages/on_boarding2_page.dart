@@ -16,7 +16,7 @@ class OnBoarding2Page extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         title: CustomButton(
-          color: Colors.grey.shade100,
+          colors: [Colors.grey.shade100],
           borderRadius: 200,
           horizontalPadding: 3,
           verticalPadding: 3,
@@ -87,7 +87,7 @@ class OnBoarding2Page extends StatelessWidget {
               Spacer(flex: 1),
               CustomButton(
                 borderRadius: 100,
-                color: AppColors.primaryColor,
+                colors: [AppColors.primaryColor],
                 horizontalPadding: 20,
                 verticalPadding: 10,
                 onTap: () {

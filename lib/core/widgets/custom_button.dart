@@ -4,7 +4,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
-    required this.color,
+    required this.colors,
     required this.child,
     required this.borderRadius,
     required this.horizontalPadding,
@@ -14,7 +14,7 @@ class CustomButton extends StatelessWidget {
     this.width,
   });
 
-  final Color color;
+  final List<Color> colors;
   final Widget child;
   final double borderRadius;
   final double horizontalPadding;
@@ -25,6 +25,13 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Color> buttonColors = colors.length == 1
+        ? [
+            colors.first.withAlpha(215),
+            colors.first.withAlpha(230),
+            colors.first,
+          ]
+        : colors;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -38,9 +45,9 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius.r),
           // color: color,
           gradient: LinearGradient(
-            colors: [color, color.withAlpha(230), color.withAlpha(215)],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
+            colors: buttonColors,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
           border: border,
         ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:masroof/features/auth/presentation/manager/cubit/auth_cubit.dart';
 
 class OtherWay extends StatelessWidget {
   const OtherWay({super.key});
@@ -47,7 +49,7 @@ class OtherWay extends StatelessWidget {
                     height: 24,
                   ),
                   onTap: () {
-                    // BlocProvider.of<AuthCubit>(context).signInWithGoogle();
+                    BlocProvider.of<AuthCubit>(context).signInWithGoogle();
                   },
                 ),
               ),

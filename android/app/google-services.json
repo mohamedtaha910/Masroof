@@ -12,7 +12,20 @@
           "package_name": "com.example.masroof"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "145262125390-sk1vq6deppplf3v9bsqssove2d3fpq7k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.masroof",
+            "certificate_hash": "e7513c2551118b5a9fc9470b20b203b7cdc5020c"
+          }
+        },
+        {
+          "client_id": "145262125390-asd0iipkull3avkd49k9svhtd8jo4p0e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDAHSjnTC3tSj0nhGopPAyhMPHn-Yt7m8c"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "145262125390-asd0iipkull3avkd49k9svhtd8jo4p0e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "145262125390-kei34horvg6bj8u7fo8muhc7cg6u85e1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.masroof"
+              }
+            }
+          ]
         }
       }
     }

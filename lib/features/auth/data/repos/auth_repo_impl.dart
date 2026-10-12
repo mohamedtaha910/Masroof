@@ -43,8 +43,8 @@ class AuthRepoImpl implements AuthRepo {
     await remoteDataSource.resetPassword(email: email);
   }
 
-  // @override
-  // Future<UserEntity> signInWithGoogle()async {
-  //   await remoteDataSource.signInWithGoogle();
-  // }
+  @override
+  Future<UserEntity> signInWithGoogle()async {
+    return await remoteDataSource.signInWithGoogle();
+  }
 }

@@ -1,6 +1,6 @@
 import 'package:masroof/features/auth/domain/entities/user_entity.dart';
 
-abstract class AuthRepo{
+abstract class AuthRepo {
   Future<UserEntity> registerUser({
     required String email,
     required String password,
@@ -13,10 +13,10 @@ abstract class AuthRepo{
   });
 
   Future<void> logoutUser();
-  
+
   Future<void> resetPassword({required String email});
 
-  // Future<UserEntity> signInWithGoogle() ;
+  Future<UserEntity> signInWithGoogle();
 
   UserEntity? getCurrentUser();
 }

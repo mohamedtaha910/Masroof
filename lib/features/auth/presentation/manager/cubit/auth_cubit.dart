@@ -2,6 +2,7 @@
 // import 'package:meta/meta.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:masroof/features/auth/domain/entities/user_entity.dart';
 import 'package:masroof/features/auth/domain/repos/auth_repo.dart';
 
@@ -36,7 +37,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthError('something went wrong'));
       }
     } catch (e) {
-      emit(AuthError('There was an error'));
+      emit(AuthError('There was an error.'));
     }
   }
 
@@ -54,44 +55,33 @@ class AuthCubit extends Cubit<AuthState> {
       } else if (e.code == 'wrong-password') {
         emit(AuthError('Wrong password provided for that user.'));
       } else {
-        emit(AuthError('The email or password is incorrect'));
+        emit(AuthError('The email or password is incorrect.'));
       }
     } catch (e) {
-      emit(AuthError('something went wrong'));
+      emit(AuthError('something went wrong.'));
     }
   }
 
-  // Future signInWithGoogle() async {
-  //   // Trigger the authentication flow
-  //   try {
-  //     final GoogleSignInAccount? googleUser = await GoogleSignIn.instance
-  //         .authenticate();
-  //     if (googleUser == null) {
-  //       return;
-  //     }
-  //     emit(AuthLoadingState());
-
-  //     // Obtain the auth details from the request
-  //     final GoogleSignInAuthentication googleAuth = googleUser.authentication;
-
-  //     // Create a new credential
-  //     final credential = GoogleAuthProvider.credential(
-  //       idToken: googleAuth.idToken,
-  //     );
-
-  //     // Once signed in, return the UserCredential
-  //     await FirebaseAuth.instance.signInWithCredential(credential);
-  //     emit(AuthSuccessState());
-  //   } on GoogleSignInException catch (e) {
-  //     if (e.code == GoogleSignInExceptionCode.canceled) {
-  //       // المستخدم ألغى تسجيل الدخول
-  //       emit((AuthInitial()));
-  //       return;
-  //     }
-
-  //     emit(AuthErrorState(e.toString()));
-  //   } catch (e) {
-  //     emit(AuthErrorState(e.toString()));
-  //   }
-  // }
+  Future signInWithGoogle() async {
+    emit(AuthLoading());
+    try {
+      await authRepo.signInWithGoogle();
+      emit(AuthSuccess());
+    } on GoogleSignInException catch (e) {
+      if (e.code == GoogleSignInExceptionCode.canceled) {
+        emit(AuthError('The Prcess is Cancelled.'));
+        return;
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        emit(AuthError('No user found for that email.'));
+      } else if (e.code == 'wrong-password') {
+        emit(AuthError('Wrong password provided for that user.'));
+      } else {
+        emit(AuthError('The email or password is incorrect.'));
+      }
+    } catch (e) {
+      emit(AuthError('Some thing went wrong.'));
+    }
+  }
 }

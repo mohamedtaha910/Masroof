@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:masroof/features/auth/data/models/user_model.dart';
 import 'package:masroof/features/auth/domain/entities/user_entity.dart';
 
@@ -18,15 +19,19 @@ abstract class AuthRemoteDataSource {
 
   Future<void> resetPassword({required String email});
 
-  // Future<UserEntity> signInWithGoogle();
+  Future<UserEntity> signInWithGoogle();
 
   UserEntity? getCurrentUser();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final FirebaseAuth firebaseAuth;
+  final GoogleSignIn googleSignIn;
 
-  AuthRemoteDataSourceImpl({required this.firebaseAuth});
+  AuthRemoteDataSourceImpl({
+    required this.firebaseAuth,
+    required this.googleSignIn,
+  });
 
   @override
   Future<UserEntity> loginUser({
@@ -88,8 +93,29 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     await firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
-  // @override
-  // Future<UserEntity> signInWithGoogle() {
+  @override
+  Future<UserEntity> signInWithGoogle() async {
+    
+    final GoogleSignInAccount googleUser = await googleSignIn.authenticate();
 
-  // }
+    final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+
+    final idToken = googleAuth.idToken;
+
+    if (idToken == null) {
+      throw Exception('Google ID token is missing.');
+    }
+
+    final credential = GoogleAuthProvider.credential(idToken: idToken);
+
+    final userCredential = await firebaseAuth.signInWithCredential(credential);
+
+    final user = userCredential.user;
+
+    if (user == null) {
+      throw Exception('Failed to sign in with Google.');
+    }
+
+    return UserModel.fromFirebase(user);
+  }
 }

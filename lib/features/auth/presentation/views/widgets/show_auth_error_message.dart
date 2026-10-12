@@ -5,7 +5,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/widgets/custom_button.dart';
 
-void showErrorMessage(BuildContext context, {required String message}) {
+void showAuthErrorMessage(BuildContext context, {required String message}) {
   showDialog(
     context: context,
     builder: (context) {
@@ -29,7 +29,7 @@ void showErrorMessage(BuildContext context, {required String message}) {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(16.dg),
+                    padding: EdgeInsets.all(14.dg),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100.r),
                       // color: Colors.white10,
@@ -43,28 +43,21 @@ void showErrorMessage(BuildContext context, {required String message}) {
                         end: AlignmentGeometry.bottomCenter,
                       ),
                       border: BoxBorder.fromLTRB(
-                        top: BorderSide(
+                        right: BorderSide(
                           color: Colors.grey.withAlpha(150),
-                          width: 1.2.w,
+                          width: 1.w,
                         ),
-                        bottom: BorderSide(
+                        left: BorderSide(
                           color: Colors.grey.withAlpha(150),
-                          width: 0.4.w,
+                          width: 1.w,
                         ),
                       ),
-                      // border: Border(
-                      //   top: BorderSide(
-                      //     color: Colors.grey.withAlpha(180),
-                      //     width: 1.2.w,
-                      //   ),
-                      //   bottom: BorderSide(
-                      //     color: Colors.grey.withAlpha(180),
-                      //     width: 0.4.w,
-                      //   ),
-                      // ),
                     ),
                     // child: Icon(Icons.error, color: Colors.white, size: 40),
-                    child: Image.asset('assets/icons/alert.png', height: 30.h),
+                    child: Image.asset(
+                      'assets/auth_icons/auth_error.png',
+                      height: 46.h,
+                    ),
                   ),
                   SizedBox(height: 24.h),
                   Text(
@@ -82,9 +75,23 @@ void showErrorMessage(BuildContext context, {required String message}) {
                       Navigator.pop(context);
                     },
                     verticalPadding: 4,
-                    color: Colors.red,
+                    colors: [
+                      Colors.white.withAlpha(80),
+                      Colors.white.withAlpha(50),
+                      Colors.white.withAlpha(25),
+                    ],
                     borderRadius: 100,
-                    horizontalPadding: 50,
+                    horizontalPadding: 42,
+                    border: Border(
+                      top: BorderSide(
+                        color: Colors.grey.withAlpha(150),
+                        width: 1.2.w,
+                      ),
+                      bottom: BorderSide(
+                        color: Colors.grey.withAlpha(150),
+                        width: 0.4.w,
+                      ),
+                    ),
                     // width: double.infinity,
                     child: Text(
                       'Ok ',

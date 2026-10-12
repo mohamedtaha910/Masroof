@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/utils/app_routes.dart';
 import 'package:masroof/core/widgets/custom_button.dart';
-import 'package:masroof/core/widgets/show_error_message.dart';
+import 'package:masroof/features/auth/presentation/views/widgets/show_auth_error_message.dart';
 import 'package:masroof/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import 'package:masroof/features/auth/presentation/views/widgets/auth_text_feild.dart';
 import 'package:masroof/features/auth/presentation/views/widgets/custom_shift.dart';
@@ -33,7 +33,7 @@ class _SignUpFormState extends State<SignUpForm> {
         if (state is AuthSuccess) {
           GoRouter.of(context).push(AppRoutes.kHomePage);
         } else if (state is AuthError) {
-          showErrorMessage(context, message: state.error);
+          showAuthErrorMessage(context, message: state.error);
         }
       },
       builder: (context, state) {
@@ -135,7 +135,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 CustomButton(
                   width: double.infinity,
 
-                  color: AppColors.tertiaryColor,
+                  colors:[ AppColors.tertiaryColor],
                   borderRadius: 14,
 
                   verticalPadding: 8,

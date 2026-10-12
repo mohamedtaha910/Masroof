@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/utils/app_routes.dart';
 // import 'package:masroof/features/splash/Presentation/pages/splash_page.dart';
@@ -17,6 +18,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await GoogleSignIn.instance.initialize(
+    serverClientId:
+        '145262125390-asd0iipkull3avkd49k9svhtd8jo4p0e.apps.googleusercontent.com',
+  );
   runApp(const MyApp());
 }
 
@@ -36,6 +41,7 @@ class MyApp extends StatelessWidget {
             authRepo: AuthRepoImpl(
               remoteDataSource: AuthRemoteDataSourceImpl(
                 firebaseAuth: FirebaseAuth.instance,
+                googleSignIn: GoogleSignIn.instance,
               ),
             ),
           ),
