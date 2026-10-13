@@ -31,7 +31,7 @@ class _SignUpFormState extends State<SignUpForm> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
-          GoRouter.of(context).push(AppRoutes.kHomePage);
+          GoRouter.of(context).push(AppRoutes.krootPage);
         } else if (state is AuthError) {
           showAuthErrorMessage(context, message: state.error);
         }
@@ -135,7 +135,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 CustomButton(
                   width: double.infinity,
 
-                  colors:[ AppColors.tertiaryColor],
+                  colors: [AppColors.tertiaryColor],
                   borderRadius: 14,
 
                   verticalPadding: 8,

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:masroof/features/auth/presentation/views/pages/login_page.dart';
 import 'package:masroof/features/auth/presentation/views/pages/sign_up_page.dart';
 import 'package:masroof/features/dashboard/presentation/views/pages/dashboard_page.dart';
+import 'package:masroof/features/home/Presentation/pages/app_root.dart';
 import 'package:masroof/features/home/Presentation/pages/home_page.dart';
 import 'package:masroof/features/profile/presentation/views/profile_page.dart';
 import 'package:masroof/features/splash/Presentation/pages/on_boarding2_page.dart';
@@ -11,6 +12,7 @@ import 'package:masroof/features/splash/Presentation/pages/splash_page.dart';
 import 'package:masroof/features/transaction/presentation/views/pages/transaction_page.dart';
 
 abstract class AppRoutes {
+  static const krootPage = '/rootpage';
   static const kHomePage = '/homePage';
   static const kOnBoarding1 = '/onBoarding1';
   static const kOnBoarding2 = '/onBoarding2';
@@ -52,53 +54,86 @@ abstract class AppRoutes {
           return const MaterialPage(child: SignUpPage());
         },
       ),
-      GoRoute(
-        path: kHomePage,
-        pageBuilder: (context, state) {
-          return const MaterialPage(child: HomePage());
-        },
-      ),
-      GoRoute(
-        path: kTransactionPage,
-        pageBuilder: (context, state) {
-          return const MaterialPage(child: TransactionPage());
-        },
-      ),
-      GoRoute(
-        path: kdashboardPage,
-        pageBuilder: (context, state) {
-          return const MaterialPage(child: DashboardPage());
-        },
-      ),
-      GoRoute(
-        path: kprofilePage,
-        pageBuilder: (context, state) {
-          return const MaterialPage(child: ProfilePage());
-        },
-      ),
-    ],
-  );
+      // GoRoute(
+      //   path: krootPage,
+      //   pageBuilder: (context, state) {
+      //     return const MaterialPage(child: AppRoot());
+      //   },
+      // ),
+      // GoRoute(
+      //   path: kHomePage,
+      //   pageBuilder: (context, state) {
+      //     return const MaterialPage(child: HomePage());
+      //   },
+      // ),
+      // GoRoute(
+      //   path: kTransactionPage,
+      //   pageBuilder: (context, state) {
+      //     return const MaterialPage(child: TransactionPage());
+      //   },
+      // ),
+      // GoRoute(
+      //   path: kdashboardPage,
+      //   pageBuilder: (context, state) {
+      //     return const MaterialPage(child: DashboardPage());
+      //   },
+      // ),
+      // GoRoute(
+      //   path: kprofilePage,
+      //   pageBuilder: (context, state) {
+      //     return const MaterialPage(child: ProfilePage());
+        // },
+      // ),
+      StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+        return AppRoot(
+          navigationShell: navigationShell,
 
-  // static CustomTransitionPage<T> slideTransitionPage<T>({
-  //   required Widget child,
-  // }) {
-  //   return CustomTransitionPage<T>(
-  //     child: child,
+        );
+      },
+      branches: [
+        // Tab 0: Dashboard
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: kHomePage,
+              builder: (context, state) => const HomePage(),
+            ),
+          ],
+        ),
 
-  //     transitionDuration: const Duration(milliseconds: 200),
-  //     reverseTransitionDuration: const Duration(milliseconds: 150),
+        // Tab 1: Transactions
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: kTransactionPage,
+              builder: (context, state) => const TransactionPage(),
+            ),
+          ],
+        ),
 
-  //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-  //       const begin = Offset(1.0, 0.0);
-  //       const end = Offset.zero;
+        // Tab 2: Profile
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: kdashboardPage,
+              builder: (context, state) => const DashboardPage(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: kprofilePage,
+              builder: (context, state) => const ProfilePage(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ],
+);
+   
 
-  //       final tween = Tween<Offset>(
-  //         begin: begin,
-  //         end: end,
-  //       ).chain(CurveTween(curve: Curves.easeOutCubic));
 
-  //       return SlideTransition(position: animation.drive(tween), child: child);
-  //     },
-  //   );
-  // }
 }

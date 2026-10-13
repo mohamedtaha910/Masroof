@@ -12,6 +12,7 @@ class CustomButton extends StatelessWidget {
     required this.onTap,
     this.border,
     this.width,
+    this.boxShadow,
   });
 
   final List<Color> colors;
@@ -22,6 +23,7 @@ class CustomButton extends StatelessWidget {
   final void Function() onTap;
   final BoxBorder? border;
   final double? width;
+  final List<BoxShadow>? boxShadow;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,7 @@ class CustomButton extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
           border: border,
+          boxShadow: boxShadow,
         ),
         child: child,
       ),
