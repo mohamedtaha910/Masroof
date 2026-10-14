@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:go_router/go_router.dart';
 import 'package:masroof/features/home/Presentation/widgets/custom_nav_bar.dart';
+import 'package:masroof/features/home/Presentation/widgets/custom_shadow.dart';
 
 class AppRoot extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
@@ -14,11 +15,12 @@ class AppRoot extends StatelessWidget {
       body: Stack(
         children: [
           Positioned.fill(child: navigationShell),
+          Positioned(bottom: 0, right: 0, left: 0, child: CustomShadow()),
 
           Positioned(
-            left: 16,
-            right: 16,
-            bottom: 8.h,
+            left: 34.w,
+            right: 34.w,
+            bottom: 20.h,
             child: CustomNavBar(
               selectedIndex: navigationShell.currentIndex,
               onChanged: (index) {

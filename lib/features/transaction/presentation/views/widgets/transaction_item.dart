@@ -3,7 +3,6 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:masroof/core/utils/app_colors.dart';
-import 'package:masroof/core/widgets/custom_button.dart';
 
 class TransactionItem extends StatelessWidget {
   const TransactionItem({super.key, required this.index});
@@ -11,20 +10,23 @@ class TransactionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomButton(
-      colors: [Colors.white.withAlpha(180), Colors.white.withAlpha(180)],
-      border: Border.all(color: Colors.white, width: 1.w),
-      borderRadius: 12,
-      horizontalPadding: 16,
-      verticalPadding: 16,
-      onTap: () {},
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.white.withAlpha(180), Colors.white.withAlpha(180)],
+        ),
+        border: Border.all(color: Colors.white, width: 1.w),
+        borderRadius: BorderRadius.circular(12.r),
+      ),
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(7.h),
+            padding: EdgeInsets.all(8.h),
             decoration: BoxDecoration(
               color: Colors.blue,
               shape: BoxShape.circle,
+              // borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(Iconsax.shopping_cart, size: 18.h, color: Colors.white),
           ),
@@ -54,7 +56,7 @@ class TransactionItem extends StatelessWidget {
                       color: index.isEven
                           ? AppColors.incomeColor.withAlpha(30)
                           : AppColors.expenseColor.withAlpha(30),
-                      borderRadius: BorderRadius.circular(100),
+                      borderRadius: BorderRadius.circular(100.r),
                       border: Border.all(
                         color: index.isEven
                             ? AppColors.incomeColor.withAlpha(40)

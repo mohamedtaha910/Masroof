@@ -1,7 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:masroof/core/utils/app_colors.dart';
+import 'package:masroof/core/widgets/custom_glass.dart';
 
 class CustomNavBar extends StatelessWidget {
   final int selectedIndex;
@@ -14,114 +17,117 @@ class CustomNavBar extends StatelessWidget {
   });
 
   static const Color _activeColor = Color(0xFF8CC0FF);
-  static const Color _inactiveColor = Color(0xFF9AAAC0);
+  static const Color _inactiveColor = Color.fromARGB(255, 64, 69, 75);
 
   static const List<IconData> _icons = [
     Iconsax.home_copy,
-    Icons.receipt_long_rounded,
-    Icons.insert_chart_rounded,
+    Iconsax.transaction_minus_copy,
+    Icons.stacked_bar_chart_rounded,
     Icons.person_rounded,
   ];
 
   static const List<IconData> _selectedIcons = [
     Iconsax.home_1,
-    Icons.receipt_long_rounded,
-    Icons.insert_chart_rounded,
+    Iconsax.transaction_minus,
+
+    Icons.bar_chart_rounded,
     Icons.person_rounded,
   ];
 
-  static const List<String> _labels = [
-    'Home',
-    'Transactions',
-    'Analytics',
-    'Profile',
-  ];
+  static const List<String> _labels = ['', '', '', ''];
 
- 
-@override
+  @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width - 32;
-    final height = width < 340 ? 62.0 : 70.0;
+    final width = MediaQuery.sizeOf(context).width - 68.w;
+    // final height = width < 340 ? 62.0 : 70.0;
+    final height = 50.h;
     final itemWidth = width / _icons.length;
 
     return SizedBox(
       width: double.infinity,
+      // width: width,
       height: height,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(28),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
-          child: Container(
-            decoration: BoxDecoration(
-              color: const Color(0xFF15243A).withAlpha(205),
-              borderRadius: BorderRadius.circular(28),
-              border: Border.all(color: Colors.white.withAlpha(45)),
-            ),
-            child: Stack(
-              children: [
-                AnimatedPositioned(
-                  duration: const Duration(milliseconds: 280),
-                  curve: Curves.easeOutCubic,
-                  left: selectedIndex * itemWidth + 5,
-                  top: 5,
-                  bottom: 5,
-                  width: itemWidth - 10,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: _activeColor.withAlpha(30),
-                      borderRadius: BorderRadius.circular(23),
-                      border: Border.all(color: _activeColor.withAlpha(100)),
+      child: CustomGlass(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(100),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+            child: Container(
+              decoration: BoxDecoration(
+                // color: Colors.white.withAlpha(150),
+                color: Colors.grey.shade100.withAlpha(60),
+                borderRadius: BorderRadius.circular(100),
+                border: Border.all(color: Colors.white.withAlpha(220)),
+              ),
+              child: Stack(
+                children: [
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 280),
+                    curve: Curves.easeOutCubic,
+                    left: selectedIndex * itemWidth + 5,
+                    top: 5,
+                    bottom: 5,
+                    width: itemWidth - 10,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: _activeColor.withAlpha(35),
+                        borderRadius: BorderRadius.circular(100),
+                        border: Border.all(color: _activeColor.withAlpha(50)),
+                      ),
                     ),
                   ),
-                ),
-                Row(
-                  children: List.generate(_icons.length, (index) {
-                    final isSelected = selectedIndex == index;
+                  Positioned.fill(
+                    child: Row(
+                      children: List.generate(_icons.length, (index) {
+                        final isSelected = selectedIndex == index;
 
-                    return Expanded(
-                      child: InkWell(
-                        onTap: () => onChanged(index),
-                        borderRadius: BorderRadius.circular(24),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              isSelected
-                                  ? _selectedIcons[index]
-                                  : _icons[index],
-                              size: isSelected ? 24 : 22,
-                              color: isSelected ? _activeColor : _inactiveColor,
+                        return Expanded(
+                          child: InkWell(
+                            onTap: () => onChanged(index),
+                            borderRadius: BorderRadius.circular(24),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  isSelected
+                                      ? _selectedIcons[index]
+                                      : _icons[index],
+                                  size: isSelected ? 24.h : 22.h,
+                                  color: isSelected
+                                      ? _activeColor
+                                      : _inactiveColor,
+                                ),
+                                // const SizedBox(height: 4),
+                                // Text(
+                                //   _labels[index],
+                                //   maxLines: 1,
+                                //   overflow: TextOverflow.ellipsis,
+                                //   style: TextStyle(
+                                //     fontSize: width < 340 ? 9 : 10,
+                                //     fontWeight: isSelected
+                                //         ? FontWeight.w600
+                                //         : FontWeight.w400,
+                                //     color: isSelected
+                                //         ? _activeColor
+                                //         : _inactiveColor,
+                                //   ),
+                                // ),
+                              ],
                             ),
-                            const SizedBox(height: 4),
-                            Text(
-                              _labels[index],
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: width < 340 ? 9 : 10,
-                                fontWeight: isSelected
-                                    ? FontWeight.w600
-                                    : FontWeight.w400,
-                                color: isSelected
-                                    ? _activeColor
-                                    : _inactiveColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-                ),
-              ],
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
   }
-
 }
 
 

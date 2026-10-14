@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:masroof/core/utils/app_colors.dart';
 
 class HeaderBadge extends StatelessWidget {
   const HeaderBadge({super.key, required this.isIncome, required this.value});
@@ -23,11 +24,14 @@ class HeaderBadge extends StatelessWidget {
             padding: EdgeInsets.all(10.dg),
             decoration: BoxDecoration(
               color: isIncome
-                  ? Color(0xff34C759).withAlpha(60)
-                  : Color(0xffFF383C).withAlpha(60),
+                  ? AppColors.incomeColor.withAlpha(60)
+                  : AppColors.expenseColor.withAlpha(60),
               shape: BoxShape.circle,
               border: Border.all(
-                color: Colors.white.withAlpha(100),
+                // color: Colors.white.withAlpha(100),
+                color: isIncome
+                    ? AppColors.incomeColor.withAlpha(30)
+                    : AppColors.expenseColor.withAlpha(25),
                 width: 0.8.w,
               ),
             ),
