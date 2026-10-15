@@ -7,7 +7,7 @@ class CustomShadow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70.h,
+      height: 60.h,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         // color: Colors.red,

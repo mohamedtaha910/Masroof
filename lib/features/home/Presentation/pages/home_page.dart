@@ -18,6 +18,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      debugPrint('MediaQuery size: ${MediaQuery.sizeOf(context)}');
+
+    debugPrint('ScreenUtil size: ${ScreenUtilPlus().screenWidth}');
     UserEntity? user = BlocProvider.of<AuthCubit>(context).getCurrentUser();
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -35,7 +38,7 @@ class HomePage extends StatelessWidget {
           children: [
             HomeHeader(),
             Transform.translate(
-              offset: Offset(0, -20),
+              offset: Offset(0, -32.h),
               child: RecentTransaction(),
             ),
           ],

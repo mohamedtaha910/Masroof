@@ -11,7 +11,7 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 14.w),
-      height: 330.h,
+      height: 350.h,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(gradient: buildSmoothGradient()),
       child: Column(

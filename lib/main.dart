@@ -8,6 +8,7 @@ import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/utils/app_routes.dart';
 // import 'package:masroof/features/splash/Presentation/pages/splash_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:masroof/core/utils/bloc_observer.dart';
 import 'package:masroof/core/utils/service_locator.dart';
 import 'package:masroof/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:masroof/features/auth/presentation/manager/cubit/auth_cubit.dart';
@@ -21,6 +22,7 @@ void main() async {
     serverClientId:
         '145262125390-asd0iipkull3avkd49k9svhtd8jo4p0e.apps.googleusercontent.com',
   );
+  Bloc.observer = SimpleBlocObserver();
   setUpServiceLocator();
   runApp(const MyApp());
 }
@@ -35,6 +37,14 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
+
+      rebuildFactor: (oldData, newData) {
+        return oldData != newData &&
+            (oldData.size != newData.size ||
+                oldData.orientation != newData.orientation ||
+                oldData.padding != newData.padding);
+      },
+      autoRebuild: true,
       builder: (context, child) {
         return BlocProvider(
           create: (context) => AuthCubit(authRepo: getIt.get<AuthRepoImpl>()),

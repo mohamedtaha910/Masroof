@@ -21,7 +21,7 @@ class RecentTransaction extends StatelessWidget {
           Text(
             'Recent transaction',
             style: GoogleFonts.poppins(
-              fontSize: 14.sp,
+              fontSize: 13.sp,
               fontWeight: FontWeight.w500,
             ),
           ),

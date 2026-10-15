@@ -7,16 +7,18 @@ class CustomGlass extends StatelessWidget {
     required this.child,
     this.refractionIndex = 1.02,
     this.refractionWidth = 24,
+    this.radius = 28,
   });
   final Widget child;
   final double refractionIndex;
   final double refractionWidth;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
     return LiquidGlassLens(
       style: LiquidGlassStyle(
-        shape: LiquidGlassShape.squircle(cornerRadius: 28),
+        shape: LiquidGlassShape.squircle(cornerRadius: radius),
         refractionIndex: refractionIndex,
         refractionWidth: refractionWidth,
       ),

@@ -10,6 +10,9 @@ class TransactionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // debugPrint('MediaQuery size: ${MediaQuery.sizeOf(context)}');
+
+    // debugPrint('ScreenUtil size: ${ScreenUtilPlus().screenWidth}');
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
       decoration: BoxDecoration(
@@ -22,13 +25,14 @@ class TransactionItem extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(8.h),
+            padding: EdgeInsets.all(7.h),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: const Color.fromARGB(255, 152, 191, 210),
               shape: BoxShape.circle,
               // borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(Iconsax.shopping_cart, size: 18.h, color: Colors.white),
+            // child: Icon(Iconsax.shopping_cart, size: 18.h, color: Colors.white),
+            child: Image.asset('assets/category_icons/taxi2.png', height: 24.h),
           ),
           SizedBox(width: 8.w),
           Column(

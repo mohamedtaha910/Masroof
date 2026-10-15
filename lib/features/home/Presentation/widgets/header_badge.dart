@@ -24,13 +24,13 @@ class HeaderBadge extends StatelessWidget {
             padding: EdgeInsets.all(10.dg),
             decoration: BoxDecoration(
               color: isIncome
-                  ? AppColors.incomeColor.withAlpha(60)
+                  ? AppColors.incomeColor.withAlpha(70)
                   : AppColors.expenseColor.withAlpha(60),
               shape: BoxShape.circle,
               border: Border.all(
                 // color: Colors.white.withAlpha(100),
                 color: isIncome
-                    ? AppColors.incomeColor.withAlpha(30)
+                    ? AppColors.incomeColor.withAlpha(35)
                     : AppColors.expenseColor.withAlpha(25),
                 width: 0.8.w,
               ),
