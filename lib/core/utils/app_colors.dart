@@ -9,4 +9,8 @@ class AppColors {
 
   // static const Color neutralColor = Color(0xFFF8FAFC);
   static const Color neutralColor = Color.fromARGB(255, 234, 238, 242);
+
+
+  // static const Color TaxiColor = const Color.fromARGB(255, 152, 191, 210);
+  // static const Color BillColor = Colors.grey;
 }

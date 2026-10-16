@@ -27,12 +27,21 @@ class TransactionItem extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(7.h),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 152, 191, 210),
+              // color: const Color.fromARGB(255, 152, 185, 191),
+              color: AppColors.neutralColor,
               shape: BoxShape.circle,
               // borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: Colors.grey.shade300.withAlpha(200),
+                width: 0.8.w,
+              ),
             ),
             // child: Icon(Iconsax.shopping_cart, size: 18.h, color: Colors.white),
-            child: Image.asset('assets/category_icons/taxi2.png', height: 24.h),
+            child: Image.asset(
+              // 'assets/category_icons/transport.png',
+              'assets/category_icons/entertainment.png',
+              height: 26.h,
+            ),
           ),
           SizedBox(width: 8.w),
           Column(
