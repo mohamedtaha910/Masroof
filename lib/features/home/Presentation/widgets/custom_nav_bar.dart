@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
-import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/widgets/custom_glass.dart';
 
 class CustomNavBar extends StatelessWidget {
@@ -38,7 +37,7 @@ class CustomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width - 68.w;
+    final width = MediaQuery.sizeOf(context).width - 105.w;
     // final height = width < 340 ? 62.0 : 70.0;
     final height = 50.h;
     final itemWidth = width / _icons.length;
@@ -61,13 +60,14 @@ class CustomNavBar extends StatelessWidget {
               ),
               child: Stack(
                 children: [
+                  // Animated selected background
                   AnimatedPositioned(
                     duration: const Duration(milliseconds: 280),
                     curve: Curves.easeOutCubic,
-                    left: selectedIndex * itemWidth + 5,
+                    left: selectedIndex * (width / _icons.length) + 5,
                     top: 5,
                     bottom: 5,
-                    width: itemWidth - 10,
+                    width: (width / _icons.length) - 10,
                     child: Container(
                       decoration: BoxDecoration(
                         color: _activeColor.withAlpha(35),
@@ -76,6 +76,8 @@ class CustomNavBar extends StatelessWidget {
                       ),
                     ),
                   ),
+
+                  // Icons
                   Positioned.fill(
                     child: Row(
                       children: List.generate(_icons.length, (index) {
@@ -84,36 +86,22 @@ class CustomNavBar extends StatelessWidget {
                         return Expanded(
                           child: InkWell(
                             onTap: () => onChanged(index),
-                            borderRadius: BorderRadius.circular(24),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Center(
+                              child: AnimatedScale(
+                                scale: isSelected ? 1.08 : 1.0,
+                                duration: const Duration(milliseconds: 280),
+                                curve: Curves.easeOutCubic,
+                                child: Icon(
                                   isSelected
                                       ? _selectedIcons[index]
                                       : _icons[index],
-                                  size: isSelected ? 24.h : 22.h,
+                                  size: isSelected ? 22.h : 21.h,
                                   color: isSelected
                                       ? _activeColor
                                       : _inactiveColor,
                                 ),
-                                // const SizedBox(height: 4),
-                                // Text(
-                                //   _labels[index],
-                                //   maxLines: 1,
-                                //   overflow: TextOverflow.ellipsis,
-                                //   style: TextStyle(
-                                //     fontSize: width < 340 ? 9 : 10,
-                                //     fontWeight: isSelected
-                                //         ? FontWeight.w600
-                                //         : FontWeight.w400,
-                                //     color: isSelected
-                                //         ? _activeColor
-                                //         : _inactiveColor,
-                                //   ),
-                                // ),
-                              ],
+                              ),
                             ),
                           ),
                         );
@@ -122,6 +110,69 @@ class CustomNavBar extends StatelessWidget {
                   ),
                 ],
               ),
+              //  Stack(
+              //   children: [
+              //     AnimatedPositioned(
+              //       duration: const Duration(milliseconds: 280),
+              //       curve: Curves.easeOutCubic,
+              //       left: selectedIndex * itemWidth + 5,
+              //       top: 5,
+              //       bottom: 5,
+              //       width: itemWidth - 10,
+              //       child: Container(
+              //         decoration: BoxDecoration(
+              //           color: _activeColor.withAlpha(35),
+              //           borderRadius: BorderRadius.circular(100),
+              //           border: Border.all(color: _activeColor.withAlpha(50)),
+              //         ),
+              //       ),
+              //     ),
+              //     Positioned.fill(
+              //       child: Row(
+              //         children: List.generate(_icons.length, (index) {
+              //           final isSelected = selectedIndex == index;
+
+              //           return Expanded(
+              //             child: InkWell(
+              //               onTap: () => onChanged(index),
+              //               borderRadius: BorderRadius.circular(24),
+              //               child: Column(
+              //                 mainAxisAlignment: MainAxisAlignment.center,
+              //                 mainAxisSize: MainAxisSize.min,
+              //                 children: [
+              //                   Icon(
+              //                     isSelected
+              //                         ? _selectedIcons[index]
+              //                         : _icons[index],
+              //                     size: isSelected ? 24.h : 22.h,
+              //                     color: isSelected
+              //                         ? _activeColor
+              //                         : _inactiveColor,
+              //                   ),
+              //                   // const SizedBox(height: 4),
+              //                   // Text(
+              //                   //   _labels[index],
+              //                   //   maxLines: 1,
+              //                   //   overflow: TextOverflow.ellipsis,
+              //                   //   style: TextStyle(
+              //                   //     fontSize: width < 340 ? 9 : 10,
+              //                   //     fontWeight: isSelected
+              //                   //         ? FontWeight.w600
+              //                   //         : FontWeight.w400,
+              //                   //     color: isSelected
+              //                   //         ? _activeColor
+              //                   //         : _inactiveColor,
+              //                   //   ),
+              //                   // ),
+              //                 ],
+              //               ),
+              //             ),
+              //           );
+              //         }),
+              //       ),
+              //     ),
+              //   ],
+              // ),
             ),
           ),
         ),

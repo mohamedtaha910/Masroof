@@ -9,6 +9,7 @@ import 'package:masroof/features/profile/presentation/views/profile_page.dart';
 import 'package:masroof/features/splash/Presentation/pages/on_boarding2_page.dart';
 import 'package:masroof/features/splash/Presentation/pages/on_boarding_page.dart';
 import 'package:masroof/features/splash/Presentation/pages/splash_page.dart';
+import 'package:masroof/features/transaction/presentation/views/pages/add_transaction_page.dart';
 import 'package:masroof/features/transaction/presentation/views/pages/transaction_page.dart';
 
 abstract class AppRoutes {
@@ -21,6 +22,7 @@ abstract class AppRoutes {
   static const kTransactionPage = '/transaction';
   static const kprofilePage = '/profilePage';
   static const kdashboardPage = '/dashboardPage';
+  static const kAddTransactionPage = '/addTransactionPage';
 
   static final GoRouter router = GoRouter(
     routes: <RouteBase>[
@@ -54,6 +56,13 @@ abstract class AppRoutes {
           return const MaterialPage(child: SignUpPage());
         },
       ),
+      GoRoute(
+        path: kAddTransactionPage,
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: AddTransactionPage());
+        },
+      ),
+
       // GoRoute(
       //   path: krootPage,
       //   pageBuilder: (context, state) {
@@ -82,58 +91,52 @@ abstract class AppRoutes {
       //   path: kprofilePage,
       //   pageBuilder: (context, state) {
       //     return const MaterialPage(child: ProfilePage());
-        // },
+      // },
       // ),
       StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) {
-        return AppRoot(
-          navigationShell: navigationShell,
+        builder: (context, state, navigationShell) {
+          return AppRoot(navigationShell: navigationShell);
+        },
+        branches: [
+          // Tab 0: Dashboard
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: kHomePage,
+                builder: (context, state) => const HomePage(),
+              ),
+            ],
+          ),
 
-        );
-      },
-      branches: [
-        // Tab 0: Dashboard
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: kHomePage,
-              builder: (context, state) => const HomePage(),
-            ),
-          ],
-        ),
+          // Tab 1: Transactions
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: kTransactionPage,
+                builder: (context, state) => const TransactionPage(),
+              ),
+            ],
+          ),
 
-        // Tab 1: Transactions
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: kTransactionPage,
-              builder: (context, state) => const TransactionPage(),
-            ),
-          ],
-        ),
-
-        // Tab 2: Profile
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: kdashboardPage,
-              builder: (context, state) => const DashboardPage(),
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: kprofilePage,
-              builder: (context, state) => const ProfilePage(),
-            ),
-          ],
-        ),
-      ],
-    ),
-  ],
-);
-   
-
-
+          // Tab 2: Profile
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: kdashboardPage,
+                builder: (context, state) => const DashboardPage(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: kprofilePage,
+                builder: (context, state) => const ProfilePage(),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ],
+  );
 }

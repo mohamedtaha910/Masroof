@@ -143,6 +143,7 @@ class HomeAppBar extends StatelessWidget {
                           style: GoogleFonts.poppins(
                             fontSize: 11.sp,
                             fontWeight: FontWeight.w600,
+                            // color: Colors.white,
                             color: AppColors.primaryColor,
                           ),
                         ),

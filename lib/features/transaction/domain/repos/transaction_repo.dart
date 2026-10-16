@@ -1,7 +1,7 @@
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 
 abstract class TransactionRepo {
-  Future<void> addTransaction({required TransactionEntity transaction});
+  Future<String> addTransaction({required TransactionEntity transaction});
 
   Future<List<TransactionEntity>> getTransactions();
 

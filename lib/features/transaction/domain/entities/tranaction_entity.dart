@@ -3,7 +3,7 @@ import 'package:masroof/core/utils/categories.dart';
 enum TransactionType { income, expense }
 
 class TransactionEntity {
-  final String id;
+  final String? id;
   final String title;
   final double amount;
   final TransactionType type;
@@ -12,7 +12,7 @@ class TransactionEntity {
   final String? note;
 
   const TransactionEntity({
-    required this.id,
+    this.id,
     required this.title,
     required this.amount,
     required this.type,
