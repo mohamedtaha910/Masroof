@@ -43,6 +43,7 @@ dependencies:
   google_fonts: ^8.2.1
   google_sign_in: ^7.2.0
   iconsax_flutter: ^1.0.1
+  intl: ^0.20.2
   liquid_glass_easy: ^5.0.0
   modal_progress_hud_nsn: ^0.5.1
 

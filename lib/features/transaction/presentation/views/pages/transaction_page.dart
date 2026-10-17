@@ -19,6 +19,8 @@ class TransactionPage extends StatelessWidget {
       body: Stack(
         children: [
           ListView.builder(
+            padding: EdgeInsets.symmetric(vertical: 100),
+            physics: BouncingScrollPhysics(),
             itemCount: 50,
             itemBuilder: (context, index) {
               return Padding(

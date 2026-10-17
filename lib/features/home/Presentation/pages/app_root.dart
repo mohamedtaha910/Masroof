@@ -51,8 +51,8 @@ class AppRoot extends StatelessWidget {
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 15.w,
-                          vertical: 14.h,
+                          horizontal: 14.w,
+                          vertical: 13.h,
                         ),
                         decoration: BoxDecoration(
                           color: Colors.grey.shade100.withAlpha(60),

@@ -9,7 +9,7 @@ class AmountTextFeild extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      keyboardType: const TextInputType.numberWithOptions(decimal: true ,),
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: 40.sp,

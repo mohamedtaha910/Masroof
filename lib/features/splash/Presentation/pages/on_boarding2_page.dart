@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/utils/app_routes.dart';
 import 'package:masroof/core/widgets/custom_button.dart';
+import 'package:masroof/core/widgets/custom_glass.dart';
 
 class OnBoarding2Page extends StatelessWidget {
   const OnBoarding2Page({super.key});
@@ -15,20 +16,21 @@ class OnBoarding2Page extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
-        title: CustomButton(
-          colors: [Colors.grey.shade100],
-          borderRadius: 200,
-          horizontalPadding: 3,
-          verticalPadding: 3,
-          onTap: () {
-            GoRouter.of(context).pop();
-          },
-
-          border: Border.all(color: Colors.grey.shade300, width: 0.8.w),
-          child: Icon(
-            Icons.chevron_left_rounded,
-            size: 28.sp,
-            color: Colors.black,
+        title: CustomGlass(
+          child: CustomButton(
+            colors: [Colors.white.withAlpha(100), Colors.white.withAlpha(100)],
+            borderRadius: 200,
+            horizontalPadding: 3,
+            verticalPadding: 3,
+            onTap: () {
+              GoRouter.of(context).pop();
+            },
+            // border: Border.all(color: Colors.grey.shade300, width: 0.8.w),
+            child: Icon(
+              Icons.chevron_left_rounded,
+              size: 28.sp,
+              color: Colors.black,
+            ),
           ),
         ),
       ),
