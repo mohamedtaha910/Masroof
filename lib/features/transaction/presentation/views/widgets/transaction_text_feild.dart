@@ -3,10 +3,17 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:masroof/core/utils/app_colors.dart';
 
 class TransactionTextFeild extends StatelessWidget {
-  const TransactionTextFeild({super.key, this.onChanged, required this.maxLines, required this.hint});
+  const TransactionTextFeild({
+    super.key,
+    this.onChanged,
+    required this.maxLines,
+    required this.hint,
+    this.validate = true,
+  });
   final void Function(String)? onChanged;
   final int maxLines;
   final String hint;
+  final bool validate;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +26,7 @@ class TransactionTextFeild extends StatelessWidget {
         color: Colors.black,
       ),
       validator: (data) {
-        if (data!.isEmpty) {
+        if (validate && data!.isEmpty) {
           return 'feild is required';
         } else {
           return null;
@@ -27,11 +34,10 @@ class TransactionTextFeild extends StatelessWidget {
       },
       // scrollPadding: EdgeInsets.symmetric(horizontal: 16.w),
       onChanged: onChanged,
-      maxLines: maxLines ,
+      maxLines: maxLines,
 
       cursorColor: AppColors.tertiaryColor,
       decoration: InputDecoration(
-        
         // fillColor: Colors.grey.withAlpha(20),
         fillColor: Colors.white.withAlpha(10),
         filled: true,

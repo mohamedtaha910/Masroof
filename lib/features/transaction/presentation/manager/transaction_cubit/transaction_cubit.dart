@@ -24,6 +24,7 @@ class TransactionsCubit extends Cubit<TransactionsState> {
   }
 
   Future<void> addTransaction({required TransactionEntity transaction}) async {
+    emit(TransactionsLoading());
     try {
       final id = await transactionRepo.addTransaction(transaction: transaction);
 
@@ -39,7 +40,7 @@ class TransactionsCubit extends Cubit<TransactionsState> {
 
       transactions = [savedTransaction, ...transactions];
 
-      emit(TransactionsLoaded(transactions));
+      emit(TransactionAdded(id));
     } catch (e) {
       emit(TransactionsError(e.toString()));
     }

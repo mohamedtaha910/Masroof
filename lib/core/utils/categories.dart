@@ -83,23 +83,23 @@ class AppCategories {
   );
 
   static const List<Category> expenses = [
+    bills,
+    shopping,
+    financial,
+    health,
+    education,
+    food,
+    transport,
+    entertainment,
     gifts,
     other,
-    financial,
-    entertainment,
-    education,
-    health,
-    shopping,
-    bills,
-    transport,
-    food,
   ];
   static const List<Category> incomes = [
-    gifts,
-    other,
-    refunds,
+    salary,
     investments,
     freeLance,
-    salary,
+    refunds,
+    gifts,
+    other,
   ];
 }

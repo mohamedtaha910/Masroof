@@ -19,6 +19,7 @@ class NoteTextFeild extends StatelessWidget {
           children: [
             Text('Note', style: TextStyle(color: Colors.black54)),
             TransactionTextFeild(
+              validate: false,
               maxLines: 5,
               hint: 'Add a Note (Optional)',
               onChanged: (value) {

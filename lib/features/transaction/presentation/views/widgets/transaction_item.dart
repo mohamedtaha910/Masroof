@@ -38,8 +38,8 @@ class TransactionItem extends StatelessWidget {
             ),
             // child: Icon(Iconsax.shopping_cart, size: 18.h, color: Colors.white),
             child: Image.asset(
-              // 'assets/category_icons/transport.png',
-              'assets/category_icons/work.png',
+              'assets/category_icons/transport.png',
+              // 'assets/category_icons/work.png',
               height: 26.h,
             ),
           ),

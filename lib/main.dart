@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +12,12 @@ import 'package:masroof/core/utils/app_routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:masroof/core/utils/bloc_observer.dart';
 import 'package:masroof/core/utils/service_locator.dart';
+import 'package:masroof/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:masroof/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:masroof/features/auth/presentation/manager/cubit/auth_cubit.dart';
+import 'package:masroof/features/transaction/data/data_sources/transaction_remote_data_source.dart';
+import 'package:masroof/features/transaction/data/repos/transaction_repo_impl.dart';
+import 'package:masroof/features/transaction/presentation/manager/transaction_cubit/transaction_cubit.dart';
 import 'package:masroof/firebase_options.dart';
 
 void main() async {
@@ -46,8 +52,23 @@ class MyApp extends StatelessWidget {
       },
       autoRebuild: true,
       builder: (context, child) {
-        return BlocProvider(
-          create: (context) => AuthCubit(authRepo: getIt.get<AuthRepoImpl>()),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  AuthCubit(authRepo: getIt.get<AuthRepoImpl>()),
+            ),
+            BlocProvider(
+              create: (context) => TransactionsCubit(
+                transactionRepo: TransactionRepoImpl(
+                  remoteDataSource: TransactionRemoteDataSourceImpl(
+                    firestore: FirebaseFirestore.instance,
+                    auth: getIt.get<FirebaseAuth>(),
+                  ),
+                ),
+              ),
+            ),
+          ],
           child: MaterialApp.router(
             theme: ThemeData(
               pageTransitionsTheme: const PageTransitionsTheme(

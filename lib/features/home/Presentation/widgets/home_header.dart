@@ -96,14 +96,14 @@ class HomeHeader extends StatelessWidget {
       if (t < 0.5) {
         // secondary -> tertiary (first half)
         c = Color.lerp(
-          AppColors.tertiaryColor.withAlpha(245),
-          AppColors.tertiaryColor.withAlpha(230),
+          AppColors.secondaryColor.withAlpha(245),
+          AppColors.secondaryColor.withAlpha(230),
           Curves.easeInOut.transform(t * 2),
         )!;
       } else {
         // tertiary -> neutral (second half)
         c = Color.lerp(
-          AppColors.tertiaryColor.withAlpha(220),
+          AppColors.secondaryColor.withAlpha(220),
           AppColors.neutralColor,
           Curves.easeInOut.transform((t - 0.5) * 2),
         )!;
