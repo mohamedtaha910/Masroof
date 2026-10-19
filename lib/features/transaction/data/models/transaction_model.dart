@@ -4,7 +4,7 @@ import 'package:masroof/features/transaction/domain/entities/tranaction_entity.d
 
 class TransactionModel extends TransactionEntity {
   const TransactionModel({
-    required super.id,
+    super.id,
     required super.title,
     required super.amount,
     required super.type,
@@ -18,12 +18,15 @@ class TransactionModel extends TransactionEntity {
   ) {
     final data = snapshot.data()!;
 
+    Category category = AppCategories.allCategories.firstWhere(
+      (element) => element.name == data['categoryName'],
+    );
     return TransactionModel(
       id: snapshot.id,
       title: data['title'] as String,
       amount: (data['amount'] as num).toDouble(),
       type: TransactionType.values.byName(data['type'] as String),
-      category: Category(name: data['categoryName'] as String, iconPath: ''),
+      category: category,
       date: (data['date'] as Timestamp).toDate(),
       note: data['note'] as String?,
     );
@@ -34,7 +37,7 @@ class TransactionModel extends TransactionEntity {
       'title': title,
       'amount': amount,
       'type': type.name,
-      'categoryId': category.name.toLowerCase(),
+      // 'categoryId': category.name.toLowerCase(),
       'categoryName': category.name,
       'date': Timestamp.fromDate(date),
       'note': note,

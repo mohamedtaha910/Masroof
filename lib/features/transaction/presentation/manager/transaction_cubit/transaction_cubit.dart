@@ -37,9 +37,9 @@ class TransactionsCubit extends Cubit<TransactionsState> {
         date: transaction.date,
         note: transaction.note,
       );
-
-      transactions = [savedTransaction, ...transactions];
-
+      getTransactions();
+      // transactions = [savedTransaction, ...transactions];
+      // transactions.add(savedTransaction);
       emit(TransactionAdded(id));
     } catch (e) {
       emit(TransactionsError(e.toString()));

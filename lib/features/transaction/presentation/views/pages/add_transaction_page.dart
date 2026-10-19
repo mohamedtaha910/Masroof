@@ -24,8 +24,14 @@ class AddTransactionPage extends StatelessWidget {
               child: GestureDetector(
                 onTap: () => GoRouter.of(context).pop(),
                 child: Container(
-                  padding: EdgeInsets.all(4),
-                  decoration: BoxDecoration(color: Colors.white.withAlpha(100)),
+                  padding: EdgeInsets.all(4.w),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade200.withAlpha(200),
+                    borderRadius: BorderRadius.circular(100),
+                    border: Border.all(
+                      color: Colors.grey.shade300.withAlpha(180),
+                    ),
+                  ),
                   child: Icon(Icons.chevron_left_rounded, size: 28.sp),
                 ),
               ),
@@ -33,7 +39,7 @@ class AddTransactionPage extends StatelessWidget {
             Spacer(),
             Text('Add Transaction', style: TextStyle(fontSize: 18.sp)),
             Spacer(),
-            // SizedBox(width: 16.w),
+            SizedBox(width: 24.w),
           ],
         ),
 
@@ -43,24 +49,58 @@ class AddTransactionPage extends StatelessWidget {
         surfaceTintColor: Colors.transparent,
       ),
 
-      body: BlocBuilder<TransactionsCubit, TransactionsState>(
-        builder: (context, state) {
-          return ModalProgressHUD(
-            progressIndicator: CustomLoadingIndicator(),
-            inAsyncCall: state is TransactionsLoading,
-            // inAsyncCall: true,
-            child: GestureDetector(
-              onTap: () {
-                FocusScopeNode currentFocus = FocusScope.of(context);
+      body: Stack(
+        children: [
+          BlocBuilder<TransactionsCubit, TransactionsState>(
+            builder: (context, state) {
+              return ModalProgressHUD(
+                progressIndicator: CustomLoadingIndicator(),
+                inAsyncCall: state is TransactionsLoading,
+                // inAsyncCall: true,
+                child: GestureDetector(
+                  onTap: () {
+                    FocusScopeNode currentFocus = FocusScope.of(context);
 
-                if (!currentFocus.hasPrimaryFocus) {
-                  currentFocus.unfocus();
-                }
-              },
-              child: AddTransactionForm(),
+                    if (!currentFocus.hasPrimaryFocus) {
+                      currentFocus.unfocus();
+                    }
+                  },
+                  child: AddTransactionForm(),
+                ),
+              );
+            },
+          ),
+
+          Positioned(
+            child: Container(
+              height: 120.h,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                // color: Colors.red,
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.white.withAlpha(255),
+                    Colors.white.withAlpha(240),
+                    Colors.white.withAlpha(235),
+                    Colors.white.withAlpha(225),
+                    Colors.white.withAlpha(210),
+                    // Colors.white.withAlpha(195),
+                    // Colors.white.withAlpha(175),
+                    Colors.white.withAlpha(140),
+                    // Colors.white.withAlpha(120),
+                    Colors.white.withAlpha(90),
+                    // Colors.white.withAlpha(60),
+                    Colors.white.withAlpha(50),
+                    Colors.white.withAlpha(20),
+                    Colors.white.withAlpha(10),
+                  ],
+                  begin: AlignmentGeometry.topCenter,
+                  end: AlignmentGeometry.bottomCenter,
+                ),
+              ),
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }

@@ -11,8 +11,9 @@ class TransactionRepoImpl implements TransactionRepo {
 
   @override
   Future<String> addTransaction({required TransactionEntity transaction}) {
+
     final model = TransactionModel(
-      id: transaction.id,
+      // id: transaction.id,
       title: transaction.title,
       amount: transaction.amount,
       type: transaction.type,

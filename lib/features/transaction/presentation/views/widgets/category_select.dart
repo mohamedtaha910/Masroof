@@ -26,42 +26,47 @@ class _CategoriesSelectState extends State<CategoriesSelect> {
         ? AppCategories.incomes
         : AppCategories.expenses;
 
-    return CustomGlass(
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+      decoration: BoxDecoration(
         color: Colors.white.withAlpha(100),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Categories', style: TextStyle(color: Colors.black54)),
-            SizedBox(height: 14.h),
-            Wrap(
-              // crossAxisAlignment: WrapCrossAlignment.center,
-              alignment: WrapAlignment.start,
-              spacing: 8,
-              runSpacing: 8,
-              children: List.generate(categories.length, (index) {
-                if (!(categories.contains(selectedCategory))) {
-                  selectedCategory = AppCategories.other;
-                  // widget.onCategorySelected(selectedCategory);
-                }
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedCategory = categories[index];
-                      widget.onCategorySelected(selectedCategory);
-                    });
-                  },
-                  child: CategoryShip(
-                    category: categories[index],
-                    isSelected: categories[index] == selectedCategory,
-                  ),
-                );
-              }),
-            ),
-          ],
-        ),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white.withAlpha(180)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Categories',
+            style: TextStyle(color: Colors.black54, fontSize: 12.sp),
+          ),
+          SizedBox(height: 10.h),
+          Wrap(
+            // crossAxisAlignment: WrapCrossAlignment.center,
+            alignment: WrapAlignment.start,
+            spacing: 8,
+            runSpacing: 8,
+            children: List.generate(categories.length, (index) {
+              if (!(categories.contains(selectedCategory))) {
+                selectedCategory = AppCategories.other;
+                // widget.onCategorySelected(selectedCategory);
+              }
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedCategory = categories[index];
+                    widget.onCategorySelected(selectedCategory);
+                  });
+                },
+                child: CategoryShip(
+                  category: categories[index],
+                  isSelected: categories[index] == selectedCategory,
+                ),
+              );
+            }),
+          ),
+        ],
       ),
     );
   }

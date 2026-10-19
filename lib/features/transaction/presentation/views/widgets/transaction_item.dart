@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:masroof/core/utils/app_colors.dart';
+import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 
 class TransactionItem extends StatelessWidget {
-  const TransactionItem({super.key, required this.index});
+  const TransactionItem({
+    super.key,
+    required this.index,
+    required this.transaction,
+  });
+  final TransactionEntity transaction;
   final int index;
 
   @override
   Widget build(BuildContext context) {
-    // debugPrint('MediaQuery size: ${MediaQuery.sizeOf(context)}');
+    bool isIncome = transaction.type == TransactionType.income;
 
+    // debugPrint('MediaQuery size: ${MediaQuery.sizeOf(context)}');
     // debugPrint('ScreenUtil size: ${ScreenUtilPlus().screenWidth}');
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
@@ -38,7 +45,8 @@ class TransactionItem extends StatelessWidget {
             ),
             // child: Icon(Iconsax.shopping_cart, size: 18.h, color: Colors.white),
             child: Image.asset(
-              'assets/category_icons/transport.png',
+              // 'assets/category_icons/transport.png',
+              transaction.category.iconPath,
               // 'assets/category_icons/work.png',
               height: 26.h,
             ),
@@ -47,12 +55,12 @@ class TransactionItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Transaction $index', style: TextStyle(fontSize: 13.sp)),
+              Text(transaction.title, style: TextStyle(fontSize: 13.sp)),
               SizedBox(height: 8.h),
               Row(
                 children: [
                   Text(
-                    'October 14',
+                    DateFormat('MMM dd, yyyy').format(transaction.date),
                     style: TextStyle(
                       color: Colors.black.withAlpha(150),
                       fontSize: 10.sp,
@@ -66,12 +74,12 @@ class TransactionItem extends StatelessWidget {
                       horizontal: 10.w,
                     ),
                     decoration: BoxDecoration(
-                      color: index.isEven
+                      color: isIncome
                           ? AppColors.incomeColor.withAlpha(30)
                           : AppColors.expenseColor.withAlpha(30),
                       borderRadius: BorderRadius.circular(100.r),
                       border: Border.all(
-                        color: index.isEven
+                        color: isIncome
                             ? AppColors.incomeColor.withAlpha(40)
                             : AppColors.expenseColor.withAlpha(30),
                         width: 0.8.w,
@@ -81,14 +89,14 @@ class TransactionItem extends StatelessWidget {
                     child: Row(
                       children: [
                         SvgPicture.asset(
-                          index.isEven
+                          isIncome
                               ? 'assets/icons/income.svg'
                               : 'assets/icons/expense.svg',
                           height: 8.h,
                         ),
                         SizedBox(width: 6.w),
                         Text(
-                          index.isEven ? 'Income' : 'Expense',
+                          transaction.type.name,
                           style: TextStyle(
                             color: Colors.black.withAlpha(200),
                             fontSize: 10.sp,
@@ -102,7 +110,10 @@ class TransactionItem extends StatelessWidget {
             ],
           ),
           Spacer(),
-          Text('\$ 124.50', style: TextStyle(fontSize: 13.sp)),
+          Text(
+            transaction.amount.toString(),
+            style: TextStyle(fontSize: 13.sp),
+          ),
         ],
       ),
     );

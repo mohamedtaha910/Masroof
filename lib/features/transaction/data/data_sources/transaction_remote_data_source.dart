@@ -40,6 +40,7 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
 
   @override
   Future<String> addTransaction(TransactionModel transaction) async {
+    
     final docRef = await _transactionsCollection.add(transaction.toFirestore());
 
     return docRef.id;

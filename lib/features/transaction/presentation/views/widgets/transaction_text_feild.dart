@@ -21,7 +21,7 @@ class TransactionTextFeild extends StatelessWidget {
       // keyboardType: const TextInputType.numberWithOptions(decimal: true),
       // textAlign: TextAlign.center,
       style: TextStyle(
-        fontSize: 14.sp,
+        fontSize: 13.sp,
         fontWeight: FontWeight.w600,
         color: Colors.black,
       ),
@@ -38,13 +38,14 @@ class TransactionTextFeild extends StatelessWidget {
 
       cursorColor: AppColors.tertiaryColor,
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.all(0),
         // fillColor: Colors.grey.withAlpha(20),
         fillColor: Colors.white.withAlpha(10),
         filled: true,
         // prefix: Icon(Icons.attach_money, color: Colors.black54, size: 40.sp),
         hint: Text(
           hint,
-          style: TextStyle(color: Colors.black38, fontSize: 14.sp),
+          style: TextStyle(color: Colors.black38, fontSize: 12.sp),
           // textAlign: TextAlign.center,
         ),
         border: InputBorder.none,

@@ -9,10 +9,10 @@ class AmountTextFeild extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      keyboardType: const TextInputType.numberWithOptions(decimal: true ,),
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
       textAlign: TextAlign.center,
       style: TextStyle(
-        fontSize: 40.sp,
+        fontSize: 28.sp,
         fontWeight: FontWeight.w600,
         color: Colors.black,
       ),
@@ -34,7 +34,7 @@ class AmountTextFeild extends StatelessWidget {
         // prefix: Icon(Icons.attach_money, color: Colors.black54, size: 40.sp),
         hint: Text(
           '0.00',
-          style: TextStyle(color: Colors.black54, fontSize: 40.sp),
+          style: TextStyle(color: Colors.black54, fontSize: 28.sp),
           textAlign: TextAlign.center,
         ),
         border: InputBorder.none,

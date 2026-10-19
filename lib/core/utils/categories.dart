@@ -102,4 +102,20 @@ class AppCategories {
     gifts,
     other,
   ];
+  static const List<Category> allCategories = [
+    bills,
+    shopping,
+    financial,
+    health,
+    education,
+    food,
+    transport,
+    entertainment,
+    salary,
+    investments,
+    freeLance,
+    refunds,
+    gifts,
+    other,
+  ];
 }

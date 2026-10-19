@@ -12,7 +12,6 @@ import 'package:masroof/core/utils/app_routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:masroof/core/utils/bloc_observer.dart';
 import 'package:masroof/core/utils/service_locator.dart';
-import 'package:masroof/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:masroof/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:masroof/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import 'package:masroof/features/transaction/data/data_sources/transaction_remote_data_source.dart';
@@ -66,7 +65,7 @@ class MyApp extends StatelessWidget {
                     auth: getIt.get<FirebaseAuth>(),
                   ),
                 ),
-              ),
+              )..getTransactions(),
             ),
           ],
           child: MaterialApp.router(

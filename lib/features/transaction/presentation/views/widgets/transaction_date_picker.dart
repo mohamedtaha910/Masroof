@@ -68,11 +68,12 @@ class _TransactionDateFieldState extends State<TransactionDateField> {
         padding: EdgeInsets.symmetric(vertical: 10.h),
         child: Row(
           children: [
-            const Icon(Iconsax.calendar_2, color: Colors.black54),
-            const SizedBox(width: 12),
+            Icon(Iconsax.calendar_1_copy, color: Colors.black54, size: 22.w),
+            SizedBox(width: 12.w),
             Text(
               // ' ${selectedDate.day}/${selectedDate.month}/${selectedDate.year} ',
               formattedDate,
+              style: TextStyle(fontSize: 12.5.sp),
             ),
             const Spacer(),
             const Icon(Icons.keyboard_arrow_down_rounded),

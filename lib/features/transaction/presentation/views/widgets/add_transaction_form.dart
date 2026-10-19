@@ -31,15 +31,15 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
   TransactionType type = TransactionType.income;
   late double amount;
   late String title;
-  late DateTime date;
-  late Category category;
+  DateTime date = DateTime.now();
+  Category category = AppCategories.other;
   String note = '';
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<TransactionsCubit, TransactionsState>(
       listener: (context, state) {
         if (state is TransactionAdded) {
-          GoRouter.of(context).go(AppRoutes.kHomePage);
+          GoRouter.of(context).pop();
         } else if (state is TransactionsError) {
           showAuthErrorMessage(context, message: state.message);
         }
@@ -50,20 +50,19 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
           autovalidateMode: autovalidateMode,
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
-            physics: BouncingScrollPhysics(),
+            // physics: BouncingScrollPhysics(),
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 14.0.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 100.h),
+                  SizedBox(height: 90.h),
 
                   TransactionAmountAndType(
                     onAmountSelected: (value) {
-                      setState(() {
-                        amount =
-                            double.tryParse(value.replaceAll(',', '.')) ?? 0;
-                      });
+                      // setState(() {
+                      amount = double.tryParse(value.replaceAll(',', '.')) ?? 0;
+                      // });
                       debugPrint(amount.toString());
                     },
                     onTypeSelected: (value) {
@@ -74,57 +73,68 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                     },
                   ),
                   SizedBox(height: 16.h),
-                  CustomGlass(
-                    radius: 14,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 10.h,
-                        horizontal: 16.w,
-                      ),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 8.h,
+                      horizontal: 16.w,
+                    ),
+                    decoration: BoxDecoration(
                       color: Colors.white.withAlpha(100),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Title',
-                            style: TextStyle(color: Colors.black54),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.white.withAlpha(180)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Title',
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: 12.sp,
                           ),
-                          // SizedBox(height: 4.h),
-                          TransactionTextFeild(
-                            onChanged: (value) {
-                              title = value;
-                              debugPrint(value);
-                            },
-                            hint: 'Add Title',
-                            maxLines: 1,
-                          ),
-                        ],
-                      ),
+                        ),
+                        // SizedBox(height: 4.h),
+                        TransactionTextFeild(
+                          onChanged: (value) {
+                            title = value;
+                            debugPrint(value);
+                          },
+                          hint: 'Add Title',
+                          maxLines: 1,
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(height: 16.h),
 
-                  CustomGlass(
-                    radius: 14,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 10.h,
-                        horizontal: 16.w,
-                      ),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 6.h,
+                      horizontal: 16.w,
+                    ),
+                    decoration: BoxDecoration(
                       color: Colors.white.withAlpha(100),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Date', style: TextStyle(color: Colors.black54)),
-                          SizedBox(height: 6.h),
-                          TransactionDateField(
-                            onDateSelected: (value) {
-                              date = value;
-                              debugPrint('${value.day}');
-                            },
-                          ),
-                        ],
-                      ),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.white.withAlpha(180)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Text(
+                        //   'Date',
+                        //   style: TextStyle(
+                        //     color: Colors.black54,
+                        //     fontSize: 12.sp,
+                        //   ),
+                        // ),
+                        // SizedBox(height: 4.h),
+                        TransactionDateField(
+                          onDateSelected: (value) {
+                            date = value;
+                            debugPrint('${value.day}');
+                          },
+                        ),
+                      ],
                     ),
                   ),
 
@@ -139,10 +149,10 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                   SizedBox(height: 16.h),
                   NoteTextFeild(
                     onNoteSelected: (value) {
-                      setState(() {
-                        note = value;
-                        // debugPrint(value);
-                      });
+                      // setState(() {
+                      note = value;
+                      // debugPrint(value);
+                      // });
                     },
                   ),
                   SizedBox(height: 16.h),
@@ -175,7 +185,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                         Text(
                           'Add Transaction',
                           style: TextStyle(
-                            fontSize: 16.sp,
+                            fontSize: 15.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),

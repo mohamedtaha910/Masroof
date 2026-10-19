@@ -37,7 +37,10 @@ class CustomType extends StatelessWidget {
         SizedBox(width: 8.w),
         Text(
           text,
-          style: TextStyle(color: isSelected ? Colors.white : Colors.black),
+          style: TextStyle(
+            color: isSelected ? Colors.white : Colors.black,
+            fontSize: 12.sp,
+          ),
         ),
       ],
     );
