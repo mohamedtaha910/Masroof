@@ -9,6 +9,8 @@ import 'package:masroof/features/transaction/domain/entities/tranaction_entity.d
 import 'package:masroof/features/transaction/presentation/manager/transaction_cubit/transaction_cubit.dart';
 import 'package:masroof/features/transaction/presentation/manager/transaction_cubit/transaction_state.dart';
 import 'package:masroof/features/transaction/presentation/views/widgets/all_transactions_list.dart';
+import 'package:masroof/features/transaction/presentation/views/widgets/no_transaction.dart';
+import 'package:masroof/features/transaction/presentation/views/widgets/transactions_shimmer_list.dart';
 
 class TransactionBlocBuilder extends StatelessWidget {
   const TransactionBlocBuilder({super.key});
@@ -24,7 +26,7 @@ class TransactionBlocBuilder extends StatelessWidget {
       builder: (context, state) {
         // BlocProvider.of<TransactionsCubit>(context).getTransactions();
         if (state is TransactionsLoading) {
-          return Center(child: CustomLoadingIndicator());
+          return TransactionsShimmerList();
         } else if (state is TransactionsLoaded) {
           List<TransactionEntity> transactions =
               BlocProvider.of<TransactionsCubit>(context).transactions;
@@ -36,46 +38,6 @@ class TransactionBlocBuilder extends StatelessWidget {
           return Text('No Transactions Yet');
         }
       },
-    );
-  }
-}
-
-class NoTransactionPage extends StatelessWidget {
-  const NoTransactionPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-
-        children: [
-          SvgPicture.asset('assets/icons/no_transactions.svg', height: 120.h),
-          // Image.asset('assets/icons/empty_folder.png', height: 135.h),
-          // Image.asset('assets/icons/empty_state.png', height: 105.h),
-          // Container(
-          //   padding: EdgeInsets.all(34.h),
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(200.r),
-          //     gradient: LinearGradient(
-          //       colors: [
-          //         AppColors.secondaryColor.withAlpha(140),
-          //         AppColors.secondaryColor.withAlpha(180),
-          //         AppColors.secondaryColor.withAlpha(225),
-          //       ],
-          //       begin: AlignmentGeometry.topCenter,
-          //       end: AlignmentGeometry.bottomCenter,
-          //     ),
-          //   ),
-          //   child: Image.asset('assets/icons/folder_error.png', height: 90.h),
-          // ),
-          SizedBox(height: 28.h),
-          Text(
-            'No Transactions yet',
-            style: TextStyle(color: Colors.black54, fontSize: 14.sp),
-          ),
-        ],
-      ),
     );
   }
 }

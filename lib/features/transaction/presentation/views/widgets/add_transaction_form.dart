@@ -72,7 +72,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                       });
                     },
                   ),
-                  SizedBox(height: 16.h),
+                  SizedBox(height: 12.h),
                   Container(
                     padding: EdgeInsets.symmetric(
                       vertical: 8.h,
@@ -105,7 +105,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 16.h),
+                  SizedBox(height: 12.h),
 
                   Container(
                     padding: EdgeInsets.symmetric(
@@ -138,7 +138,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                     ),
                   ),
 
-                  SizedBox(height: 16.h),
+                  SizedBox(height: 12.h),
                   CategoriesSelect(
                     type: type,
                     onCategorySelected: (value) {
@@ -146,7 +146,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                       debugPrint(value.name);
                     },
                   ),
-                  SizedBox(height: 16.h),
+                  SizedBox(height: 12.h),
                   NoteTextFeild(
                     onNoteSelected: (value) {
                       // setState(() {
@@ -155,7 +155,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                       // });
                     },
                   ),
-                  SizedBox(height: 16.h),
+                  SizedBox(height: 12.h),
                   CustomButton(
                     borderRadius: 100,
                     colors: [AppColors.primaryColor],

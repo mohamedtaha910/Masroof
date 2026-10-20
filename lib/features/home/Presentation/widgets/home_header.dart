@@ -27,7 +27,7 @@ class HomeHeader extends StatelessWidget {
           ),
           SizedBox(height: 10.h),
           Text(
-            '\$ 124,892.65',
+            '£ 124,892.65',
             style: TextStyle(fontSize: 38.sp, color: Colors.white),
           ),
           SizedBox(height: 10.h),

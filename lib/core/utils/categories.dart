@@ -30,7 +30,7 @@ class AppCategories {
 
   static const health = Category(
     name: 'Health',
-    iconPath: 'assets/category_icons/shopping.png',
+    iconPath: 'assets/category_icons/medicine1.png',
   );
 
   static const education = Category(

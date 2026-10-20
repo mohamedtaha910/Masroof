@@ -25,7 +25,7 @@ class NoteTextFeild extends StatelessWidget {
           SizedBox(height: 4.h),
           TransactionTextFeild(
             validate: false,
-            maxLines: 3,
+            maxLines: 4,
             hint: 'Add a Note (Optional)',
             onChanged: (value) {
               onNoteSelected(value);

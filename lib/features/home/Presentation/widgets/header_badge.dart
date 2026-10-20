@@ -59,7 +59,7 @@ class HeaderBadge extends StatelessWidget {
               ),
               SizedBox(height: 4.h),
               Text(
-                '\$ $value',
+                '£ $value',
                 style: GoogleFonts.poppins(
                   fontSize: 15.sp,
                   fontWeight: FontWeight.w600,

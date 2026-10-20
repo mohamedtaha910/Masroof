@@ -38,7 +38,7 @@ class _CategoriesSelectState extends State<CategoriesSelect> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Categories',
+            'Category',
             style: TextStyle(color: Colors.black54, fontSize: 12.sp),
           ),
           SizedBox(height: 10.h),

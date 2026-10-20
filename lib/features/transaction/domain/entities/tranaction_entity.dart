@@ -5,7 +5,7 @@ enum TransactionType { income, expense }
 class TransactionEntity {
   final String? id;
   final String title;
-  final double amount;
+  final double amount;  
   final TransactionType type;
   final Category category;
   final DateTime date;

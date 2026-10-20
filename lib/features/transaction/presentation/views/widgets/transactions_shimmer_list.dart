@@ -1,0 +1,103 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:masroof/core/utils/app_colors.dart';
+import 'package:shimmer/shimmer.dart';
+
+class TransactionsShimmerList extends StatelessWidget {
+  const TransactionsShimmerList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0.h, horizontal: 12.w),
+      child: ListView.builder(
+        padding: EdgeInsets.only(top: 100),
+        itemCount: 15,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0.h),
+            child: Shimmer.fromColors(
+              baseColor: Colors.white,
+              highlightColor: AppColors.neutralColor.withAlpha(100),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.white.withAlpha(150),
+                      Colors.white.withAlpha(150),
+                    ],
+                  ),
+                  border: Border.all(color: Colors.white, width: 1.w),
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(16.h),
+                      decoration: BoxDecoration(
+                        // color: const Color.fromARGB(255, 152, 185, 191),
+                        color: AppColors.neutralColor,
+                        shape: BoxShape.circle,
+                        // borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: Colors.grey.shade300.withAlpha(200),
+                          width: 0.8.w,
+                        ),
+                      ),
+                      // child: Icon(Iconsax.shopping_cart, size: 18.h, color: Colors.white),
+                      child:
+                          // 'assets/category_icons/transport.png',
+                          Icon(Icons.category_rounded, size: 22.h),
+
+                      // 'assets/category_icons/work.png',
+                    ),
+                    SizedBox(width: 8.w),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 15,
+                          width: 140,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                        ),
+                        SizedBox(height: 10.h),
+                        Row(
+                          children: [
+                            Container(
+                              height: 12,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                            ),
+                            SizedBox(width: 12.w),
+
+                            Container(
+                              height: 12,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    Text('0.00', style: TextStyle(fontSize: 13.sp)),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
