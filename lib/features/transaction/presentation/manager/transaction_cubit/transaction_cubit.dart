@@ -47,14 +47,17 @@ class TransactionsCubit extends Cubit<TransactionsState> {
   }
 
   Future<void> deleteTransaction({required String transactionId}) async {
+    emit(const TransactionsLoading());
     try {
       await transactionRepo.deleteTransaction(transactionId: transactionId);
 
-      transactions = transactions
-          .where((transaction) => transaction.id != transactionId)
-          .toList();
+      // transactions = transactions
+      //     .where((transaction) => transaction.id != transactionId)
+      //     .toList();
 
-      emit(TransactionsLoaded(transactions));
+      getTransactions();
+
+      // emit(TransactionsLoaded(transactions));
     } catch (e) {
       emit(TransactionsError(e.toString()));
     }

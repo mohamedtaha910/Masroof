@@ -35,7 +35,7 @@ class AppCategories {
 
   static const education = Category(
     name: 'Education',
-    iconPath: 'assets/category_icons/education.png',
+    iconPath: 'assets/category_icons/education2.png',
   );
 
   static const entertainment = Category(

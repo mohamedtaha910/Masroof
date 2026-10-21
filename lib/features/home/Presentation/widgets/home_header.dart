@@ -44,7 +44,7 @@ class HomeHeader extends StatelessWidget {
               SvgPicture.asset('assets/icons/income.svg', height: 8.h),
               SizedBox(width: 6.w),
               Text(
-                '\$ 2,492.65 ,',
+                '£ 2,492.65 ,',
                 style: TextStyle(
                   fontSize: 12.sp,
                   color: Colors.white.withAlpha(200),
@@ -56,7 +56,7 @@ class HomeHeader extends StatelessWidget {
               SizedBox(width: 6.w),
 
               Text(
-                '\$ 3,640.65 ',
+                '£ 3,640.65 ',
                 style: TextStyle(
                   fontSize: 12.sp,
                   color: Colors.white.withAlpha(200),

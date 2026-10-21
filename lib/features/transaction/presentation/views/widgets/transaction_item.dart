@@ -30,9 +30,10 @@ class TransactionItem extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.white.withAlpha(150), Colors.white.withAlpha(150)],
+            colors: [Colors.white.withAlpha(120), Colors.white.withAlpha(120)],
+            // colors: [Colors.white.withAlpha(150), Colors.white.withAlpha(150)],
           ),
-          border: Border.all(color: Colors.white, width: 1.w),
+          border: Border.all(color: Colors.white.withAlpha(150), width: 1.w),
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: Row(

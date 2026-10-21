@@ -14,6 +14,8 @@ class AppRoot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('MediaQuery size: ${MediaQuery.sizeOf(context)}');
+    debugPrint('ScreenUtil size: ${ScreenUtilPlus().screenWidth}');
     return Scaffold(
       body: Stack(
         children: [

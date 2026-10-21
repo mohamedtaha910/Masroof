@@ -10,7 +10,7 @@ class TransactionModel extends TransactionEntity {
     required super.type,
     required super.category,
     required super.date,
-    super.note,
+    required super.note,
   });
 
   factory TransactionModel.fromFirestore(
@@ -28,7 +28,7 @@ class TransactionModel extends TransactionEntity {
       type: TransactionType.values.byName(data['type'] as String),
       category: category,
       date: (data['date'] as Timestamp).toDate(),
-      note: data['note'] as String?,
+      note: data['note'] as String,
     );
   }
 
