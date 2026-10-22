@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:masroof/core/utils/app_colors.dart';
@@ -33,37 +34,45 @@ class TransactionInfo extends StatelessWidget {
         children: [
           InfoRow(
             label: 'DATE',
-            body: DateFormat('MMMM dd, yyyy , hh:mm a').format(date),
+            body: DateFormat('MMMM dd, yyyy - hh:mm a').format(date),
             // icon: Icon(Iconsax.calendar_1, color: Colors.orange, size: 18.h),
-            icon: Image.asset('assets/icons/calendar.png', height: 20.h),
-            color: Colors.orange.withAlpha(50),
+            icon: Image.asset('assets/icons/calendar.png', height: 18.h),
+            color: Colors.orange.withAlpha(40),
           ),
-          SizedBox(height: 16.h),
+          SizedBox(height: 14.h),
           Horizintalline(),
-          SizedBox(height: 16.h),
+          SizedBox(height: 14.h),
           InfoRow(
             label: 'TYPE',
-            body: type.name,
-            
-            icon: Image.asset(
-              type == TransactionType.income
-                  ? 'assets/icons/income00.png'
-                  : 'assets/icons/expense2.png',
-              height: 20.h,
+            body: '${type.name[0].toUpperCase()}${type.name.substring(1)}',
+            icon: Padding(
+              padding: EdgeInsets.all(2.5.h),
+              child: SvgPicture.asset(
+                type == TransactionType.income
+                    ? 'assets/icons/income.svg'
+                    : 'assets/icons/expense.svg',
+                height: 12.h,
+              ),
             ),
+            // icon: Image.asset(
+            //   type == TransactionType.income
+            //       ? 'assets/icons/income00.png'
+            //       : 'assets/icons/expense2.png',
+            //   height: 18.h,
+            // ),
             color: type == TransactionType.income
-                ? AppColors.incomeColor.withAlpha(80)
-                : AppColors.expenseColor.withAlpha(80),
+                ? AppColors.incomeColor.withAlpha(40)
+                : AppColors.expenseColor.withAlpha(40),
           ),
-          SizedBox(height: 16.h),
+          SizedBox(height: 14.h),
           Horizintalline(),
-          SizedBox(height: 16.h),
+          SizedBox(height: 14.h),
           InfoRow(
             label: 'CATEGORY',
             body: category.name,
             // icon: Icon(Iconsax.category, color: Colors.blue, size: 18.h),
-            icon: Image.asset('assets/icons/category.png', height: 20.h),
-            color: Colors.blue.withAlpha(50),
+            icon: Image.asset('assets/icons/category.png', height: 18.h),
+            color: Colors.blue.withAlpha(40),
           ),
         ],
       ),

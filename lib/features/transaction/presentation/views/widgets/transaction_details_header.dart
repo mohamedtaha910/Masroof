@@ -43,16 +43,16 @@ class TransactionDetailsHeader extends StatelessWidget {
           SizedBox(height: 12.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            // crossAxisAlignment: CrossAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(amout, style: TextStyle(fontSize: 28.sp)),
+              Text(amout, style: TextStyle(fontSize: 29.sp)),
               Text(
                 ' EGP',
                 style: TextStyle(
                   fontSize: 14.sp,
                   color: type == TransactionType.income
                       ? AppColors.incomeColor.withAlpha(180)
-                      : AppColors.expenseColor.withAlpha(150),
+                      : AppColors.expenseColor.withAlpha(180),
                 ),
               ),
             ],

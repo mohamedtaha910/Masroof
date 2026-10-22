@@ -62,4 +62,24 @@ class TransactionsCubit extends Cubit<TransactionsState> {
       emit(TransactionsError(e.toString()));
     }
   }
+
+Future<void> updateTransaction({
+    required TransactionEntity transaction,
+  }) async {
+    try {
+      await transactionRepo.updateTransaction(
+        transaction: transaction,
+      );
+
+      transactions = transactions.map((item) {
+        return item.id == transaction.id ? transaction : item;
+      }).toList();
+
+      emit(TransactionsLoaded(transactions));
+    } catch (e) {
+      emit(TransactionsError(e.toString()));
+    }
+  }
+
+
 }

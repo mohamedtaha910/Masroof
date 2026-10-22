@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 import 'package:masroof/features/transaction/presentation/views/widgets/info_row.dart';
 import 'package:masroof/features/transaction/presentation/views/widgets/transaction_details_header.dart';
@@ -44,11 +45,11 @@ class TransactionDetailsBoby extends StatelessWidget {
                 label: 'NOTE',
                 body: transaction.note.isEmpty ? 'No Note!' : transaction.note,
                 // icon: Icon(
-                //   Iconsax.note_21,
-                //   color: Colors.purple.withAlpha(200),
+                //   Iconsax.note_text,
+                //   color: AppColors.tertiaryColor.withAlpha(200),
                 // ),
-                icon: Image.asset('assets/icons/note.png', height: 20.h),
-                color: Colors.purple.withAlpha(35),
+                icon: Image.asset('assets/icons/paper.png', height: 20.h),
+                color: AppColors.tertiaryColor.withAlpha(30),
               ),
             ),
             SizedBox(height: 24.h),

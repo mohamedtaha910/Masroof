@@ -3,6 +3,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:masroof/core/utils/app_colors.dart';
+import 'package:masroof/core/utils/app_routes.dart';
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 import 'package:masroof/features/transaction/presentation/views/widgets/confirm_delete_transaction.dart';
 
@@ -31,7 +32,11 @@ class TransactionDeatilsAppBar extends StatelessWidget {
         Text('Transaction Details', style: TextStyle(fontSize: 16.sp)),
         Spacer(),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            GoRouter.of(
+              context,
+            ).push(AppRoutes.kEditTransactionPage, extra: transaction);
+          },
           child: Container(
             padding: EdgeInsets.all(8.w),
             decoration: BoxDecoration(
@@ -45,7 +50,7 @@ class TransactionDeatilsAppBar extends StatelessWidget {
         SizedBox(width: 8.w),
         GestureDetector(
           onTap: () {
-            confirmDeleteTransaction(context , transaction: transaction );
+            confirmDeleteTransaction(context, transaction: transaction);
           },
           child: Container(
             padding: EdgeInsets.all(8.w),

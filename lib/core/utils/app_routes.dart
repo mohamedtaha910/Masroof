@@ -11,6 +11,7 @@ import 'package:masroof/features/splash/Presentation/pages/on_boarding_page.dart
 import 'package:masroof/features/splash/Presentation/pages/splash_page.dart';
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 import 'package:masroof/features/transaction/presentation/views/pages/add_transaction_page.dart';
+import 'package:masroof/features/transaction/presentation/views/pages/edit_transaction_page.dart';
 import 'package:masroof/features/transaction/presentation/views/pages/transaction_details.dart';
 import 'package:masroof/features/transaction/presentation/views/pages/transaction_page.dart';
 
@@ -26,6 +27,7 @@ abstract class AppRoutes {
   static const kdashboardPage = '/dashboardPage';
   static const kAddTransactionPage = '/addTransactionPage';
   static const kTransactionDetails = '/TransactionDetails';
+  static const kEditTransactionPage = '/EditTransactionPage';
 
   static final GoRouter router = GoRouter(
     routes: <RouteBase>[
@@ -71,6 +73,15 @@ abstract class AppRoutes {
           final transaction = state.extra as TransactionEntity;
           return MaterialPage(
             child: TransactionDetails(transaction: transaction),
+          );
+        },
+      ),
+      GoRoute(
+        path: kEditTransactionPage,
+        pageBuilder: (context, state) {
+          final transaction = state.extra as TransactionEntity;
+          return MaterialPage(
+            child: EditTransactionPage(transaction: transaction),
           );
         },
       ),

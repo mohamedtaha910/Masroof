@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:masroof/core/utils/app_colors.dart';
 
 class InfoRow extends StatelessWidget {
@@ -27,7 +26,7 @@ class InfoRow extends StatelessWidget {
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(100),
-            border: Border.all(color: AppColors.expenseColor.withAlpha(10)),
+            border: Border.all(color: color.withAlpha(10)),
           ),
           child: icon,
         ),
