@@ -3,7 +3,9 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 import 'package:masroof/features/transaction/presentation/views/widgets/edit_amout_and_type.dart';
+import 'package:masroof/features/transaction/presentation/views/widgets/edit_transaction_date.dart';
 import 'package:masroof/features/transaction/presentation/views/widgets/edit_transaction_title.dart';
+import 'package:masroof/features/transaction/presentation/views/widgets/transaction_date_picker.dart';
 
 class EditTransactionForm extends StatefulWidget {
   const EditTransactionForm({super.key, required this.oldTransaction});
@@ -68,7 +70,14 @@ class _EditTransactionFormState extends State<EditTransactionForm> {
                 },
               ),
               SizedBox(height: 12.h),
-              
+              EditDate(
+                date: date,
+                onDateChanged: (value) {
+                  date = value;
+                  debugPrint(date.toString());
+                },
+              ),
+              SizedBox(height: 12.h),
             ],
           ),
         ),

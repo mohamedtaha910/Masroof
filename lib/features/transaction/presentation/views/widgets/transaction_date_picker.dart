@@ -5,15 +5,20 @@ import 'package:intl/intl.dart';
 import 'package:masroof/core/utils/app_colors.dart';
 
 class TransactionDateField extends StatefulWidget {
-  const TransactionDateField({super.key, required this.onDateSelected});
+  const TransactionDateField({
+    super.key,
+    required this.onDateSelected,
+    this.initialDate,
+  });
   final ValueChanged<DateTime> onDateSelected;
+  final DateTime? initialDate;
 
   @override
   State<TransactionDateField> createState() => _TransactionDateFieldState();
 }
 
 class _TransactionDateFieldState extends State<TransactionDateField> {
-  DateTime selectedDate = DateTime.now();
+  late DateTime selectedDate;
 
   Future<void> pickDate() async {
     final DateTime? pickedDate = await showDatePicker(
@@ -57,6 +62,12 @@ class _TransactionDateFieldState extends State<TransactionDateField> {
       });
     }
     widget.onDateSelected(selectedDate);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    selectedDate = widget.initialDate ?? DateTime.now();
   }
 
   @override
