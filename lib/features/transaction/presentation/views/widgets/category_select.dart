@@ -9,16 +9,25 @@ class CategoriesSelect extends StatefulWidget {
     super.key,
     required this.type,
     required this.onCategorySelected,
+    this.initialCategory = AppCategories.other,
   });
   final TransactionType type;
   final ValueChanged<Category> onCategorySelected;
+  final Category? initialCategory;
 
   @override
   State<CategoriesSelect> createState() => _CategoriesSelectState();
 }
 
 class _CategoriesSelectState extends State<CategoriesSelect> {
-  Category selectedCategory = AppCategories.other;
+  late Category selectedCategory;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedCategory = widget.initialCategory ?? AppCategories.other;
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Category> categories = widget.type == TransactionType.income

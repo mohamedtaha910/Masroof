@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/utils/categories.dart';
+import 'package:masroof/core/widgets/custom_button.dart';
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
+import 'package:masroof/features/transaction/presentation/manager/transaction_cubit/transaction_cubit.dart';
+import 'package:masroof/features/transaction/presentation/views/widgets/category_select.dart';
 import 'package:masroof/features/transaction/presentation/views/widgets/edit_amout_and_type.dart';
 import 'package:masroof/features/transaction/presentation/views/widgets/edit_transaction_date.dart';
+import 'package:masroof/features/transaction/presentation/views/widgets/edit_transaction_text_feild.dart';
 import 'package:masroof/features/transaction/presentation/views/widgets/edit_transaction_title.dart';
-import 'package:masroof/features/transaction/presentation/views/widgets/transaction_date_picker.dart';
+import 'package:masroof/features/transaction/presentation/views/widgets/transaction_text_feild.dart';
 
 class EditTransactionForm extends StatefulWidget {
   const EditTransactionForm({super.key, required this.oldTransaction});
@@ -56,8 +62,10 @@ class _EditTransactionFormState extends State<EditTransactionForm> {
                   debugPrint(amount.toString());
                 },
                 onTypeChanged: (value) {
-                  type = value;
-                  debugPrint(type.name);
+                  setState(() {
+                    type = value;
+                    debugPrint(type.name);
+                  });
                 },
                 transaction: widget.oldTransaction,
               ),
@@ -78,6 +86,70 @@ class _EditTransactionFormState extends State<EditTransactionForm> {
                 },
               ),
               SizedBox(height: 12.h),
+              CategoriesSelect(
+                type: type,
+                onCategorySelected: (value) {
+                  category = value;
+                  debugPrint(category.name);
+                },
+                initialCategory: category,
+              ),
+              SizedBox(height: 12.h),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+                decoration: BoxDecoration(
+                  color: Colors.white.withAlpha(100),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.white.withAlpha(180)),
+                ),
+                child: EditTransactionTextFeild(
+                  maxLines: 4,
+                  text: note,
+                  validate: true,
+                  onChanged: (value) {
+                    note = value;
+                  },
+                ),
+              ),
+              SizedBox(height: 12.h),
+              CustomButton(
+                borderRadius: 100,
+                colors: [AppColors.primaryColor],
+                horizontalPadding: 20,
+                verticalPadding: 10,
+                onTap: () {
+                  autovalidateMode = AutovalidateMode.always;
+                  setState(() {});
+
+                  if (formKey.currentState!.validate()) {
+                    TransactionEntity transaction = TransactionEntity(
+                      title: title,
+                      amount: amount,
+                      type: type,
+                      category: category,
+                      date: date,
+                      note: note,
+                    );
+                    BlocProvider.of<TransactionsCubit>(
+                      context,
+                    ).updateTransaction(transaction: transaction);
+                  }
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Save',
+                      style: TextStyle(
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 32.h),
             ],
           ),
         ),
