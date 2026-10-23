@@ -26,9 +26,7 @@ class _EditTransactionTextFeildState extends State<EditTransactionTextFeild> {
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController(
-      text: widget.text.isEmpty ? 'No Note!' : widget.text,
-    );
+    controller = TextEditingController(text: widget.text);
   }
 
   @override

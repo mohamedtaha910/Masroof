@@ -27,9 +27,11 @@ class TransactionBlocBuilder extends StatelessWidget {
         // BlocProvider.of<TransactionsCubit>(context).getTransactions();
         if (state is TransactionsLoading) {
           return TransactionsShimmerList();
-        } else if (state is TransactionsError) {
-          return NoTransactionPage(text: 'Some Thing went Wrong');
-        } else {
+        }
+        // else if (state is TransactionsError) {
+        //   return NoTransactionPage(text: 'Some Thing went Wrong');
+        // }
+        else {
           List<TransactionEntity> transactions =
               BlocProvider.of<TransactionsCubit>(context).transactions;
 

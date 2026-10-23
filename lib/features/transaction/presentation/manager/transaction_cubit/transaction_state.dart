@@ -1,4 +1,3 @@
-
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 
 abstract class TransactionsState {
@@ -29,6 +28,12 @@ class TransactionAdded extends TransactionsState {
   final String id;
 
   const TransactionAdded(this.id);
+}
+
+class TransactionUpdated extends TransactionsState {
+  final TransactionEntity transactionEntity;
+
+  const TransactionUpdated(this.transactionEntity);
 }
 
 class TransactionDeleted extends TransactionsState {

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:masroof/core/utils/app_colors.dart';
@@ -17,11 +18,21 @@ class AmountTextFeild extends StatelessWidget {
         color: Colors.black,
       ),
       validator: (data) {
-        if (data!.isEmpty) {
-          return 'feild is required';
-        } else {
-          return null;
+        if (data == null || data.trim().isEmpty) {
+          return 'Please enter an amount';
         }
+
+        final parsedAmount = double.tryParse(data.trim().replaceAll(',', '.'));
+
+        if (parsedAmount == null) {
+          return 'Please enter a valid amount';
+        }
+
+        if (parsedAmount <= 0) {
+          return 'Amount must be greater than zero';
+        }
+
+        return null;
       },
       // scrollPadding: EdgeInsets.symmetric(horizontal: 16.w),
       onChanged: onChanged,

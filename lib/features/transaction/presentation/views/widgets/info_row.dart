@@ -41,10 +41,15 @@ class InfoRow extends StatelessWidget {
             SizedBox(height: 8.h),
             SizedBox(
               width: 220.w,
-              child: Text(
-                body,
-                style: TextStyle(fontSize: 13.sp, color: Colors.black),
-              ),
+              child: body.isNotEmpty
+                  ? Text(
+                      body,
+                      style: TextStyle(fontSize: 13.sp, color: Colors.black),
+                    )
+                  : Text(
+                      'N/A',
+                      style: TextStyle(fontSize: 13.sp, color: Colors.black54),
+                    ),
             ),
           ],
         ),

@@ -35,9 +35,9 @@ class TransactionPage extends StatelessWidget {
                   colors: [
                     Colors.white.withAlpha(255),
                     Colors.white.withAlpha(245),
-                    Colors.white.withAlpha(225),
-                    Colors.white.withAlpha(215),
-                    Colors.white.withAlpha(190),
+                    Colors.white.withAlpha(235),
+                    Colors.white.withAlpha(220),
+                    Colors.white.withAlpha(200),
                     Colors.white.withAlpha(120),
                     Colors.white.withAlpha(20),
                     Colors.white.withAlpha(0),

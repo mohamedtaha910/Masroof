@@ -68,7 +68,7 @@ class TransactionsCubit extends Cubit<TransactionsState> {
   Future<void> updateTransaction({
     required TransactionEntity transaction,
   }) async {
-    // emit(TransactionsLoading());
+    emit(TransactionsLoading());
     try {
       await transactionRepo.updateTransaction(transaction: transaction);
 
@@ -77,7 +77,7 @@ class TransactionsCubit extends Cubit<TransactionsState> {
       }).toList();
       AppHelpers.sortTransactions(transactions);
 
-      emit(TransactionsLoaded(transactions));
+      emit(TransactionAdded(transaction.id!));
     } catch (e) {
       emit(TransactionsError(e.toString()));
     }

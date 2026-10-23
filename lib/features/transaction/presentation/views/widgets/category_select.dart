@@ -58,7 +58,7 @@ class _CategoriesSelectState extends State<CategoriesSelect> {
             children: List.generate(categories.length, (index) {
               if (!(categories.contains(selectedCategory))) {
                 selectedCategory = AppCategories.other;
-                // widget.onCategorySelected(selectedCategory);
+                widget.onCategorySelected(selectedCategory);
               }
               return GestureDetector(
                 onTap: () {

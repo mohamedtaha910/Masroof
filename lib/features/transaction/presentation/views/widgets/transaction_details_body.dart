@@ -43,7 +43,7 @@ class TransactionDetailsBoby extends StatelessWidget {
               ),
               child: InfoRow(
                 label: 'NOTE',
-                body: transaction.note.isEmpty ? 'No Note!' : transaction.note,
+                body: transaction.note,
                 // icon: Icon(
                 //   Iconsax.note_text,
                 //   color: AppColors.tertiaryColor.withAlpha(200),

@@ -34,11 +34,21 @@ class _EditAmoutTextFeildState extends State<EditAmoutTextFeild> {
         color: Colors.black,
       ),
       validator: (data) {
-        if (data!.isEmpty) {
-          return 'feild is required';
-        } else {
-          return null;
+        if (data == null || data.trim().isEmpty) {
+          return 'Please enter an amount';
         }
+
+        final parsedAmount = double.tryParse(data.trim().replaceAll(',', '.'));
+
+        if (parsedAmount == null) {
+          return 'Please enter a valid amount';
+        }
+
+        if (parsedAmount <= 0) {
+          return 'Amount must be greater than zero';
+        }
+
+        return null;
       },
       // scrollPadding: EdgeInsets.symmetric(horizontal: 16.w),
       onChanged: widget.onChanged,
