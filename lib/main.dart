@@ -58,14 +58,8 @@ class MyApp extends StatelessWidget {
                   AuthCubit(authRepo: getIt.get<AuthRepoImpl>()),
             ),
             BlocProvider(
-              create: (context) => TransactionsCubit(
-                transactionRepo: TransactionRepoImpl(
-                  remoteDataSource: TransactionRemoteDataSourceImpl(
-                    firestore: FirebaseFirestore.instance,
-                    auth: getIt.get<FirebaseAuth>(),
-                  ),
-                ),
-              )..getTransactions(),
+              create: (context) =>
+                  getIt.get<TransactionsCubit>()..getTransactions(),
             ),
           ],
           child: MaterialApp.router(

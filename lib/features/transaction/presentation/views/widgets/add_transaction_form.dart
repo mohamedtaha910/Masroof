@@ -41,7 +41,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
         if (state is TransactionAdded) {
           GoRouter.of(context).pop();
         } else if (state is TransactionsError) {
-          showAuthErrorMessage(context, message: state.message);
+          showErrorMessage(context, message: state.message, isAuth: false);
         }
       },
       builder: (context, state) {

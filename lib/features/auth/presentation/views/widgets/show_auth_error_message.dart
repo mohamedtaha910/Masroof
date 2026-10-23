@@ -6,7 +6,11 @@ import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/widgets/custom_blur.dart';
 import 'package:masroof/core/widgets/custom_button.dart';
 
-void showAuthErrorMessage(BuildContext context, {required String message}) {
+void showErrorMessage(
+  BuildContext context, {
+  required String message,
+  bool isAuth = true,
+}) {
   showDialog(
     context: context,
     builder: (context) {
@@ -55,7 +59,9 @@ void showAuthErrorMessage(BuildContext context, {required String message}) {
                   ),
                   // child: Icon(Icons.error, color: Colors.white, size: 40),
                   child: Image.asset(
-                    'assets/auth_icons/auth_error.png',
+                    isAuth
+                        ? 'assets/auth_icons/auth_error.png'
+                        : 'assets/icons/cloud_error.png',
                     height: 46.h,
                   ),
                 ),

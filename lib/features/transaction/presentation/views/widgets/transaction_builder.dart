@@ -20,22 +20,22 @@ class TransactionBlocBuilder extends StatelessWidget {
     return BlocConsumer<TransactionsCubit, TransactionsState>(
       listener: (context, state) {
         if (state is TransactionsError) {
-          showAuthErrorMessage(context, message: state.message);
+          showErrorMessage(context, message: state.message);
         }
       },
       builder: (context, state) {
         // BlocProvider.of<TransactionsCubit>(context).getTransactions();
         if (state is TransactionsLoading) {
           return TransactionsShimmerList();
-        } else if (state is TransactionsLoaded) {
+        } else if (state is TransactionsError) {
+          return NoTransactionPage(text: 'Some Thing went Wrong');
+        } else {
           List<TransactionEntity> transactions =
               BlocProvider.of<TransactionsCubit>(context).transactions;
 
           return transactions.isEmpty
               ? NoTransactionPage()
               : AllTransactionList(transactions: transactions);
-        } else {
-          return Text('No Transactions Yet');
         }
       },
     );

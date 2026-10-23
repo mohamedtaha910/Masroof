@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:masroof/core/utils/helper.dart';
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 import 'package:masroof/features/transaction/domain/repos/transaction_repo.dart';
 import 'package:masroof/features/transaction/presentation/manager/transaction_cubit/transaction_state.dart';
@@ -37,9 +38,10 @@ class TransactionsCubit extends Cubit<TransactionsState> {
         date: transaction.date,
         note: transaction.note,
       );
-      getTransactions();
-      // transactions = [savedTransaction, ...transactions];
-      // transactions.add(savedTransaction);
+
+      // getTransactions();
+      transactions = [savedTransaction, ...transactions];
+      AppHelpers.sortTransactions(transactions);
       emit(TransactionAdded(id));
     } catch (e) {
       emit(TransactionsError(e.toString()));
@@ -47,33 +49,15 @@ class TransactionsCubit extends Cubit<TransactionsState> {
   }
 
   Future<void> deleteTransaction({required String transactionId}) async {
-    emit(const TransactionsLoading());
+    // emit(const TransactionsLoading());
     try {
       await transactionRepo.deleteTransaction(transactionId: transactionId);
 
-      // transactions = transactions
-      //     .where((transaction) => transaction.id != transactionId)
-      //     .toList();
+      transactions = transactions
+          .where((transaction) => transaction.id != transactionId)
+          .toList();
 
-      getTransactions();
-
-      // emit(TransactionsLoaded(transactions));
-    } catch (e) {
-      emit(TransactionsError(e.toString()));
-    }
-  }
-
-Future<void> updateTransaction({
-    required TransactionEntity transaction,
-  }) async {
-    try {
-      await transactionRepo.updateTransaction(
-        transaction: transaction,
-      );
-
-      transactions = transactions.map((item) {
-        return item.id == transaction.id ? transaction : item;
-      }).toList();
+      // getTransactions();
 
       emit(TransactionsLoaded(transactions));
     } catch (e) {
@@ -81,5 +65,21 @@ Future<void> updateTransaction({
     }
   }
 
+  Future<void> updateTransaction({
+    required TransactionEntity transaction,
+  }) async {
+    // emit(TransactionsLoading());
+    try {
+      await transactionRepo.updateTransaction(transaction: transaction);
 
+      transactions = transactions.map((item) {
+        return item.id == transaction.id ? transaction : item;
+      }).toList();
+      AppHelpers.sortTransactions(transactions);
+
+      emit(TransactionsLoaded(transactions));
+    } catch (e) {
+      emit(TransactionsError(e.toString()));
+    }
+  }
 }

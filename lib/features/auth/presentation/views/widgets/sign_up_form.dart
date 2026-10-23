@@ -33,7 +33,7 @@ class _SignUpFormState extends State<SignUpForm> {
         if (state is AuthSuccess) {
           GoRouter.of(context).push(AppRoutes.krootPage);
         } else if (state is AuthError) {
-          showAuthErrorMessage(context, message: state.error);
+          showErrorMessage(context, message: state.error);
         }
       },
       builder: (context, state) {

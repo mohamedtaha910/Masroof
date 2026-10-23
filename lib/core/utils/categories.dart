@@ -45,7 +45,7 @@ class AppCategories {
 
   static const financial = Category(
     name: 'Financial',
-    iconPath: 'assets/category_icons/visa_card.png',
+    iconPath: 'assets/category_icons/visa.png',
   );
 
   // ==========income Categoy ====================
@@ -82,14 +82,16 @@ class AppCategories {
     iconPath: 'assets/category_icons/other.png',
   );
 
+  // ===========List =====================
+
   static const List<Category> expenses = [
     bills,
+    health,
     shopping,
     financial,
-    health,
     education,
-    food,
     transport,
+    food,
     entertainment,
     gifts,
     other,

@@ -1,3 +1,5 @@
+import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
+
 class AppHelpers {
   AppHelpers._();
 
@@ -18,5 +20,9 @@ class AppHelpers {
     return date.year == yesterday.year &&
         date.month == yesterday.month &&
         date.day == yesterday.day;
+  }
+
+  static void sortTransactions(List<TransactionEntity> transactions) {
+    transactions.sort((a, b) => b.date.compareTo(a.date));
   }
 }

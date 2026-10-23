@@ -32,7 +32,7 @@ class _LoginFormState extends State<LoginForm> {
         if (state is AuthSuccess) {
           GoRouter.of(context).go(AppRoutes.kHomePage);
         } else if (state is AuthError) {
-          showAuthErrorMessage(context, message: state.error);
+          showErrorMessage(context, message: state.error);
         }
       },
       builder: (context, state) {

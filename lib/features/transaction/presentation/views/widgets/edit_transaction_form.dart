@@ -3,6 +3,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 import 'package:masroof/features/transaction/presentation/views/widgets/edit_amout_and_type.dart';
+import 'package:masroof/features/transaction/presentation/views/widgets/edit_transaction_title.dart';
 
 class EditTransactionForm extends StatefulWidget {
   const EditTransactionForm({super.key, required this.oldTransaction});
@@ -58,8 +59,16 @@ class _EditTransactionFormState extends State<EditTransactionForm> {
                 },
                 transaction: widget.oldTransaction,
               ),
+              SizedBox(height: 12.h),
+              EditTransactionTitle(
+                title: title,
+                onTextChanged: (value) {
+                  title = value;
+                  debugPrint(title);
+                },
+              ),
+              SizedBox(height: 12.h),
               
-
             ],
           ),
         ),
@@ -67,5 +76,3 @@ class _EditTransactionFormState extends State<EditTransactionForm> {
     );
   }
 }
-
-

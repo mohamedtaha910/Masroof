@@ -3,7 +3,8 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_svg/svg.dart';
 
 class NoTransactionPage extends StatelessWidget {
-  const NoTransactionPage({super.key});
+  const NoTransactionPage({super.key, this.text = 'No Transactions yet'});
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class NoTransactionPage extends StatelessWidget {
           // ),
           SizedBox(height: 28.h),
           Text(
-            'No Transactions yet',
+            text,
             style: TextStyle(color: Colors.black54, fontSize: 14.sp),
           ),
         ],
