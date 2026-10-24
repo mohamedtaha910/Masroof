@@ -90,7 +90,7 @@ class TransactionsShimmerList extends StatelessWidget {
                       ],
                     ),
                     Spacer(),
-                    Text('0.00', style: TextStyle(fontSize: 13.sp)),
+                    Text('000.0 £', style: TextStyle(fontSize: 13.sp)),
                   ],
                 ),
               ),
