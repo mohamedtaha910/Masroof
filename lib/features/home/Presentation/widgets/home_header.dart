@@ -11,7 +11,7 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 14.w),
-      height: 350.h,
+      height: 360.h,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(gradient: buildSmoothGradient()),
       child: Column(
@@ -96,14 +96,14 @@ class HomeHeader extends StatelessWidget {
       if (t < 0.5) {
         // secondary -> tertiary (first half)
         c = Color.lerp(
-          AppColors.secondaryColor.withAlpha(245),
-          AppColors.secondaryColor.withAlpha(230),
+          AppColors.secondaryColor.withAlpha(225),
+          AppColors.secondaryColor.withAlpha(205),
           Curves.easeInOut.transform(t * 2),
         )!;
       } else {
         // tertiary -> neutral (second half)
         c = Color.lerp(
-          AppColors.secondaryColor.withAlpha(220),
+          AppColors.secondaryColor.withAlpha(190),
           AppColors.neutralColor,
           Curves.easeInOut.transform((t - 0.5) * 2),
         )!;

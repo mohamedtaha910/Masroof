@@ -18,13 +18,7 @@ class RecentTransaction extends StatelessWidget {
           //   width: MediaQuery.of(context).size.width * 0.7,
           //   decoration: BoxDecoration(color: Colors.black38),
           // ),
-          Text(
-            'Recent transaction',
-            style: GoogleFonts.poppins(
-              fontSize: 13.sp,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          Text('Recent transaction', style: TextStyle(fontSize: 14.sp)),
           SizedBox(height: 10.h),
           ListView.builder(
             padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
