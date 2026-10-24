@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 import 'package:masroof/features/transaction/presentation/views/widgets/transaction_item.dart';
 
 class RecentTransaction extends StatelessWidget {
-  const RecentTransaction({super.key});
+  const RecentTransaction({super.key, required this.recentTransaction});
+  final List<TransactionEntity> recentTransaction;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 14.w),
+      padding: EdgeInsets.only(right: 14.w, left: 14.w, bottom: 50.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -24,11 +25,14 @@ class RecentTransaction extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: 50,
+            itemCount: recentTransaction.length,
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
-                // child: TransactionItem(index: index, transaction: []),
+                child: TransactionItem(
+                  index: index,
+                  transaction: recentTransaction[index],
+                ),
               );
             },
           ),

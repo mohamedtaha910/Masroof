@@ -14,6 +14,9 @@ import 'package:masroof/core/utils/bloc_observer.dart';
 import 'package:masroof/core/utils/service_locator.dart';
 import 'package:masroof/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:masroof/features/auth/presentation/manager/cubit/auth_cubit.dart';
+import 'package:masroof/features/home/Presentation/manager/home_cubit/home_cubit.dart';
+import 'package:masroof/features/home/data/repos/home_repo_impl.dart';
+import 'package:masroof/features/transaction/data/repos/transaction_repo_impl.dart';
 import 'package:masroof/features/transaction/presentation/manager/transaction_cubit/transaction_cubit.dart';
 import 'package:masroof/firebase_options.dart';
 
@@ -58,6 +61,13 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (context) =>
                   getIt.get<TransactionsCubit>()..getTransactions(),
+            ),
+            BlocProvider(
+              create: (context) => HomeCubit(
+                homeRepo: HomeRepoImpl(
+                  transactionRepo: getIt.get<TransactionRepoImpl>(),
+                ),
+              )..getHomeSummary(),
             ),
           ],
           child: MaterialApp.router(

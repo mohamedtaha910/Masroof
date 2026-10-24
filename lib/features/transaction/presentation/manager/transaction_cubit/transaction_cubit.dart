@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:masroof/core/utils/helper.dart';
+import 'package:masroof/features/home/Presentation/manager/home_cubit/home_cubit.dart';
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 import 'package:masroof/features/transaction/domain/repos/transaction_repo.dart';
 import 'package:masroof/features/transaction/presentation/manager/transaction_cubit/transaction_state.dart';
@@ -40,6 +41,7 @@ class TransactionsCubit extends Cubit<TransactionsState> {
       );
 
       // getTransactions();
+
       transactions = [savedTransaction, ...transactions];
       AppHelpers.sortTransactions(transactions);
       emit(TransactionAdded(id));
@@ -59,7 +61,7 @@ class TransactionsCubit extends Cubit<TransactionsState> {
 
       // getTransactions();
 
-      emit(TransactionsLoaded(transactions));
+      emit(TransactionDeleted());
     } catch (e) {
       emit(TransactionsError(e.toString()));
     }
@@ -77,7 +79,7 @@ class TransactionsCubit extends Cubit<TransactionsState> {
       }).toList();
       AppHelpers.sortTransactions(transactions);
 
-      emit(TransactionAdded(transaction.id!));
+      emit(TransactionUpdated(transaction));
     } catch (e) {
       emit(TransactionsError(e.toString()));
     }

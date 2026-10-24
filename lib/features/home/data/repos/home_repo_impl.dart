@@ -21,7 +21,7 @@ class HomeRepoImpl implements HomeRepo {
 
     // transactions.sort((a, b) => b.date.compareTo(a.date));
 
-    return transactions.take(6).toList();
+    return transactions.take(10).toList();
   }
 
   @override

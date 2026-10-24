@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:masroof/core/utils/app_colors.dart';
-import 'package:masroof/features/home/Presentation/widgets/header_badge.dart';
+import 'package:masroof/features/home/Presentation/views/widgets/header_badge.dart';
+import 'package:masroof/features/home/domain/entities/home_summary_entity.dart';
 
 class HomeHeader extends StatelessWidget {
-  const HomeHeader({super.key});
+  const HomeHeader({super.key, required this.summaryEntity});
+  final HomeSummaryEntity summaryEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class HomeHeader extends StatelessWidget {
           ),
           SizedBox(height: 10.h),
           Text(
-            '£ 124,892.65',
+            '£ ${summaryEntity.totalBalance}',
             style: TextStyle(fontSize: 38.sp, color: Colors.white),
           ),
           SizedBox(height: 10.h),
@@ -44,7 +46,7 @@ class HomeHeader extends StatelessWidget {
               SvgPicture.asset('assets/icons/income.svg', height: 8.h),
               SizedBox(width: 6.w),
               Text(
-                '£ 2,492.65 ,',
+                '£ ${summaryEntity.todayIncome} ,',
                 style: TextStyle(
                   fontSize: 12.sp,
                   color: Colors.white.withAlpha(200),
@@ -56,7 +58,7 @@ class HomeHeader extends StatelessWidget {
               SizedBox(width: 6.w),
 
               Text(
-                '£ 3,640.65 ',
+                '£ ${summaryEntity.todayExpense} ',
                 style: TextStyle(
                   fontSize: 12.sp,
                   color: Colors.white.withAlpha(200),
@@ -75,9 +77,19 @@ class HomeHeader extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Expanded(child: HeaderBadge(isIncome: true, value: '9,892.65')),
+              Expanded(
+                child: HeaderBadge(
+                  isIncome: true,
+                  value: summaryEntity.totalIncome.toString(),
+                ),
+              ),
               SizedBox(width: 6.w),
-              Expanded(child: HeaderBadge(isIncome: false, value: '2,500.48')),
+              Expanded(
+                child: HeaderBadge(
+                  isIncome: false,
+                  value: summaryEntity.totalExpense.toString(),
+                ),
+              ),
             ],
           ),
         ],
@@ -96,7 +108,7 @@ class HomeHeader extends StatelessWidget {
       if (t < 0.5) {
         // secondary -> tertiary (first half)
         c = Color.lerp(
-          AppColors.secondaryColor.withAlpha(225),
+          AppColors.secondaryColor.withAlpha(235),
           AppColors.secondaryColor.withAlpha(205),
           Curves.easeInOut.transform(t * 2),
         )!;

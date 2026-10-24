@@ -13,13 +13,13 @@ class CustomLoadingIndicator extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12.r),
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 12.w, sigmaY: 12.h),
+        filter: ImageFilter.blur(sigmaX: 10.w, sigmaY: 10.h),
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 75.w, vertical: 50.h),
           height: 140.h,
           width: 200.w,
           decoration: BoxDecoration(
-            color: AppColors.primaryColor.withAlpha(100),
+            color: AppColors.primaryColor.withAlpha(80),
 
             borderRadius: BorderRadius.circular(12.r),
             border: Border.all(color: Colors.white.withAlpha(150), width: 1.w),

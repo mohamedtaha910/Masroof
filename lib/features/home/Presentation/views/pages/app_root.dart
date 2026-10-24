@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:masroof/core/utils/app_routes.dart';
 import 'package:masroof/core/widgets/custom_blur.dart';
 import 'package:masroof/core/widgets/custom_glass.dart';
-import 'package:masroof/features/home/Presentation/widgets/custom_nav_bar.dart';
-import 'package:masroof/features/home/Presentation/widgets/custom_shadow.dart';
+import 'package:masroof/features/home/Presentation/views/widgets/custom_nav_bar.dart';
+import 'package:masroof/features/home/Presentation/views/widgets/custom_shadow.dart';
 
 class AppRoot extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
