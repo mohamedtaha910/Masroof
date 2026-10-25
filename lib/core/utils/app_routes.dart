@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/features/auth/presentation/views/pages/login_page.dart';
 import 'package:masroof/features/auth/presentation/views/pages/sign_up_page.dart';
 import 'package:masroof/features/dashboard/presentation/views/pages/dashboard_page.dart';
@@ -14,6 +15,7 @@ import 'package:masroof/features/transaction/presentation/views/pages/add_transa
 import 'package:masroof/features/transaction/presentation/views/pages/edit_transaction_page.dart';
 import 'package:masroof/features/transaction/presentation/views/pages/transaction_details.dart';
 import 'package:masroof/features/transaction/presentation/views/pages/transaction_page.dart';
+import 'package:masroof/features/transaction/presentation/views/widgets/category_select.dart';
 
 abstract class AppRoutes {
   static const krootPage = '/rootpage';
@@ -28,6 +30,7 @@ abstract class AppRoutes {
   static const kAddTransactionPage = '/addTransactionPage';
   static const kTransactionDetails = '/TransactionDetails';
   static const kEditTransactionPage = '/EditTransactionPage';
+  static const kCategoriesSelect = '/categoriesSelect';
 
   static final GoRouter router = GoRouter(
     routes: <RouteBase>[
@@ -82,6 +85,20 @@ abstract class AppRoutes {
           final transaction = state.extra as TransactionEntity;
           return MaterialPage(
             child: EditTransactionPage(transaction: transaction),
+          );
+        },
+      ),
+
+      GoRoute(
+        path: kCategoriesSelect,
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>;
+
+          return CategoriesSelect(
+            initialCategory: extra['initialCategory'] as Category?,
+            type: extra['type'] as TransactionType,
+            onCategorySelected:
+                extra['onCategorySelected'] as ValueChanged<Category>,
           );
         },
       ),

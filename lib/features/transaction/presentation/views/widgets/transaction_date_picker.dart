@@ -75,21 +75,35 @@ class _TransactionDateFieldState extends State<TransactionDateField> {
     String formattedDate = DateFormat('MMMM dd, yyyy').format(selectedDate);
     return InkWell(
       onTap: pickDate,
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.h),
-        child: Row(
-          children: [
-            Icon(Iconsax.calendar_1_copy, color: Colors.black54, size: 22.w),
-            SizedBox(width: 12.w),
-            Text(
-              // ' ${selectedDate.day}/${selectedDate.month}/${selectedDate.year} ',
-              formattedDate,
-              style: TextStyle(fontSize: 12.5.sp),
+      child: Row(
+        children: [
+          Container(
+            padding: EdgeInsets.all(7.h),
+            decoration: BoxDecoration(
+              // color: const Color.fromARGB(255, 152, 185, 191),
+              color: AppColors.neutralColor,
+              shape: BoxShape.circle,
+              // borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: Colors.grey.shade300.withAlpha(200),
+                width: 0.8.w,
+              ),
             ),
-            const Spacer(),
-            const Icon(Icons.keyboard_arrow_down_rounded),
-          ],
-        ),
+            child: Icon(
+              Iconsax.calendar_1_copy,
+              color: Colors.black54,
+              size: 18.w,
+            ),
+          ),
+          SizedBox(width: 12.w),
+          Text(
+            // ' ${selectedDate.day}/${selectedDate.month}/${selectedDate.year} ',
+            formattedDate,
+            style: TextStyle(fontSize: 12.sp),
+          ),
+          const Spacer(),
+          Icon(Icons.keyboard_arrow_down_rounded, size: 24.sp),
+        ],
       ),
     );
   }

@@ -12,10 +12,14 @@ class AppCategories {
     name: 'Food',
     iconPath: 'assets/category_icons/food4.png',
   );
+  static const travelling = Category(
+    name: 'Travelling',
+    iconPath: 'assets/category_icons/travel.png',
+  );
 
   static const transport = Category(
     name: 'Transport',
-    iconPath: 'assets/category_icons/transport.png',
+    iconPath: 'assets/category_icons/car2.png',
   );
 
   static const bills = Category(
@@ -45,7 +49,7 @@ class AppCategories {
 
   static const financial = Category(
     name: 'Financial',
-    iconPath: 'assets/category_icons/visa.png',
+    iconPath: 'assets/category_icons/credit_card.png',
   );
 
   // ==========income Categoy ====================
@@ -92,6 +96,7 @@ class AppCategories {
     education,
     transport,
     food,
+    travelling,
     entertainment,
     gifts,
     other,
@@ -111,6 +116,7 @@ class AppCategories {
     health,
     education,
     food,
+    travelling,
     transport,
     entertainment,
     salary,

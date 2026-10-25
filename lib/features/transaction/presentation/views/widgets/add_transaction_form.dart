@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:masroof/core/utils/app_colors.dart';
+import 'package:masroof/core/utils/app_routes.dart';
 import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/core/widgets/custom_button.dart';
 import 'package:masroof/features/auth/presentation/views/widgets/show_auth_error_message.dart';
@@ -30,7 +32,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
   late double amount;
   late String title;
   DateTime date = DateTime.now();
-  Category category = AppCategories.other;
+  Category? category;
   String note = '';
   @override
   Widget build(BuildContext context) {
@@ -66,7 +68,12 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                     onTypeSelected: (value) {
                       setState(() {
                         type = value;
-                        debugPrint(value.name);
+                        category =
+                            category == AppCategories.other ||
+                                category == AppCategories.gifts
+                            ? category
+                            : null;
+                        // debugPrint(value.name);
                       });
                     },
                   ),
@@ -107,7 +114,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
 
                   Container(
                     padding: EdgeInsets.symmetric(
-                      vertical: 6.h,
+                      vertical: 16.h,
                       horizontal: 16.w,
                     ),
                     decoration: BoxDecoration(
@@ -137,13 +144,99 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                   ),
 
                   SizedBox(height: 12.h),
-                  CategoriesSelect(
-                    type: type,
-                    onCategorySelected: (value) {
-                      category = value;
-                      debugPrint(value.name);
+                  GestureDetector(
+                    onTap: () {
+                      context.push(
+                        AppRoutes.kCategoriesSelect,
+                        extra: {
+                          'initialCategory': category,
+                          'type': type,
+                          'onCategorySelected': (Category value) {
+                            setState(() {
+                              category = value;
+                            });
+                            debugPrint(value.name);
+                          },
+                        },
+                      );
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute(
+                      //     builder: (context) {
+                      //       return CategoriesSelect(
+                      //         type: type,
+                      //         onCategorySelected: (value) {
+                      //           setState(() {
+                      //             category = value;
+                      //           });
+                      //           debugPrint(value.name);
+                      //         },
+                      //       );
+                      //     },
+                      //   ),
+                      // );
                     },
+                    child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 16.h,
+                        horizontal: 16.w,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withAlpha(100),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.white.withAlpha(180)),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(7.h),
+                            decoration: BoxDecoration(
+                              // color: const Color.fromARGB(255, 152, 185, 191),
+                              color: AppColors.neutralColor,
+                              shape: BoxShape.circle,
+                              // borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: Colors.grey.shade300.withAlpha(200),
+                                width: 0.8.w,
+                              ),
+                            ),
+                            child: category == null
+                                ? Icon(
+                                    Iconsax.category,
+                                    size: 18,
+                                    color: Colors.black54,
+                                  )
+                                : Image.asset(category!.iconPath, height: 22),
+                          ),
+                          SizedBox(width: 12.w),
+                          category == null
+                              ? Text(
+                                  'Select Category',
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    color: Colors.black54,
+                                  ),
+                                )
+                              : Text(
+                                  category!.name,
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                          Spacer(),
+                          Icon(Icons.chevron_right_rounded, size: 24.sp),
+                        ],
+                      ),
+                    ),
                   ),
+                  // CategoriesSelect(
+                  //   type: type,
+                  //   onCategorySelected: (value) {
+                  //     category = value;
+                  //     debugPrint(value.name);
+                  //   },
+                  // ),
                   SizedBox(height: 12.h),
                   NoteTextFeild(
                     onNoteSelected: (value) {
@@ -155,6 +248,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                   ),
                   SizedBox(height: 12.h),
                   CustomButton(
+                    width: double.infinity,
                     borderRadius: 100,
                     colors: [AppColors.primaryColor],
                     horizontalPadding: 20,
@@ -164,31 +258,35 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                       setState(() {});
 
                       if (formKey.currentState!.validate()) {
-                        TransactionEntity transaction = TransactionEntity(
-                          title: title,
-                          amount: amount,
-                          type: type,
-                          category: category,
-                          date: date,
-                          note: note,
-                        );
-                        BlocProvider.of<TransactionsCubit>(
-                          context,
-                        ).addTransaction(transaction: transaction);
+                        if (category == null) {
+                          showErrorMessage(
+                            context,
+                            message: 'You Must Choose Category',
+                            isAuth: false,
+                          );
+                        } else {
+                          TransactionEntity transaction = TransactionEntity(
+                            title: title,
+                            amount: amount,
+                            type: type,
+                            category: category!,
+                            date: date,
+                            note: note,
+                          );
+                          BlocProvider.of<TransactionsCubit>(
+                            context,
+                          ).addTransaction(transaction: transaction);
+                        }
                       }
                     },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Add Transaction',
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
+                    child: Text(
+                      'Add Transaction',
+                      style: TextStyle(
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   SizedBox(height: 24),
