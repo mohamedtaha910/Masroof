@@ -83,7 +83,7 @@ class AppCategories {
 
   static const other = Category(
     name: 'Other',
-    iconPath: 'assets/category_icons/other.png',
+    iconPath: 'assets/category_icons/money.png',
   );
 
   // ===========List =====================

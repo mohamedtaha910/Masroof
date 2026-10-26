@@ -12,7 +12,7 @@ class HeaderBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 12.h),
       decoration: BoxDecoration(
         color: Colors.white.withAlpha(180),
         borderRadius: BorderRadius.circular(12),
@@ -41,8 +41,8 @@ class HeaderBadge extends StatelessWidget {
                 isIncome ? Color(0xff34C759) : Color(0xffFF383C),
                 BlendMode.srcIn,
               ),
-              height: 11.h,
-              width: 11.w,
+              height: 10.h,
+              width: 10.w,
             ),
           ),
           SizedBox(width: 7.w),
@@ -52,16 +52,17 @@ class HeaderBadge extends StatelessWidget {
               Text(
                 isIncome ? 'Income' : 'Expense',
                 style: GoogleFonts.poppins(
-                  fontSize: 11.sp,
+                  fontSize: 10.sp,
                   fontWeight: FontWeight.w500,
                   color: Colors.black.withAlpha(160),
                 ),
               ),
               SizedBox(height: 4.h),
               Text(
-                '£ $value',
+                '£ ${value.length < 9 ? value : value.substring(0, 8) + '...'}',
+
                 style: GoogleFonts.poppins(
-                  fontSize: 15.sp,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                   color: Colors.black,
                 ),

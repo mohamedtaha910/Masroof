@@ -27,53 +27,55 @@ class HomeAppBar extends StatelessWidget {
             bottomRight: Radius.circular(2),
             topRight: Radius.circular(2),
           ),
-          child: CustomGlass(
-            radius: 2,
-            child: CustomBlur(
-              radius: 2,
-              sigmaX: 3,
-              sigmay: 3,
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 9),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.white.withAlpha(80),
-                      Colors.white.withAlpha(60),
-                      Colors.white.withAlpha(20),
-                      // AppColors.tertiaryColor.withAlpha(80),
-                      // AppColors.tertiaryColor.withAlpha(50),
-                    ],
-                    begin: AlignmentGeometry.topCenter,
-                    end: AlignmentGeometry.bottomCenter,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withAlpha(20),
-                      offset: Offset(4, 4),
-                      blurRadius: 24,
+          child:
+              //  CustomGlass(
+              // radius: 2,
+              // child:
+              CustomBlur(
+                radius: 2,
+                sigmaX: 3,
+                sigmay: 3,
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 9),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.white.withAlpha(60),
+                        // Colors.white.withAlpha(30),
+                        Colors.white.withAlpha(20),
+                        // AppColors.tertiaryColor.withAlpha(80),
+                        // AppColors.tertiaryColor.withAlpha(50),
+                      ],
+                      begin: AlignmentGeometry.topCenter,
+                      end: AlignmentGeometry.bottomCenter,
                     ),
-                  ],
-                  border: Border.all(
-                    color: Colors.grey.shade400.withAlpha(80),
-                    width: 1.w,
-                  ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withAlpha(20),
+                        offset: Offset(4, 4),
+                        blurRadius: 24,
+                      ),
+                    ],
+                    border: Border.all(
+                      color: Colors.grey.shade400.withAlpha(80),
+                      width: 1.w,
+                    ),
 
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(120),
-                    bottomLeft: Radius.circular(120),
-                    bottomRight: Radius.circular(2),
-                    topRight: Radius.circular(2),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(120),
+                      bottomLeft: Radius.circular(120),
+                      bottomRight: Radius.circular(2),
+                      topRight: Radius.circular(2),
+                    ),
                   ),
-                ),
-                child: Image.asset(
-                  'assets/icons/user.png',
-                  height: 20.h,
-                  color: AppColors.secondaryColor,
+                  child: Image.asset(
+                    'assets/icons/user.png',
+                    height: 20.h,
+                    color: AppColors.secondaryColor,
+                  ),
                 ),
               ),
-            ),
-          ),
+          // ),
         ),
 
         SizedBox(width: 3.w),
@@ -85,199 +87,189 @@ class HomeAppBar extends StatelessWidget {
             bottomRight: Radius.circular(120),
             topRight: Radius.circular(120),
           ),
-          child: CustomGlass(
-            radius: 2,
-            child: CustomBlur(
-              radius: 2,
-              sigmaX: 3,
-              sigmay: 3,
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: 4.5.h,
-                  horizontal: 16.w,
-                ),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.white.withAlpha(80),
-                      Colors.white.withAlpha(60),
-                      Colors.white.withAlpha(20),
-                      // AppColors.tertiaryColor.withAlpha(80),
-                      // AppColors.tertiaryColor.withAlpha(50),
-                    ],
-                    begin: AlignmentGeometry.topCenter,
-                    end: AlignmentGeometry.bottomCenter,
+          child:
+              //  CustomGlass(
+              // radius: 2,
+              // child:
+              CustomBlur(
+                radius: 2,
+                sigmaX: 3,
+                sigmay: 3,
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 4.5.h,
+                    horizontal: 16.w,
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withAlpha(20),
-                      offset: Offset(4, 4),
-                      blurRadius: 24,
-                    ),
-                  ],
-                  border: Border.all(
-                    color: Colors.grey.shade400.withAlpha(80),
-                    width: 1.w,
-                  ),
-
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(2),
-                    bottomLeft: Radius.circular(2),
-                    bottomRight: Radius.circular(120),
-                    topRight: Radius.circular(120),
-                  ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/app_icons/Masroof.svg',
-                      height: 9.h,
-                    ),
-                    SizedBox(height: 2.h),
-                    Row(
-                      children: [
-                        Text('Hi ', style: TextStyle(fontSize: 11.sp)),
-                        Text(
-                          name ?? 'There',
-                          style: GoogleFonts.poppins(
-                            fontSize: 11.sp,
-                            fontWeight: FontWeight.w600,
-                            // color: Colors.white,
-                            color: AppColors.primaryColor,
-                          ),
-                        ),
-                        SizedBox(width: 6.w),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.white.withAlpha(60),
+                        // Colors.white.withAlpha(30),
+                        Colors.white.withAlpha(20),
+                        // AppColors.tertiaryColor.withAlpha(80),
+                        // AppColors.tertiaryColor.withAlpha(50),
                       ],
+                      begin: AlignmentGeometry.topCenter,
+                      end: AlignmentGeometry.bottomCenter,
                     ),
-                  ],
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withAlpha(20),
+                        offset: Offset(4, 4),
+                        blurRadius: 24,
+                      ),
+                    ],
+                    border: Border.all(
+                      color: Colors.grey.shade400.withAlpha(80),
+                      width: 1.w,
+                    ),
+
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(2),
+                      bottomLeft: Radius.circular(2),
+                      bottomRight: Radius.circular(120),
+                      topRight: Radius.circular(120),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/app_icons/Masroof.svg',
+                        height: 9.h,
+                      ),
+                      SizedBox(height: 2.h),
+                      Row(
+                        children: [
+                          Text('Hi ', style: TextStyle(fontSize: 11.sp)),
+                          Text(
+                            name ?? 'There',
+                            style: GoogleFonts.poppins(
+                              fontSize: 11.sp,
+                              fontWeight: FontWeight.w600,
+                              // color: Colors.white,
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                          SizedBox(width: 6.w),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ),
+          // ),
         ),
 
         Spacer(),
+
         // CustomGlass(
-        //   child: CustomBlur(
-        //     radius: 100,
-        //     sigmaX: 0,
-        //     sigmay: 20,
-        //     child: Padding(
-        //       padding: EdgeInsets.all(9.h),
-        //       child: Icon(
-        //         Iconsax.search_normal_copy,
-        //         size: 18.h,
-        //         color: Colors.black.withAlpha(180),
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        CustomGlass(
+        // radius: 100,
+        // child:
+        CustomBlur(
           radius: 100,
-          child: CustomBlur(
-            radius: 100,
-            sigmaX: 3,
-            sigmay: 3,
-            child: CustomButton(
-              // colors: [Colors.white.withAlpha(80), Colors.white.withAlpha(80)],
-              colors: [
-                Colors.white.withAlpha(80),
-                Colors.white.withAlpha(60),
-                Colors.white.withAlpha(20),
-                // AppColors.tertiaryColor.withAlpha(80),
-                // AppColors.tertiaryColor.withAlpha(50),
-              ],
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withAlpha(20),
-                  offset: Offset(4, 4),
-                  blurRadius: 24,
-                ),
-              ],
-              border: Border(
-                top: BorderSide(
-                  color: Colors.grey.shade400.withAlpha(80),
-                  width: 1.w,
-                ),
-                bottom: BorderSide(
-                  color: Colors.grey.shade400.withAlpha(80),
-                  width: 1.w,
-                ),
-                right: BorderSide(
-                  color: Colors.grey.shade400.withAlpha(80),
-                  width: 0.4.w,
-                ),
-                left: BorderSide(
-                  color: Colors.grey.shade400.withAlpha(80),
-                  width: 0.4.w,
-                ),
+          sigmaX: 3,
+          sigmay: 3,
+          child: CustomButton(
+            // colors: [Colors.white.withAlpha(80), Colors.white.withAlpha(80)],
+            colors: [
+              Colors.white.withAlpha(80),
+              Colors.white.withAlpha(60),
+              Colors.white.withAlpha(20),
+              // AppColors.tertiaryColor.withAlpha(80),
+              // AppColors.tertiaryColor.withAlpha(50),
+            ],
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withAlpha(20),
+                offset: Offset(4, 4),
+                blurRadius: 24,
               ),
-              borderRadius: 200,
-              horizontalPadding: 10,
-              verticalPadding: 8,
-              onTap: () {},
-              child: Icon(
-                Iconsax.search_normal_copy,
-                size: 18.h,
-                color: Colors.black.withAlpha(180),
+            ],
+            border: Border(
+              top: BorderSide(
+                color: Colors.grey.shade400.withAlpha(80),
+                width: 1.w,
               ),
+              bottom: BorderSide(
+                color: Colors.grey.shade400.withAlpha(80),
+                width: 1.w,
+              ),
+              right: BorderSide(
+                color: Colors.grey.shade400.withAlpha(80),
+                width: 0.4.w,
+              ),
+              left: BorderSide(
+                color: Colors.grey.shade400.withAlpha(80),
+                width: 0.4.w,
+              ),
+            ),
+            borderRadius: 200,
+            horizontalPadding: 10,
+            verticalPadding: 8,
+            onTap: () {},
+            child: Icon(
+              Iconsax.search_normal_copy,
+              size: 18.h,
+              color: Colors.black.withAlpha(180),
             ),
           ),
         ),
+        // ),
         SizedBox(width: 10.w),
         // Spacer(),
-        CustomGlass(
+        // CustomGlass(
+        // radius: 100,
+        // child:
+        CustomBlur(
           radius: 100,
-          child: CustomBlur(
-            radius: 100,
-            sigmaX: 3,
-            sigmay: 3,
-            child: CustomButton(
-              colors: [
-                Colors.white.withAlpha(80),
-                Colors.white.withAlpha(60),
-                Colors.white.withAlpha(20),
-              ],
+          sigmaX: 3,
+          sigmay: 3,
+          child: CustomButton(
+            colors: [
+              Colors.white.withAlpha(80),
+              Colors.white.withAlpha(60),
+              Colors.white.withAlpha(20),
+            ],
 
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: Colors.black.withAlpha(20),
-              //     offset: Offset(4, 4),
-              //     blurRadius: 24,
-              //   ),
-              // ],
-              border: Border(
-                top: BorderSide(
-                  color: Colors.grey.shade400.withAlpha(80),
-                  width: 1.w,
-                ),
-                bottom: BorderSide(
-                  color: Colors.grey.shade400.withAlpha(80),
-                  width: 1.w,
-                ),
-                right: BorderSide(
-                  color: Colors.grey.shade400.withAlpha(80),
-                  width: 0.4.w,
-                ),
-                left: BorderSide(
-                  color: Colors.grey.shade400.withAlpha(80),
-                  width: 0.4.w,
-                ),
+            // boxShadow: [
+            //   BoxShadow(
+            //     color: Colors.black.withAlpha(20),
+            //     offset: Offset(4, 4),
+            //     blurRadius: 24,
+            //   ),
+            // ],
+            border: Border(
+              top: BorderSide(
+                color: Colors.grey.shade400.withAlpha(80),
+                width: 1.w,
               ),
-              borderRadius: 200,
-              horizontalPadding: 9,
-              verticalPadding: 7,
-              onTap: () {},
+              bottom: BorderSide(
+                color: Colors.grey.shade400.withAlpha(80),
+                width: 1.w,
+              ),
+              right: BorderSide(
+                color: Colors.grey.shade400.withAlpha(80),
+                width: 0.4.w,
+              ),
+              left: BorderSide(
+                color: Colors.grey.shade400.withAlpha(80),
+                width: 0.4.w,
+              ),
+            ),
+            borderRadius: 200,
+            horizontalPadding: 9,
+            verticalPadding: 7,
+            onTap: () {},
 
-              child: Icon(
-                Iconsax.notification_bing_copy,
-                size: 18.h,
-                color: Colors.black.withAlpha(180),
-              ),
+            child: Icon(
+              Iconsax.notification_bing_copy,
+              size: 18.h,
+              color: Colors.black.withAlpha(180),
             ),
           ),
         ),
+        // ),
       ],
     );
   }

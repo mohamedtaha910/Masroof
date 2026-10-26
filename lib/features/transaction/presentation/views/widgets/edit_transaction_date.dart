@@ -10,7 +10,7 @@ class EditDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 16.w),
+      padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 16.w),
       decoration: BoxDecoration(
         color: Colors.white.withAlpha(100),
         borderRadius: BorderRadius.circular(12),

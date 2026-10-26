@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:masroof/core/utils/app_colors.dart';
+import 'package:masroof/core/utils/app_routes.dart';
 import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/core/widgets/custom_button.dart';
 import 'package:masroof/features/auth/presentation/views/widgets/show_auth_error_message.dart';
@@ -30,7 +32,7 @@ class _EditTransactionFormState extends State<EditTransactionForm> {
   late double amount;
   late String title;
   late DateTime date;
-  late Category category;
+  late Category? category;
   late String note;
   late TransactionType type;
 
@@ -88,7 +90,12 @@ class _EditTransactionFormState extends State<EditTransactionForm> {
                       onTypeChanged: (value) {
                         setState(() {
                           type = value;
-                          debugPrint(type.name);
+                          category =
+                              category == AppCategories.other ||
+                                  category == AppCategories.gifts
+                              ? category
+                              : null;
+                          // debugPrint(type.name);
                         });
                       },
                       transaction: widget.oldTransaction,
@@ -110,18 +117,86 @@ class _EditTransactionFormState extends State<EditTransactionForm> {
                       },
                     ),
                     SizedBox(height: 12.h),
-                    CategoriesSelect(
-                      type: type,
-                      onCategorySelected: (value) {
-                        category = value;
-                        debugPrint(category.name);
+                    GestureDetector(
+                      onTap: () {
+                        context.push(
+                          AppRoutes.kCategoriesSelect,
+                          extra: {
+                            'initialCategory': category,
+                            'type': type,
+                            'onCategorySelected': (Category value) {
+                              setState(() {
+                                category = value;
+                              });
+                              debugPrint(value.name);
+                            },
+                          },
+                        );
                       },
-                      initialCategory: category,
+                      child: Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(
+                          vertical: 14.h,
+                          horizontal: 16.w,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withAlpha(100),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: Colors.white.withAlpha(180),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(7.h),
+                              decoration: BoxDecoration(
+                                // color: const Color.fromARGB(255, 152, 185, 191),
+                                color: AppColors.neutralColor,
+                                shape: BoxShape.circle,
+                                // borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: Colors.grey.shade300.withAlpha(200),
+                                  width: 0.8.w,
+                                ),
+                              ),
+                              child: category == null
+                                  ? Icon(
+                                      Iconsax.category,
+                                      size: 18,
+                                      color: Colors.black54,
+                                    )
+                                  : Image.asset(
+                                      category!.iconPath,
+                                      height: 19.h,
+                                    ),
+                            ),
+                            SizedBox(width: 12.w),
+                            category == null
+                                ? Text(
+                                    'Select Category',
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      color: Colors.black54,
+                                    ),
+                                  )
+                                : Text(
+                                    category!.name,
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                            Spacer(),
+                            Icon(Icons.chevron_right_rounded, size: 24.sp),
+                          ],
+                        ),
+                      ),
                     ),
                     SizedBox(height: 12.h),
                     Container(
                       padding: EdgeInsets.symmetric(
-                        vertical: 12.h,
+                        vertical: 10.h,
                         horizontal: 16.w,
                       ),
                       decoration: BoxDecoration(
@@ -130,15 +205,15 @@ class _EditTransactionFormState extends State<EditTransactionForm> {
                         border: Border.all(color: Colors.white.withAlpha(180)),
                       ),
                       child: EditTransactionTextFeild(
-                        maxLines: 4,
+                        maxLines: 5,
                         text: note,
-                        validate: true,
+                        validate: false,
                         onChanged: (value) {
                           note = value;
                         },
                       ),
                     ),
-                    SizedBox(height: 12.h),
+                    SizedBox(height: 14.h),
                     CustomButton(
                       borderRadius: 100,
                       colors: [AppColors.primaryColor],
@@ -149,18 +224,26 @@ class _EditTransactionFormState extends State<EditTransactionForm> {
                         setState(() {});
 
                         if (formKey.currentState!.validate()) {
-                          TransactionEntity transaction = TransactionEntity(
-                            id: id,
-                            title: title,
-                            amount: amount,
-                            type: type,
-                            category: category,
-                            date: date,
-                            note: note,
-                          );
-                          BlocProvider.of<TransactionsCubit>(
-                            context,
-                          ).updateTransaction(transaction: transaction);
+                          if (category == null) {
+                            showErrorMessage(
+                              context,
+                              message: 'You Must Choose Category',
+                              isAuth: false,
+                            );
+                          } else {
+                            TransactionEntity transaction = TransactionEntity(
+                              id: id,
+                              title: title,
+                              amount: amount,
+                              type: type,
+                              category: category!,
+                              date: date,
+                              note: note,
+                            );
+                            BlocProvider.of<TransactionsCubit>(
+                              context,
+                            ).updateTransaction(transaction: transaction);
+                          }
                         }
                       },
                       child: Row(

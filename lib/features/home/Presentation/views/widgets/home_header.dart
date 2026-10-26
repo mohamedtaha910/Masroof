@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:masroof/core/utils/app_colors.dart';
+import 'package:masroof/core/utils/helper.dart';
 import 'package:masroof/features/home/Presentation/views/widgets/header_badge.dart';
 import 'package:masroof/features/home/domain/entities/home_summary_entity.dart';
 
@@ -29,7 +30,7 @@ class HomeHeader extends StatelessWidget {
           ),
           SizedBox(height: 10.h),
           Text(
-            '£ ${summaryEntity.totalBalance}',
+            '£ ${AppHelpers.formatNumber(summaryEntity.totalBalance)}',
             style: TextStyle(fontSize: 38.sp, color: Colors.white),
           ),
           SizedBox(height: 10.h),
@@ -46,7 +47,7 @@ class HomeHeader extends StatelessWidget {
               SvgPicture.asset('assets/icons/income.svg', height: 8.h),
               SizedBox(width: 6.w),
               Text(
-                '£ ${summaryEntity.todayIncome} ,',
+                '£ ${AppHelpers.formatNumber(summaryEntity.todayIncome)} ,',
                 style: TextStyle(
                   fontSize: 12.sp,
                   color: Colors.white.withAlpha(200),
@@ -58,7 +59,7 @@ class HomeHeader extends StatelessWidget {
               SizedBox(width: 6.w),
 
               Text(
-                '£ ${summaryEntity.todayExpense} ',
+                '£ ${AppHelpers.formatNumber(summaryEntity.todayExpense)} ',
                 style: TextStyle(
                   fontSize: 12.sp,
                   color: Colors.white.withAlpha(200),
@@ -80,14 +81,14 @@ class HomeHeader extends StatelessWidget {
               Expanded(
                 child: HeaderBadge(
                   isIncome: true,
-                  value: summaryEntity.totalIncome.toString(),
+                  value: AppHelpers.formatNumber(summaryEntity.totalIncome),
                 ),
               ),
               SizedBox(width: 6.w),
               Expanded(
                 child: HeaderBadge(
                   isIncome: false,
-                  value: summaryEntity.totalExpense.toString(),
+                  value: AppHelpers.formatNumber(summaryEntity.totalExpense),
                 ),
               ),
             ],

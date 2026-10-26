@@ -1,4 +1,5 @@
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
+import 'package:intl/intl.dart';
 
 class AppHelpers {
   AppHelpers._();
@@ -24,5 +25,9 @@ class AppHelpers {
 
   static void sortTransactions(List<TransactionEntity> transactions) {
     transactions.sort((a, b) => b.date.compareTo(a.date));
+  }
+
+  static String formatNumber(double number) {
+    return NumberFormat('#,##0.0').format(number);
   }
 }

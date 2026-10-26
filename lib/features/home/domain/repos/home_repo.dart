@@ -1,10 +1,11 @@
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 
 abstract class HomeRepo {
-  Future<List<TransactionEntity>> getRecentTransactions();
-  Future<double> getTotalBalance();
-  Future<double> getTotalIncome();
-  Future<double> getTotalExpense();
-  Future<double> getTodayIncome();
-  Future<double> getTodayExpense();
+  Future<void> getAllTransaction();
+  List<TransactionEntity> getRecentTransactions();
+  double getTotalBalance();
+  double getTotalIncome();
+  double getTotalExpense();
+  double getTodayIncome();
+  double getTodayExpense();
 }

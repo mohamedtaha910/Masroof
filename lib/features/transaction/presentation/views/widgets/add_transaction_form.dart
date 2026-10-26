@@ -80,7 +80,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                   SizedBox(height: 12.h),
                   Container(
                     padding: EdgeInsets.symmetric(
-                      vertical: 8.h,
+                      vertical: 12.h,
                       horizontal: 16.w,
                     ),
                     decoration: BoxDecoration(
@@ -114,7 +114,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
 
                   Container(
                     padding: EdgeInsets.symmetric(
-                      vertical: 16.h,
+                      vertical: 14.h,
                       horizontal: 16.w,
                     ),
                     decoration: BoxDecoration(
@@ -159,26 +159,11 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                           },
                         },
                       );
-                      // Navigator.of(context).push(
-                      //   MaterialPageRoute(
-                      //     builder: (context) {
-                      //       return CategoriesSelect(
-                      //         type: type,
-                      //         onCategorySelected: (value) {
-                      //           setState(() {
-                      //             category = value;
-                      //           });
-                      //           debugPrint(value.name);
-                      //         },
-                      //       );
-                      //     },
-                      //   ),
-                      // );
                     },
                     child: Container(
                       width: double.infinity,
                       padding: EdgeInsets.symmetric(
-                        vertical: 16.h,
+                        vertical: 14.h,
                         horizontal: 16.w,
                       ),
                       decoration: BoxDecoration(
@@ -203,10 +188,10 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                             child: category == null
                                 ? Icon(
                                     Iconsax.category,
-                                    size: 18,
+                                    size: 19.sp,
                                     color: Colors.black54,
                                   )
-                                : Image.asset(category!.iconPath, height: 22),
+                                : Image.asset(category!.iconPath, height: 19.h),
                           ),
                           SizedBox(width: 12.w),
                           category == null
@@ -246,7 +231,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                       // });
                     },
                   ),
-                  SizedBox(height: 12.h),
+                  SizedBox(height: 14.h),
                   CustomButton(
                     width: double.infinity,
                     borderRadius: 100,

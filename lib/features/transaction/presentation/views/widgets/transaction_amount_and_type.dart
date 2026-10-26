@@ -41,13 +41,13 @@ class _TransactionAmountAndTypeState extends State<TransactionAmountAndType> {
             style: TextStyle(color: Colors.black54, fontSize: 12.sp),
           ),
 
-          SizedBox(height: 8.h),
+          SizedBox(height: 10.h),
           AmountTextFeild(
             onChanged: (value) {
               widget.onAmountSelected(value);
             },
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: 10.h),
           Row(
             children: [
               Expanded(

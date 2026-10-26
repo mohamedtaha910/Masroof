@@ -71,22 +71,22 @@ class HomePage extends StatelessWidget {
           ),
 
           CustomBlur(
-            sigmaX: 2,
-            sigmay: 2,
-            radius: 200,
+            sigmaX: 1.3,
+            sigmay: 1.3,
+            radius: 0,
             child: Container(
-              height: 35.h,
+              height: 45.h,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 // color: Colors.red,
                 gradient: LinearGradient(
                   colors: [
                     // Colors.white.withAlpha(225),
-                    AppColors.secondaryColor.withAlpha(200),
-                    AppColors.secondaryColor.withAlpha(180),
-                    AppColors.secondaryColor.withAlpha(130),
-                    AppColors.secondaryColor.withAlpha(70),
-                    AppColors.secondaryColor.withAlpha(20),
+                    AppColors.secondaryColor.withAlpha(230),
+                    AppColors.secondaryColor.withAlpha(190),
+                    AppColors.secondaryColor.withAlpha(120),
+                    AppColors.secondaryColor.withAlpha(60),
+                    AppColors.secondaryColor.withAlpha(10),
                     AppColors.secondaryColor.withAlpha(0),
                   ],
                   begin: AlignmentGeometry.topCenter,

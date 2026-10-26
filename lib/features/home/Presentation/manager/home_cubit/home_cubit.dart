@@ -14,7 +14,8 @@ class HomeCubit extends Cubit<HomeState> {
     emit(HomeLoading());
 
     try {
-      final results = await Future.wait([
+      await homeRepo.getAllTransaction();
+      final results = ([
         homeRepo.getRecentTransactions(),
         homeRepo.getTotalBalance(),
         homeRepo.getTotalIncome(),
@@ -38,14 +39,6 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 }
-
-
-
-
-
-
-
-
 
 // ============================================================================
 

@@ -21,9 +21,9 @@ class TransactionDeatilsAppBar extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(4.w),
             decoration: BoxDecoration(
-              color: Colors.grey.shade200.withAlpha(200),
+              color: Colors.white.withAlpha(120),
               borderRadius: BorderRadius.circular(100),
-              border: Border.all(color: Colors.grey.shade300.withAlpha(180)),
+              border: Border.all(color: Colors.white.withAlpha(200)),
             ),
             child: Icon(Icons.chevron_left_rounded, size: 24.sp),
           ),
@@ -40,9 +40,9 @@ class TransactionDeatilsAppBar extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(8.w),
             decoration: BoxDecoration(
-              color: Colors.grey.shade200.withAlpha(200),
+              color: Colors.white.withAlpha(120),
               borderRadius: BorderRadius.circular(100),
-              border: Border.all(color: Colors.grey.shade300.withAlpha(180)),
+              border: Border.all(color: Colors.white.withAlpha(200)),
             ),
             child: Icon(Iconsax.receipt_edit_copy, size: 20.sp),
           ),
@@ -55,9 +55,9 @@ class TransactionDeatilsAppBar extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(8.w),
             decoration: BoxDecoration(
-              color: Colors.grey.shade200.withAlpha(200),
+              color: Colors.white.withAlpha(120),
               borderRadius: BorderRadius.circular(100),
-              border: Border.all(color: Colors.grey.shade300.withAlpha(180)),
+              border: Border.all(color: Colors.white.withAlpha(200)),
             ),
             child: Icon(
               Iconsax.trash_copy,

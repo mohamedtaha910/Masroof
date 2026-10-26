@@ -92,7 +92,7 @@ class _TransactionDateFieldState extends State<TransactionDateField> {
             child: Icon(
               Iconsax.calendar_1_copy,
               color: Colors.black54,
-              size: 18.w,
+              size: 19.sp,
             ),
           ),
           SizedBox(width: 12.w),

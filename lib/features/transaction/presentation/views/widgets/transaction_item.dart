@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/utils/app_routes.dart';
+import 'package:masroof/core/utils/helper.dart';
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 
 class TransactionItem extends StatelessWidget {
@@ -27,7 +28,7 @@ class TransactionItem extends StatelessWidget {
         context,
       ).push(AppRoutes.kTransactionDetails, extra: transaction),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 16.h),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white.withAlpha(120), Colors.white.withAlpha(120)],
@@ -73,11 +74,11 @@ class TransactionItem extends StatelessWidget {
                         fontSize: 10.sp,
                       ),
                     ),
-                    SizedBox(width: 12.w),
+                    SizedBox(width: 10.w),
 
                     Container(
                       padding: EdgeInsets.symmetric(
-                        vertical: 1.h,
+                        vertical: 0.5.h,
                         horizontal: 10.w,
                       ),
                       decoration: BoxDecoration(
@@ -99,7 +100,7 @@ class TransactionItem extends StatelessWidget {
                             isIncome
                                 ? 'assets/icons/income.svg'
                                 : 'assets/icons/expense.svg',
-                            height: 8.h,
+                            height: 7.h,
                           ),
                           SizedBox(width: 6.w),
                           Text(
@@ -119,9 +120,14 @@ class TransactionItem extends StatelessWidget {
             Spacer(),
             Row(
               children: [
-                Text(
-                  transaction.amount.toString(),
-                  style: TextStyle(fontSize: 12.5.sp),
+                SizedBox(
+                  width: 64.w,
+                  child: Text(
+                    AppHelpers.formatNumber(transaction.amount),
+
+                    style: TextStyle(fontSize: 12.5.sp),
+                    textAlign: TextAlign.end,
+                  ),
                 ),
                 Text(
                   ' £',

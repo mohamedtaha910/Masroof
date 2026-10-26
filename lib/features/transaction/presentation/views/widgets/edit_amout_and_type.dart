@@ -46,7 +46,7 @@ class _EditAmountAndTypeState extends State<EditAmountAndType> {
             'ENTER AMOUNT',
             style: TextStyle(color: Colors.black54, fontSize: 12.sp),
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: 10.h),
           EditAmoutTextFeild(
             amout: widget.transaction.amount.toString(),
             onChanged: (value) {
@@ -54,7 +54,7 @@ class _EditAmountAndTypeState extends State<EditAmountAndType> {
             },
           ),
 
-          SizedBox(height: 8.h),
+          SizedBox(height: 10.h),
           Row(
             children: [
               Expanded(

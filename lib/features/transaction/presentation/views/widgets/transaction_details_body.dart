@@ -20,7 +20,7 @@ class TransactionDetailsBoby extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 16.h),
+            SizedBox(height: 90.h),
             TransactionDetailsHeader(
               category: transaction.category,
               title: transaction.title,
@@ -52,7 +52,7 @@ class TransactionDetailsBoby extends StatelessWidget {
                 color: AppColors.tertiaryColor.withAlpha(30),
               ),
             ),
-            SizedBox(height: 24.h),
+            SizedBox(height: 240.h),
           ],
         ),
       ),

@@ -10,52 +10,55 @@ class HomeRepoImpl implements HomeRepo {
 
   HomeRepoImpl({required this.transactionRepo});
 
-  Future<List<TransactionEntity>> _getallTransactions() {
-    return transactionRepo.getTransactions();
-  }
-  // final transactions = BlocProvider.of<TransactionsCubit>(context).transactions;
+  List<TransactionEntity> allTransactions = [];
 
   @override
-  Future<List<TransactionEntity>> getRecentTransactions() async {
-    final transactions = await _getallTransactions();
+  Future<void> getAllTransaction() async {
+    allTransactions = await transactionRepo.getTransactions();
+    // return transactionRepo.getTransactions();
+  }
+
+  @override
+  List<TransactionEntity> getRecentTransactions()  {
+    // final transactions = await _getallTransactions();
 
     // transactions.sort((a, b) => b.date.compareTo(a.date));
 
-    return transactions.take(10).toList();
+    return allTransactions.take(10).toList();
   }
 
   @override
-  Future<double> getTotalIncome() async {
-    final transactions = await _getallTransactions();
+  double getTotalIncome()  {
+    // final transactions = await _getallTransactions();
 
-    return transactions
+    return allTransactions
         .where((transaction) => transaction.type == TransactionType.income)
         .fold<double>(0, (sum, transaction) => sum + transaction.amount);
   }
 
   @override
-  Future<double> getTotalExpense() async {
-    final transactions = await _getallTransactions();
+  double getTotalExpense()  {
+    // final transactions = await _getallTransactions();
 
-    return transactions
+    return allTransactions
         .where((transaction) => transaction.type == TransactionType.expense)
         .fold<double>(0, (sum, transaction) => sum + transaction.amount);
   }
 
   @override
-  Future<double> getTotalBalance() async {
-    final income = await getTotalIncome();
-    final expense = await getTotalExpense();
+ double getTotalBalance()  {
+    final income =  getTotalIncome();
+    final expense =  getTotalExpense();
 
     return income - expense;
   }
 
   @override
-  Future<double> getTodayIncome() async {
-    final transactions = await _getallTransactions();
+  double getTodayIncome()  {
+    // final transactions = await _getallTransactions();
     final now = DateTime.now();
 
-    return transactions
+    return allTransactions
         .where(
           (transaction) =>
               transaction.type == TransactionType.income &&
@@ -67,11 +70,11 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<double> getTodayExpense() async {
-    final transactions = await _getallTransactions();
+  double getTodayExpense()  {
+    // final transactions = await _getallTransactions();
     final now = DateTime.now();
 
-    return transactions
+    return allTransactions
         .where(
           (transaction) =>
               transaction.type == TransactionType.expense &&
