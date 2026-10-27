@@ -31,7 +31,7 @@ class HomeShimmer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Recent transaction', style: TextStyle(fontSize: 14.sp)),
+                  Text('Recent transaction', style: TextStyle(fontSize: 13.sp)),
 
                   RecentTransactionShimmer(),
                 ],

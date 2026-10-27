@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/features/auth/presentation/views/pages/login_page.dart';
 import 'package:masroof/features/auth/presentation/views/pages/sign_up_page.dart';
-import 'package:masroof/features/dashboard/presentation/views/pages/dashboard_page.dart';
+import 'package:masroof/features/analytics/presentation/views/pages/analytics_page.dart';
 import 'package:masroof/features/home/Presentation/views/pages/app_root.dart';
 import 'package:masroof/features/home/Presentation/views/pages/home_page.dart';
 import 'package:masroof/features/profile/presentation/views/profile_page.dart';
@@ -26,7 +26,7 @@ abstract class AppRoutes {
   static const kSignUpPage = '/signUp';
   static const kTransactionPage = '/transaction';
   static const kprofilePage = '/profilePage';
-  static const kdashboardPage = '/dashboardPage';
+  static const kAnalyticsPage = '/analyticsdPage';
   static const kAddTransactionPage = '/addTransactionPage';
   static const kTransactionDetails = '/TransactionDetails';
   static const kEditTransactionPage = '/EditTransactionPage';
@@ -162,8 +162,8 @@ abstract class AppRoutes {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: kdashboardPage,
-                builder: (context, state) => const DashboardPage(),
+                path: kAnalyticsPage,
+                builder: (context, state) => const AnalyticsPage(),
               ),
             ],
           ),

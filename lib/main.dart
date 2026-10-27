@@ -63,11 +63,7 @@ class MyApp extends StatelessWidget {
                   getIt.get<TransactionsCubit>()..getTransactions(),
             ),
             BlocProvider(
-              create: (context) => HomeCubit(
-                homeRepo: HomeRepoImpl(
-                  transactionRepo: getIt.get<TransactionRepoImpl>(),
-                ),
-              )..getHomeSummary(),
+              create: (context) => getIt.get<HomeCubit>()..getHomeSummary(),
             ),
           ],
           child: MaterialApp.router(

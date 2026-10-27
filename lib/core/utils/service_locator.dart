@@ -4,6 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:masroof/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:masroof/features/auth/data/repos/auth_repo_impl.dart';
+import 'package:masroof/features/home/Presentation/manager/home_cubit/home_cubit.dart';
+import 'package:masroof/features/home/data/repos/home_repo_impl.dart';
 import 'package:masroof/features/transaction/data/data_sources/transaction_remote_data_source.dart';
 import 'package:masroof/features/transaction/data/repos/transaction_repo_impl.dart';
 import 'package:masroof/features/transaction/presentation/manager/transaction_cubit/transaction_cubit.dart';
@@ -31,10 +33,18 @@ void setUpServiceLocator() {
   getIt.registerSingleton<AuthRepoImpl>(
     AuthRepoImpl(remoteDataSource: getIt.get<AuthRemoteDataSourceImpl>()),
   );
+
   getIt.registerSingleton<TransactionRepoImpl>(
     TransactionRepoImpl(
       remoteDataSource: getIt.get<TransactionRemoteDataSourceImpl>(),
     ),
+  );
+  getIt.registerSingleton<HomeRepoImpl>(
+    HomeRepoImpl(transactionRepo: getIt.get<TransactionRepoImpl>()),
+  );
+
+  getIt.registerSingleton<HomeCubit>(
+    HomeCubit(homeRepo: getIt.get<HomeRepoImpl>()),
   );
 
   getIt.registerSingleton<TransactionsCubit>(

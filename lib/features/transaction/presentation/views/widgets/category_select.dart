@@ -37,11 +37,12 @@ class _CategoriesSelectState extends State<CategoriesSelect> {
         : AppCategories.expenses;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: Size(double.infinity, kToolbarHeight),
         child: CustomBlur(
-          sigmaX: 7,
-          sigmay: 7,
+          sigmaX: 12,
+          sigmay: 12,
           radius: 0,
           child: AppBar(
             title: Row(
@@ -68,9 +69,7 @@ class _CategoriesSelectState extends State<CategoriesSelect> {
 
             // centerTitle: true,
             automaticallyImplyLeading: false,
-            // backgroundColor: AppColors.neutralColor.withAlpha(10),
-            // surfaceTintColor: AppColors.neutralColor,
-            backgroundColor: Colors.transparent,
+            backgroundColor: AppColors.neutralColor.withAlpha(100),
             surfaceTintColor: Colors.transparent,
             bottom: PreferredSize(
               preferredSize: Size(double.infinity, 1.h),
@@ -88,6 +87,7 @@ class _CategoriesSelectState extends State<CategoriesSelect> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
+            SizedBox(height: 80.h),
             Container(
               width: double.infinity,
               margin: EdgeInsets.symmetric(horizontal: 14.w, vertical: 16.h),

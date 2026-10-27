@@ -14,9 +14,16 @@ class HeaderBadge extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 12.h),
       decoration: BoxDecoration(
-        color: Colors.white.withAlpha(180),
+        color: Colors.white.withAlpha(190),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.white.withAlpha(150), width: 1.w),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF0D2137).withAlpha(8),
+            blurRadius: 16,
+            offset: const Offset(0, 5),
+          ),
+        ],
       ),
       child: Row(
         children: [
@@ -24,8 +31,8 @@ class HeaderBadge extends StatelessWidget {
             padding: EdgeInsets.all(10.dg),
             decoration: BoxDecoration(
               color: isIncome
-                  ? AppColors.incomeColor.withAlpha(70)
-                  : AppColors.expenseColor.withAlpha(60),
+                  ? AppColors.incomeColor.withAlpha(50)
+                  : AppColors.expenseColor.withAlpha(50),
               shape: BoxShape.circle,
               border: Border.all(
                 // color: Colors.white.withAlpha(100),
@@ -45,7 +52,7 @@ class HeaderBadge extends StatelessWidget {
               width: 10.w,
             ),
           ),
-          SizedBox(width: 7.w),
+          SizedBox(width: 8.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -55,15 +62,16 @@ class HeaderBadge extends StatelessWidget {
                   fontSize: 10.sp,
                   fontWeight: FontWeight.w500,
                   color: Colors.black.withAlpha(160),
+                  // color: AppColors.mutedColor
                 ),
               ),
               SizedBox(height: 4.h),
               Text(
                 '£ ${value.length < 9 ? value : value.substring(0, 8) + '...'}',
 
-                style: GoogleFonts.poppins(
+                style: TextStyle(
                   fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
+                  // fontWeight: FontWeight.w600,
                   color: Colors.black,
                 ),
               ),
