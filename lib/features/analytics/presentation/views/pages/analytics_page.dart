@@ -1,39 +1,11 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-// import 'package:masroof/core/utils/app_colors.dart';
-
-// class AnalyticsPage extends StatelessWidget {
-//   const AnalyticsPage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('My Analytics ', style: TextStyle(fontSize: 18.sp)),
-//         backgroundColor: AppColors.neutralColor.withAlpha(100),
-//         surfaceTintColor: Colors.transparent,
-//         bottom: PreferredSize(
-//           preferredSize: Size(double.infinity, 1.h),
-//           child: Container(
-//             height: 1.h,
-//             width: double.infinity,
-//             color: Colors.white.withAlpha(200),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:masroof/core/utils/app_colors.dart';
+import 'package:masroof/features/analytics/presentation/manager/analytics_cubit/analytics_cubit.dart';
+import 'package:masroof/features/analytics/presentation/views/widgets/analytics_builder.dart';
 import 'package:masroof/features/analytics/presentation/views/widgets/analytics_header.dart';
-import 'package:masroof/features/analytics/presentation/views/widgets/analytics_summary.dart';
-import 'package:masroof/features/analytics/presentation/views/widgets/expenses_breakdown.dart';
-import 'package:masroof/features/analytics/presentation/views/widgets/income_vs_expene_chart.dart';
-import 'package:masroof/features/analytics/presentation/views/widgets/spending_trend.dart';
-import 'package:masroof/features/analytics/presentation/views/widgets/top_spend_categories.dart';
 
 class AnalyticsPage extends StatefulWidget {
   const AnalyticsPage({super.key});
@@ -47,41 +19,64 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
 
   final periods = ['Week', 'Month', 'Year'];
 
-  static const incomeColor = Color(0xFF34C759);
+  DateTimeRange getSelectedDateRange() {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+
+    switch (selectedPeriod) {
+      case 0: // Week: today and the previous 6 days
+        return DateTimeRange(
+          start: today.subtract(const Duration(days: 6)),
+          end: today.add(const Duration(days: 1)),
+        );
+
+      case 1: // Current month
+        return DateTimeRange(
+          start: DateTime(now.year, now.month),
+          end: DateTime(now.year, now.month + 1),
+        );
+
+      // case 2: // Current month and previous 2 months
+      //   return DateTimeRange(
+      //     start: DateTime(now.year, now.month - 2),
+      //     end: DateTime(now.year, now.month + 1),
+      //   );
+
+      case 2: // Current year
+        return DateTimeRange(
+          start: DateTime(now.year),
+          end: DateTime(now.year + 1),
+        );
+
+      default:
+        return DateTimeRange(
+          start: DateTime(now.year, now.month),
+          end: DateTime(now.year, now.month + 1),
+        );
+    }
+  }
+
+  void _loadSelectedPeriod() async {
+    final range = getSelectedDateRange();
+
+    await BlocProvider.of<AnalyticsCubit>(
+      context,
+    ).loadAnalytics(startDate: range.start, endDate: range.end);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: backgroundColor,
       body: SafeArea(
         bottom: false,
         child: SingleChildScrollView(
           padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 100.h),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AnalyticsHeader(),
               SizedBox(height: 24.h),
               _periodSelector(),
-              SizedBox(height: 20.h),
-              AnalyticsSummary(),
-              SizedBox(height: 20.h),
-              IncomeVsExpeneChart(),
-              SizedBox(height: 20.h),
-              ExpensesBreakdown(),
-              SizedBox(height: 20.h),
-              SpendingTrend(),
-              SizedBox(height: 24.h),
-              Text(
-                'Top Spending Categories',
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w700,
-                  // color: textColor,
-                ),
-              ),
-              SizedBox(height: 12.h),
-              TopSpendCategories(),
+              AnalyticsBuilder(),
             ],
           ),
         ),
@@ -103,9 +98,18 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
 
           return Expanded(
             child: GestureDetector(
-              onTap: () => setState(() => selectedPeriod = index),
+              behavior: HitTestBehavior.opaque,
+              onTap: () {
+                if (selectedPeriod == index) return;
+
+                setState(() {
+                  selectedPeriod = index;
+                });
+
+                _loadSelectedPeriod();
+              },
               child: AnimatedContainer(
-                duration: const Duration(milliseconds: 100),
+                duration: const Duration(milliseconds: 200),
                 curve: Curves.easeInOut,
                 padding: EdgeInsets.symmetric(vertical: 8.h),
                 decoration: BoxDecoration(
@@ -131,12 +135,4 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
       ),
     );
   }
-
-  // Widget _buildTopCategories() {
-
-  // }
-
-  // Widget _legend(Color color, String label) {
-
-  // }
 }

@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:masroof/core/utils/app_colors.dart';
+import 'package:masroof/core/utils/helper.dart';
 
 class AnalyticsSummary extends StatelessWidget {
-  const AnalyticsSummary({super.key});
+  const AnalyticsSummary({
+    super.key,
+    required this.totalIncome,
+    required this.totalExpense,
+    required this.netSaving,
+  });
+  final double totalIncome;
+  final double totalExpense;
+  final double netSaving;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +23,7 @@ class AnalyticsSummary extends StatelessWidget {
             Expanded(
               child: _summaryCard(
                 title: 'Income',
-                amount: '9,892.65',
+                amount: AppHelpers.formatNumber(totalIncome),
                 icon: Icons.south_west_rounded,
                 color: AppColors.incomeColor,
                 background: const Color(0xFFE0F7E8),
@@ -24,7 +33,7 @@ class AnalyticsSummary extends StatelessWidget {
             Expanded(
               child: _summaryCard(
                 title: 'Expenses',
-                amount: '2,500.48',
+                amount: AppHelpers.formatNumber(totalExpense),
                 icon: Icons.north_east_rounded,
                 color: AppColors.expenseColor,
                 background: const Color(0xFFFFE7EB),
@@ -35,7 +44,7 @@ class AnalyticsSummary extends StatelessWidget {
         SizedBox(height: 12.h),
         _summaryCard(
           title: 'Net Savings',
-          amount: '7,392.17',
+          amount: AppHelpers.formatNumber(netSaving),
           icon: Icons.account_balance_wallet_rounded,
           color: const Color(0xFF3184F4),
           background: const Color(0xFFE2EEFF),

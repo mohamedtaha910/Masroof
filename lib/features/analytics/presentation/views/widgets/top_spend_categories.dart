@@ -1,17 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:masroof/core/utils/app_colors.dart';
+import 'package:masroof/core/utils/categories.dart';
+import 'package:masroof/core/utils/helper.dart';
 
 class TopSpendCategories extends StatelessWidget {
-  const TopSpendCategories({super.key});
+  const TopSpendCategories({
+    super.key,
+    required this.categories,
+    required this.totalExpense,
+  });
+  final Map<Category, double> categories;
+  final double totalExpense;
 
   @override
   Widget build(BuildContext context) {
-    final categories = [
-      ('Food & Groceries', 800.0, 0.32, const Color(0xFF3987F5)),
-      ('Transportation', 450.0, 0.18, AppColors.incomeColor),
-      ('Shopping', 375.0, 0.15, const Color(0xFFFFA62B)),
-    ];
+    // categories.entries.toList().sort((a, b) => a.value.compareTo(b.value));
+    // final List<MapEntry<Category, double>> topCategories = categories.entries
+    //     .toList();
+    final topCategories =
+        categories.entries.where((entry) => entry.value > 0).toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
+
+    final topThree = topCategories.take(3).toList();
+
+    if (topThree.isEmpty || totalExpense <= 0) {
+      return const SizedBox.shrink();
+    }
 
     return Container(
       padding: EdgeInsets.all(16.w),
@@ -20,8 +35,12 @@ class TopSpendCategories extends StatelessWidget {
         border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(12.r),
       ),
-      child: Column(
-        children: categories.map((category) {
+      child: ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: topThree.length,
+        itemBuilder: (context, index) {
+          MapEntry<Category, double> category = topThree[index];
           return Padding(
             padding: EdgeInsets.only(bottom: 18.h),
             child: Column(
@@ -30,7 +49,7 @@ class TopSpendCategories extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        category.$1,
+                        category.key.name,
                         style: TextStyle(
                           fontSize: 12.sp,
                           // color: textColor,
@@ -39,7 +58,7 @@ class TopSpendCategories extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '£ ${category.$2.toStringAsFixed(2)}',
+                      '£ ${AppHelpers.formatNumber(category.value)}',
                       style: TextStyle(
                         fontSize: 12.sp,
                         // color: textColor,
@@ -52,18 +71,21 @@ class TopSpendCategories extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20.r),
                   child: LinearProgressIndicator(
-                    value: category.$3,
+                    value: totalExpense == 0
+                        ? 0
+                        : category.value / totalExpense,
                     minHeight: 7.h,
                     // backgroundColor: const Color(0xFFEDF1F7),
                     backgroundColor: AppColors.neutralColor,
                     // backgroundColor: Colors.grey.shade200,
-                    valueColor: AlwaysStoppedAnimation(category.$4),
+                    valueColor: AlwaysStoppedAnimation(category.key.color),
                   ),
                 ),
               ],
             ),
           );
-        }).toList(),
+          ;
+        },
       ),
     );
   }

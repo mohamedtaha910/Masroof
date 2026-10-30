@@ -34,7 +34,7 @@ class ChartCard extends StatelessWidget {
               // color: textColor,
             ),
           ),
-          SizedBox(height: 22.h),
+          SizedBox(height: 20.h),
           child,
         ],
       ),

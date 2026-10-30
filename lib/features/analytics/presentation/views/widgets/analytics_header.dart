@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
@@ -10,6 +9,7 @@ class AnalyticsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
           child: Column(
@@ -43,7 +43,7 @@ class AnalyticsHeader extends StatelessWidget {
           child: Icon(
             Iconsax.calendar,
             color: AppColors.primaryColor,
-            size: 22.sp,
+            size: 20.sp,
           ),
         ),
       ],

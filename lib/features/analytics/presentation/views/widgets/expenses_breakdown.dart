@@ -1,21 +1,26 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:masroof/core/utils/app_colors.dart';
+import 'package:masroof/core/utils/categories.dart';
+import 'package:masroof/core/utils/helper.dart';
 import 'package:masroof/features/analytics/presentation/views/widgets/chart_card.dart';
 
 class ExpensesBreakdown extends StatelessWidget {
-  const ExpensesBreakdown({super.key});
+  const ExpensesBreakdown({
+    super.key,
+    required this.categories,
+    required this.totalExpense,
+  });
+  final Map<Category, double> categories;
+  final double totalExpense;
 
   @override
   Widget build(BuildContext context) {
-    final categories = [
-      ('Food', 32.0, const Color(0xFF3987F5)),
-      ('Transport', 18.0, const Color(0xFF34C759)),
-      ('Shopping', 15.0, const Color(0xFFFFA62B)),
-      ('Bills', 12.0, const Color(0xFF9B6BEE)),
-      ('Other', 23.0, const Color(0xFFB7C4D8)),
-    ];
+    final topCategories =
+        categories.entries.where((entry) => entry.value > 0).toList()
+          ..sort((a, b) => b.value.compareTo(a.value));
 
     return ChartCard(
       title: 'Expense Breakdown',
@@ -23,57 +28,186 @@ class ExpensesBreakdown extends StatelessWidget {
         children: [
           SizedBox(
             height: 185.h,
-            child: PieChart(
-              PieChartData(
-                centerSpaceRadius: 43.r,
-                sectionsSpace: 3,
-                sections: categories.map((category) {
-                  return PieChartSectionData(
-                    value: category.$2,
-                    color: category.$3,
-                    radius: 24.r,
-                    showTitle: false,
-                  );
-                }).toList(),
-              ),
+            child: Stack(
+              children: [
+                PieChart(
+                  PieChartData(
+                    centerSpaceRadius: 68.r,
+                    sectionsSpace: 1.2,
+                    sections: categories.entries.map((category) {
+                      return PieChartSectionData(
+                        value: category.value,
+                        color: category.key.color,
+                        radius: 24.r,
+                        showTitle: false,
+                      );
+                    }).toList(),
+                  ),
+                ),
+                Positioned(
+                  top: 78.h,
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
+                  child: Column(
+                    children: [
+                      Text(
+                        '£ ${AppHelpers.formatNumber(totalExpense)}',
+                        style: TextStyle(fontSize: 13.sp),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 6.h),
+                      Text(
+                        'Total Spent',
+                        style: TextStyle(
+                          fontSize: 11.sp,
+                          color: AppColors.mutedColor,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-          SizedBox(height: 18.h),
-          ...categories.map((category) {
-            return Padding(
-              padding: EdgeInsets.only(bottom: 12.h),
-              child: Row(
-                children: [
-                  Container(
-                    width: 10.w,
-                    height: 10.w,
-                    decoration: BoxDecoration(
-                      color: category.$3,
-                      shape: BoxShape.circle,
+          SizedBox(height: 14.h),
+          ListView.separated(
+            separatorBuilder: (context, index) {
+              return Container(
+                height: 1.1.h,
+
+                width: double.infinity,
+                margin: EdgeInsets.only(bottom: 8.h),
+                color: Colors.white,
+              );
+            },
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: topCategories.length,
+            itemBuilder: (context, index) {
+              MapEntry<Category, double> category = topCategories[index];
+              final percentage = totalExpense == 0
+                  ? 0.0
+                  : ((category.value / totalExpense) * 100).roundToDouble();
+              return Padding(
+                padding: EdgeInsets.only(bottom: 12.h),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 10.w,
+                      height: 10.w,
+                      decoration: BoxDecoration(
+                        color: category.key.color,
+                        shape: BoxShape.circle,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 10.w),
-                  Expanded(
-                    child: Text(
-                      category.$1,
+                    SizedBox(width: 10.w),
+                    Image.asset(category.key.iconPath, height: 14.h),
+                    SizedBox(width: 8.w),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          category.key.name,
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                        SizedBox(height: 6.h),
+                        Text(
+                          'Total Spent : ${AppHelpers.formatNumber(category.value)}',
+                          style: TextStyle(
+                            fontSize: 10.sp,
+                            color: AppColors.mutedColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    Text(
+                      '$percentage',
                       style: TextStyle(
                         fontSize: 12.sp,
                         color: AppColors.mutedColor,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                  ),
-                  Text(
-                    '${category.$2.toInt()}%',
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      // color: textColor,
-                      fontWeight: FontWeight.w600,
+                    Text(
+                      ' %',
+                      style: TextStyle(
+                        fontSize: 12.sp,
+
+                        color: AppColors.mutedColor,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            );
-          }),
+                  ],
+                ),
+              );
+            },
+          ),
+          // ...categories.entries.map((category) {
+          //   final percentage = totalExpense == 0
+          //       ? 0.0
+          //       : ((category.value / totalExpense) * 100).roundToDouble();
+          //   return Padding(
+          //     padding: EdgeInsets.only(bottom: 12.h),
+          //     child: Row(
+          //       children: [
+          //         Container(
+          //           width: 10.w,
+          //           height: 10.w,
+          //           decoration: BoxDecoration(
+          //             color: category.key.color,
+          //             shape: BoxShape.circle,
+          //           ),
+          //         ),
+          //         SizedBox(width: 10.w),
+          //         Image.asset(category.key.iconPath, height: 14.h),
+          //         SizedBox(width: 8.w),
+          //         Expanded(
+          //           child: Column(
+          //             crossAxisAlignment: CrossAxisAlignment.start,
+          //             children: [
+          //               Text(
+          //                 category.key.name,
+          //                 style: TextStyle(
+          //                   fontSize: 12.sp,
+          //                   color: AppColors.primaryColor,
+          //                 ),
+          //               ),
+          //               SizedBox(height: 6.h),
+          //               Text(
+          //                 'Total Spend : ${AppHelpers.formatNumber(category.value)}',
+          //                 style: TextStyle(
+          //                   fontSize: 10.sp,
+          //                   color: AppColors.mutedColor,
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //         Text(
+          //           '$percentage',
+          //           style: TextStyle(
+          //             fontSize: 12.sp,
+          //             color: AppColors.mutedColor,
+          //             fontWeight: FontWeight.w600,
+          //           ),
+          //         ),
+          //         Text(
+          //           ' %',
+          //           style: TextStyle(
+          //             fontSize: 12.sp,
+
+          //             color: AppColors.mutedColor,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   );
+          // }),
         ],
       ),
     );

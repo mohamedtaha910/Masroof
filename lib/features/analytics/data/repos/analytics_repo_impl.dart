@@ -1,3 +1,4 @@
+import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/features/analytics/domain/entities/analytics_entity.dart';
 import 'package:masroof/features/analytics/domain/repos/analytics_repo.dart';
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
@@ -23,22 +24,22 @@ class AnalyticsRepoImpl implements AnalyticsRepo {
     double totalIncome = 0;
     double totalExpenses = 0;
 
-    final Map<String, double> expensesByCategory = {};
-    final Map<String, double> incomeByCategory = {};
+    final Map<Category, double> expensesByCategory = {};
+    final Map<Category, double> incomeByCategory = {};
 
     for (final transaction in transactions) {
-      final categoryName = transaction.category.name;
+      final category = transaction.category;
 
       if (transaction.type == TransactionType.income) {
         totalIncome += transaction.amount;
 
-        incomeByCategory[categoryName] =
-            (incomeByCategory[categoryName] ?? 0) + transaction.amount;
+        incomeByCategory[category] =
+            (incomeByCategory[category] ?? 0) + transaction.amount;
       } else {
         totalExpenses += transaction.amount;
 
-        expensesByCategory[categoryName] =
-            (expensesByCategory[categoryName] ?? 0) + transaction.amount;
+        expensesByCategory[category] =
+            (expensesByCategory[category] ?? 0) + transaction.amount;
       }
     }
 

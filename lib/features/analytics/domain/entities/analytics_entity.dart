@@ -1,11 +1,12 @@
+import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 
 class AnalyticsEntity {
   final double totalIncome;
   final double totalExpenses;
   final double netSavings;
-  final Map<String, double> expensesByCategory;
-  final Map<String, double> incomeByCategory;
+  final Map<Category, double> expensesByCategory;
+  final Map<Category, double> incomeByCategory;
   final List<TransactionEntity> transactions;
 
   const AnalyticsEntity({

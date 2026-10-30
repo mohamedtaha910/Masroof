@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +10,11 @@ import 'package:masroof/core/utils/app_routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:masroof/core/utils/bloc_observer.dart';
 import 'package:masroof/core/utils/service_locator.dart';
+import 'package:masroof/features/analytics/data/repos/analytics_repo_impl.dart';
+import 'package:masroof/features/analytics/presentation/manager/analytics_cubit/analytics_cubit.dart';
 import 'package:masroof/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:masroof/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import 'package:masroof/features/home/Presentation/manager/home_cubit/home_cubit.dart';
-import 'package:masroof/features/home/data/repos/home_repo_impl.dart';
 import 'package:masroof/features/transaction/data/repos/transaction_repo_impl.dart';
 import 'package:masroof/features/transaction/presentation/manager/transaction_cubit/transaction_cubit.dart';
 import 'package:masroof/firebase_options.dart';
@@ -52,6 +51,7 @@ class MyApp extends StatelessWidget {
       },
       autoRebuild: true,
       builder: (context, child) {
+        DateTime now = DateTime.now();
         return MultiBlocProvider(
           providers: [
             BlocProvider(
@@ -64,6 +64,17 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider(
               create: (context) => getIt.get<HomeCubit>()..getHomeSummary(),
+            ),
+            BlocProvider(
+              create: (context) =>
+                  AnalyticsCubit(
+                    analyticsRepo: AnalyticsRepoImpl(
+                      transactionRepo: getIt.get<TransactionRepoImpl>(),
+                    ),
+                  )..loadAnalytics(
+                    startDate: DateTime(now.year, now.month),
+                    endDate: DateTime(now.year, now.month + 1),
+                  ),
             ),
           ],
           child: MaterialApp.router(
@@ -78,7 +89,7 @@ class MyApp extends StatelessWidget {
 
               scaffoldBackgroundColor: AppColors.neutralColor,
               textTheme: GoogleFonts.poppinsTextTheme(
-                Theme.of(context).textTheme,
+                Theme.of(context).textTheme, 
               ),
 
               // fontFamily: 'Poppins',
