@@ -32,7 +32,7 @@ class ExpensesBreakdown extends StatelessWidget {
               children: [
                 PieChart(
                   PieChartData(
-                    centerSpaceRadius: 68.r,
+                    centerSpaceRadius: 70.r,
                     sectionsSpace: 1.2,
                     sections: categories.entries.map((category) {
                       return PieChartSectionData(
@@ -52,7 +52,8 @@ class ExpensesBreakdown extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        '£ ${AppHelpers.formatNumber(totalExpense)}',
+                        '£ ${AppHelpers.formatNumber(totalExpense).length < 10 ? AppHelpers.formatNumber(totalExpense) : AppHelpers.formatNumber(totalExpense).substring(0, 11)}',
+                        // '2222222222222',
                         style: TextStyle(fontSize: 13.sp),
                         textAlign: TextAlign.center,
                       ),
@@ -147,67 +148,6 @@ class ExpensesBreakdown extends StatelessWidget {
               );
             },
           ),
-          // ...categories.entries.map((category) {
-          //   final percentage = totalExpense == 0
-          //       ? 0.0
-          //       : ((category.value / totalExpense) * 100).roundToDouble();
-          //   return Padding(
-          //     padding: EdgeInsets.only(bottom: 12.h),
-          //     child: Row(
-          //       children: [
-          //         Container(
-          //           width: 10.w,
-          //           height: 10.w,
-          //           decoration: BoxDecoration(
-          //             color: category.key.color,
-          //             shape: BoxShape.circle,
-          //           ),
-          //         ),
-          //         SizedBox(width: 10.w),
-          //         Image.asset(category.key.iconPath, height: 14.h),
-          //         SizedBox(width: 8.w),
-          //         Expanded(
-          //           child: Column(
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //             children: [
-          //               Text(
-          //                 category.key.name,
-          //                 style: TextStyle(
-          //                   fontSize: 12.sp,
-          //                   color: AppColors.primaryColor,
-          //                 ),
-          //               ),
-          //               SizedBox(height: 6.h),
-          //               Text(
-          //                 'Total Spend : ${AppHelpers.formatNumber(category.value)}',
-          //                 style: TextStyle(
-          //                   fontSize: 10.sp,
-          //                   color: AppColors.mutedColor,
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //         Text(
-          //           '$percentage',
-          //           style: TextStyle(
-          //             fontSize: 12.sp,
-          //             color: AppColors.mutedColor,
-          //             fontWeight: FontWeight.w600,
-          //           ),
-          //         ),
-          //         Text(
-          //           ' %',
-          //           style: TextStyle(
-          //             fontSize: 12.sp,
-
-          //             color: AppColors.mutedColor,
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //   );
-          // }),
         ],
       ),
     );

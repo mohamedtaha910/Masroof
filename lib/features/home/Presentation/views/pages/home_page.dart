@@ -30,8 +30,9 @@ class HomePage extends StatelessWidget {
         surfaceTintColor: Colors.transparent,
         title: HomeAppBar(name: user?.displayName),
       ),
-      body: Stack(
-        children: [
+      body:
+          //  Stack(
+          // children: [
           BlocListener<TransactionsCubit, TransactionsState>(
             listener: (context, state) {
               if (state is TransactionAdded ||
@@ -70,33 +71,33 @@ class HomePage extends StatelessWidget {
             ),
           ),
 
-          CustomBlur(
-            sigmaX: 1.3,
-            sigmay: 1.3,
-            radius: 0,
-            child: Container(
-              height: 45.h,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                // color: Colors.red,
-                gradient: LinearGradient(
-                  colors: [
-                    // Colors.white.withAlpha(225),
-                    AppColors.secondaryColor.withAlpha(230),
-                    AppColors.secondaryColor.withAlpha(190),
-                    AppColors.secondaryColor.withAlpha(120),
-                    AppColors.secondaryColor.withAlpha(60),
-                    AppColors.secondaryColor.withAlpha(10),
-                    AppColors.secondaryColor.withAlpha(0),
-                  ],
-                  begin: AlignmentGeometry.topCenter,
-                  end: AlignmentGeometry.bottomCenter,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+      // CustomBlur(
+      //   sigmaX: 1.3,
+      //   sigmay: 1.3,
+      //   radius: 0,
+      //   child: Container(
+      //     height: 45.h,
+      //     width: MediaQuery.of(context).size.width,
+      //     decoration: BoxDecoration(
+      //       // color: Colors.red,
+      //       gradient: LinearGradient(
+      //         colors: [
+      //           // Colors.white.withAlpha(225),
+      //           AppColors.secondaryColor.withAlpha(230),
+      //           AppColors.secondaryColor.withAlpha(190),
+      //           AppColors.secondaryColor.withAlpha(120),
+      //           AppColors.secondaryColor.withAlpha(60),
+      //           AppColors.secondaryColor.withAlpha(10),
+      //           AppColors.secondaryColor.withAlpha(0),
+      //         ],
+      //         begin: AlignmentGeometry.topCenter,
+      //         end: AlignmentGeometry.bottomCenter,
+      //       ),
+      //     ),
+      //   ),
+      // ),
+      // ],
+      // ),
     );
   }
 }

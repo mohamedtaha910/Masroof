@@ -32,14 +32,14 @@ class _AnalyticsBodyState extends State<AnalyticsBody> {
           totalExpense: widget.analyticsEntity.totalExpenses,
           netSaving: widget.analyticsEntity.netSavings,
         ),
-        SizedBox(height: 20.h),
-        IncomeVsExpeneChart(),
+        // SizedBox(height: 20.h),
+        // IncomeVsExpeneChart(),
         SizedBox(height: 20.h),
         ExpensesBreakdown(
           totalExpense: widget.analyticsEntity.totalExpenses,
           categories: widget.analyticsEntity.expensesByCategory,
         ),
-        SizedBox(height: 20.h),
+        // SizedBox(height: 20.h),
         // SpendingTrend(),
         SizedBox(height: 24.h),
         Text(

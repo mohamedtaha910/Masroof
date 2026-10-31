@@ -8,6 +8,12 @@ class AnalyticsEntity {
   final Map<Category, double> expensesByCategory;
   final Map<Category, double> incomeByCategory;
   final List<TransactionEntity> transactions;
+  // ==============================
+  final double averageDailySpending;
+  final TransactionEntity largestExpenseTransaction;
+  final Category? topExpenseCategory;
+  final double savingsRate;
+  // final double? expenseChangePercentage;
 
   const AnalyticsEntity({
     required this.totalIncome,
@@ -16,5 +22,10 @@ class AnalyticsEntity {
     required this.expensesByCategory,
     required this.incomeByCategory,
     required this.transactions,
+    required this.averageDailySpending,
+    required this.largestExpenseTransaction,
+    this.topExpenseCategory,
+    required this.savingsRate,
+    // this.expenseChangePercentage,
   });
 }

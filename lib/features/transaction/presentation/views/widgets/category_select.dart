@@ -83,14 +83,14 @@ class _CategoriesSelectState extends State<CategoriesSelect> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        // physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
             SizedBox(height: 80.h),
             Container(
               width: double.infinity,
-              margin: EdgeInsets.symmetric(horizontal: 14.w, vertical: 16.h),
+              margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 16.h),
               padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
               decoration: BoxDecoration(
                 color: Colors.white.withAlpha(100),
@@ -162,16 +162,16 @@ class CategoryShip extends StatelessWidget {
             ? AppColors.primaryColor.withAlpha(200)
             : AppColors.neutralColor,
         borderRadius: BorderRadius.circular(10.r),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: Colors.grey.shade300.withAlpha(200)),
       ),
       child: Row(
         children: [
           Container(
             padding: EdgeInsets.all(8.h),
             decoration: BoxDecoration(
-              color: Colors.white.withAlpha(200),
+              color: Colors.white.withAlpha(120),
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.grey.shade300.withAlpha(200)),
+              border: Border.all(color: Colors.white),
             ),
             child: Image.asset(category.iconPath, height: 26),
           ),
