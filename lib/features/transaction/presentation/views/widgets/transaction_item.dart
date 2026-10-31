@@ -40,7 +40,7 @@ class TransactionItem extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              padding: EdgeInsets.all(7.5.h),
+              padding: EdgeInsets.all(7.h),
               decoration: BoxDecoration(
                 // color: const Color.fromARGB(255, 152, 185, 191),
                 color: AppColors.neutralColor,
