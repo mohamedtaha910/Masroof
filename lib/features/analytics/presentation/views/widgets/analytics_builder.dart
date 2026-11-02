@@ -27,7 +27,7 @@ class AnalyticsBuilder extends StatelessWidget {
           AnalyticsEntity analyticsEntity = state.analytics;
           return AnalyticsBody(analyticsEntity: analyticsEntity);
         } else {
-          return Center(child: Text('errpr'));
+          return Center(child: Text('error'));
         }
       },
     );

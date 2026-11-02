@@ -63,7 +63,13 @@ class TransactionItem extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(transaction.title, style: TextStyle(fontSize: 12.5.sp)),
+                SizedBox(
+                  width: 165.w,
+                  child: Text(
+                    transaction.title,
+                    style: TextStyle(fontSize: 12.5.sp),
+                  ),
+                ),
                 SizedBox(height: 8.h),
                 Row(
                   children: [

@@ -56,7 +56,7 @@ class HomePage extends StatelessWidget {
                       children: [
                         HomeHeader(summaryEntity: summaryEntity),
                         Transform.translate(
-                          offset: Offset(0, -32.h),
+                          offset: Offset(0, -35.h),
                           child: RecentTransaction(
                             recentTransaction: summaryEntity.recentTransactions,
                           ),

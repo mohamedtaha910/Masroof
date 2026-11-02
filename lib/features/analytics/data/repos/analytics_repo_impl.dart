@@ -22,16 +22,27 @@ class AnalyticsRepoImpl implements AnalyticsRepo {
           transaction.date.isBefore(endDate);
     }).toList();
 
+    DateTime prevStartDate = startDate.subtract(
+      Duration(days: AppHelpers.daysBetween(startDate, endDate)),
+    );
+    DateTime prevEndDate = startDate;
+    final prevTransactions = allTransactions.where((transaction) {
+      return !transaction.date.isBefore(prevStartDate) &&
+          transaction.date.isBefore(prevEndDate);
+    }).toList();
+
     double totalIncome = 0;
     double totalExpenses = 0;
+    double prevTotalExpenses = 0;
 
     final Map<Category, double> expensesByCategory = {};
     final Map<Category, double> incomeByCategory = {};
     double averageDailySpending = 0;
-    Category topExpenseCategory;
+    // Category topExpenseCategory;
     final int daysNumber = AppHelpers.daysBetween(startDate, endDate);
     TransactionEntity largestTransaction;
     double savingRate;
+    double expenseChangePercentage = 0;
 
     List<TransactionEntity> expensesTrnsactions = transactions
         .where((transaction) => transaction.type == TransactionType.expense)
@@ -54,15 +65,24 @@ class AnalyticsRepoImpl implements AnalyticsRepo {
             (expensesByCategory[category] ?? 0) + transaction.amount;
       }
     }
+    for (final transaction in prevTransactions) {
+      if (transaction.type == TransactionType.expense) {
+        prevTotalExpenses += transaction.amount;
+      }
+    }
     averageDailySpending = totalExpenses / daysNumber;
-    expensesByCategory.entries
-        .where((entry) => entry.value > 0)
-        .toList()
-        .sort((a, b) => b.value.compareTo(a.value));
-    topExpenseCategory = expensesByCategory.entries.first.key;
+    // expensesByCategory.entries
+    //     .where((entry) => entry.value > 0)
+    //     .toList()
+    //     .sort((a, b) => b.value.compareTo(a.value));
+    // topExpenseCategory = expensesByCategory.entries.first.key;
     savingRate = totalIncome == 0
         ? 0
-        : (totalIncome - totalExpenses) / totalIncome;
+        : ((totalIncome - totalExpenses) / totalIncome) * 100;
+
+    expenseChangePercentage = prevTotalExpenses == 0
+        ? 100
+        : ((totalExpenses - prevTotalExpenses) / prevTotalExpenses) * 100;
 
     return AnalyticsEntity(
       totalIncome: totalIncome,
@@ -72,10 +92,11 @@ class AnalyticsRepoImpl implements AnalyticsRepo {
       incomeByCategory: incomeByCategory,
       transactions: transactions,
       averageDailySpending: averageDailySpending,
-      topExpenseCategory: topExpenseCategory,
+      // topExpenseCategory: topExpenseCategory,
       largestExpenseTransaction: largestTransaction,
       savingsRate: savingRate,
-      // expenseChangePercentage: ,
+      prevTotalExpenses: prevTotalExpenses,
+      expenseChangePercentage: expenseChangePercentage,
     );
   }
 }

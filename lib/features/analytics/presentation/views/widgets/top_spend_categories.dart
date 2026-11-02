@@ -42,7 +42,7 @@ class TopSpendCategories extends StatelessWidget {
         itemBuilder: (context, index) {
           MapEntry<Category, double> category = topThree[index];
           return Padding(
-            padding: EdgeInsets.only(bottom: 18.h),
+            padding: EdgeInsets.symmetric(vertical: 10.h),
             child: Column(
               children: [
                 Row(
@@ -58,7 +58,7 @@ class TopSpendCategories extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '£ ${AppHelpers.formatNumber(category.value)}',
+                      '${AppHelpers.formatNumber(category.value)} £',
                       style: TextStyle(
                         fontSize: 12.sp,
                         // color: textColor,

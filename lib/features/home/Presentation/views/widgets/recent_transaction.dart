@@ -10,15 +10,10 @@ class RecentTransaction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 14.w, left: 14.w, bottom: 50.h),
+      padding: EdgeInsets.only(right: 12.w, left: 12.w, bottom: 50.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Container(
-          //   height: 2.h,
-          //   width: MediaQuery.of(context).size.width * 0.7,
-          //   decoration: BoxDecoration(color: Colors.black38),
-          // ),
           Text('Recent transaction', style: TextStyle(fontSize: 13.sp)),
           SizedBox(height: 10.h),
           ListView.builder(
