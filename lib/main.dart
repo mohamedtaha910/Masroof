@@ -6,7 +6,6 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/utils/app_routes.dart';
-// import 'package:masroof/features/splash/Presentation/pages/splash_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:masroof/core/utils/bloc_observer.dart';
 import 'package:masroof/core/utils/service_locator.dart';

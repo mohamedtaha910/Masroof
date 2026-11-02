@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-import 'package:masroof/core/utils/app_colors.dart';
-import 'package:masroof/core/utils/categories.dart';
-import 'package:masroof/core/utils/helper.dart';
 import 'package:masroof/features/analytics/domain/entities/analytics_entity.dart';
-import 'package:masroof/features/analytics/presentation/manager/analytics_cubit/analytics_cubit.dart';
-import 'package:masroof/features/analytics/presentation/views/widgets/analytics_header.dart';
 import 'package:masroof/features/analytics/presentation/views/widgets/analytics_summary.dart';
 import 'package:masroof/features/analytics/presentation/views/widgets/expenses_breakdown.dart';
-import 'package:masroof/features/analytics/presentation/views/widgets/income_vs_expene_chart.dart';
 import 'package:masroof/features/analytics/presentation/views/widgets/period_comparison.dart';
 import 'package:masroof/features/analytics/presentation/views/widgets/spending_insights.dart';
-import 'package:masroof/features/analytics/presentation/views/widgets/spending_trend.dart';
 import 'package:masroof/features/analytics/presentation/views/widgets/top_spend_categories.dart';
-import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 
 class AnalyticsBody extends StatefulWidget {
   const AnalyticsBody({super.key, required this.analyticsEntity});

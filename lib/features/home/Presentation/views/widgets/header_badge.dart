@@ -14,12 +14,13 @@ class HeaderBadge extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 12.h),
       decoration: BoxDecoration(
-        color: Colors.white.withAlpha(190),
+        color: Colors.white.withAlpha(180),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withAlpha(150), width: 1.w),
+        border: Border.all(color: Colors.white.withAlpha(150)),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF0D2137).withAlpha(8),
+            // color: const Color(0xFF0D2137).withAlpha(8),
+            color: AppColors.neutralColor.withAlpha(40),
             blurRadius: 16,
             offset: const Offset(0, 5),
           ),
