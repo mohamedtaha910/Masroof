@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/features/auth/presentation/manager/cubit/auth_cubit.dart';
 
 class OtherWay extends StatelessWidget {
@@ -16,8 +17,11 @@ class OtherWay extends StatelessWidget {
           //  Divider
           Row(
             children: [
-              const Expanded(
-                child: Divider(thickness: 0.8, color: Colors.grey),
+              Expanded(
+                child: Divider(
+                  thickness: 0.8,
+                  color: Colors.white.withAlpha(150),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -25,13 +29,16 @@ class OtherWay extends StatelessWidget {
                   'or continue with',
                   style: TextStyle(
                     fontSize: 12.sp,
-                    color: Colors.black54,
+                    color: AppColors.mutedColor,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
-              const Expanded(
-                child: Divider(thickness: 0.8, color: Colors.grey),
+              Expanded(
+                child: Divider(
+                  thickness: 0.8,
+                  color: Colors.white.withAlpha(150),
+                ),
               ),
             ],
           ),
@@ -89,14 +96,11 @@ class _SocialBtn extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 42.h,
+        height: 40.h,
         decoration: BoxDecoration(
-          color: Colors.grey.shade100.withAlpha(120),
-          borderRadius: BorderRadius.circular(14.r),
-          border: Border.all(
-            color: Colors.grey.shade400.withAlpha(120),
-            width: 0.8.w,
-          ),
+          color: Colors.white.withAlpha(100),
+          borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(color: Colors.white.withAlpha(120), width: 0.8.w),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

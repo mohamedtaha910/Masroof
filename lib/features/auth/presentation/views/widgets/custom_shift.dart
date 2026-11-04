@@ -23,7 +23,7 @@ class CustomShift extends StatelessWidget {
         Text(
           text2,
           style: TextStyle(
-            color: Colors.black54,
+            color: AppColors.mutedColor,
             fontSize: 12.sp,
             fontWeight: FontWeight.w400,
           ),
@@ -31,9 +31,7 @@ class CustomShift extends StatelessWidget {
         // SizedBox(width: 4),
         GestureDetector(
           onTap: () {
-           GoRouter.of(context).pushReplacement(
-            destination
-           );
+            GoRouter.of(context).pushReplacement(destination);
           },
           child: Text(
             text,

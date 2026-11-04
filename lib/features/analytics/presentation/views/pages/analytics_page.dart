@@ -59,7 +59,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
   void _loadSelectedPeriod() async {
     final range = getSelectedDateRange();
 
-    await BlocProvider.of<AnalyticsCubit>(
+    BlocProvider.of<AnalyticsCubit>(
       context,
     ).loadAnalytics(startDate: range.start, endDate: range.end);
   }

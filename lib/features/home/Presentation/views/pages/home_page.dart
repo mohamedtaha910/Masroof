@@ -23,13 +23,13 @@ class HomePage extends StatelessWidget {
     debugPrint('ScreenUtil size: ${ScreenUtilPlus().screenWidth}');
     UserEntity? user = BlocProvider.of<AuthCubit>(context).getCurrentUser();
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
 
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        surfaceTintColor: Colors.transparent,
-        title: HomeAppBar(name: user?.displayName),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   surfaceTintColor: Colors.transparent,
+      //   title: HomeAppBar(name: user?.displayName),
+      // ),
       body:
           //  Stack(
           // children: [

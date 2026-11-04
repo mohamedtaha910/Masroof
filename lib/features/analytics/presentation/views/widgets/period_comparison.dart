@@ -18,7 +18,7 @@ class PeriodComparison extends StatelessWidget {
   Widget build(BuildContext context) {
     final change = analytics.expenseChangePercentage;
 
-    final isDecrease = change != null && change < 0;
+    final isDecrease = change != null && change <= 0;
     final color = isDecrease
         ? const Color(0xFF34C759)
         : const Color(0xFFFF383C);

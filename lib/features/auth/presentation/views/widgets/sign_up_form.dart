@@ -61,7 +61,10 @@ class _SignUpFormState extends State<SignUpForm> {
                 SizedBox(height: 5.h),
                 Text(
                   'Create an account to get started',
-                  style: TextStyle(fontSize: 12.sp, color: Colors.black38),
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    color: AppColors.mutedColor,
+                  ),
                 ),
                 SizedBox(height: 38.h),
                 Text(

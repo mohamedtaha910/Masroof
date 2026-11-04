@@ -34,7 +34,7 @@ class TransactionBlocBuilder extends StatelessWidget {
         else {
           List<TransactionEntity> transactions =
               BlocProvider.of<TransactionsCubit>(context).transactions;
-
+          // return NoTransactionPage();
           return transactions.isEmpty
               ? NoTransactionPage()
               : AllTransactionList(transactions: transactions);

@@ -9,13 +9,22 @@ class AnalyticsRepoImpl implements AnalyticsRepo {
   final TransactionRepo transactionRepo;
 
   AnalyticsRepoImpl({required this.transactionRepo});
+  final List<TransactionEntity> allTransactions = [];
+
+  @override
+  Future<List<TransactionEntity>> getAllTransactions() async {
+    final transactions = await transactionRepo.getTransactions();
+    allTransactions.clear();
+    allTransactions.addAll(transactions);
+    return allTransactions;
+  }
 
   @override
   Future<AnalyticsEntity> getAnalytics({
     required DateTime startDate,
     required DateTime endDate,
   }) async {
-    final allTransactions = await transactionRepo.getTransactions();
+    // final allTransactions = await transactionRepo.getTransactions();
 
     final transactions = allTransactions.where((transaction) {
       return !transaction.date.isBefore(startDate) &&
@@ -38,17 +47,31 @@ class AnalyticsRepoImpl implements AnalyticsRepo {
     final Map<Category, double> expensesByCategory = {};
     final Map<Category, double> incomeByCategory = {};
     double averageDailySpending = 0;
-    // Category topExpenseCategory;
     final int daysNumber = AppHelpers.daysBetween(startDate, endDate);
     TransactionEntity largestTransaction;
     double savingRate;
     double expenseChangePercentage = 0;
 
-    List<TransactionEntity> expensesTrnsactions = transactions
-        .where((transaction) => transaction.type == TransactionType.expense)
-        .toList();
+    List<TransactionEntity> expensesTrnsactions = transactions.isEmpty
+        ? []
+        : transactions
+              .where(
+                (transaction) => transaction.type == TransactionType.expense,
+              )
+              .toList();
+
     expensesTrnsactions.sort((a, b) => b.amount.compareTo(a.amount));
-    largestTransaction = expensesTrnsactions.first;
+    largestTransaction = expensesTrnsactions.isNotEmpty
+        ? expensesTrnsactions.first
+        : TransactionEntity(
+            id: '',
+            amount: 0,
+            date: DateTime.now(),
+            type: TransactionType.expense,
+            category: AppCategories.other,
+            title: '',
+            note: '',
+          );
 
     for (final transaction in transactions) {
       final category = transaction.category;
@@ -71,16 +94,14 @@ class AnalyticsRepoImpl implements AnalyticsRepo {
       }
     }
     averageDailySpending = totalExpenses / daysNumber;
-    // expensesByCategory.entries
-    //     .where((entry) => entry.value > 0)
-    //     .toList()
-    //     .sort((a, b) => b.value.compareTo(a.value));
-    // topExpenseCategory = expensesByCategory.entries.first.key;
+
     savingRate = totalIncome == 0
         ? 0
         : ((totalIncome - totalExpenses) / totalIncome) * 100;
 
-    expenseChangePercentage = prevTotalExpenses == 0
+    expenseChangePercentage = prevTotalExpenses == 0 && totalExpenses == 0
+        ? 0
+        : prevTotalExpenses == 0
         ? 100
         : ((totalExpenses - prevTotalExpenses) / prevTotalExpenses) * 100;
 
@@ -92,7 +113,6 @@ class AnalyticsRepoImpl implements AnalyticsRepo {
       incomeByCategory: incomeByCategory,
       transactions: transactions,
       averageDailySpending: averageDailySpending,
-      // topExpenseCategory: topExpenseCategory,
       largestExpenseTransaction: largestTransaction,
       savingsRate: savingRate,
       prevTotalExpenses: prevTotalExpenses,

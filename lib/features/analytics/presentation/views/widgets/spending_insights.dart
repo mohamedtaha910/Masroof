@@ -32,6 +32,24 @@ class SpendingInsights extends StatelessWidget {
         children: [
           InsightRow(
             icon: Icon(
+              Iconsax.wallet_3,
+              // color: AppColors.tertiaryColor.withAlpha(210),
+              color: Colors.lightBlue,
+              size: 20.sp,
+            ),
+            title: 'Savings Rate',
+            subTitle: 'percentage of income saved',
+            value: '${savingsRate.toStringAsFixed(1)} %',
+          ),
+          // SizedBox(height: 12.h),
+          Container(
+            height: 1.1.h,
+            width: double.infinity,
+            margin: EdgeInsets.symmetric(vertical: 14.h),
+            color: Colors.white,
+          ),
+          InsightRow(
+            icon: Icon(
               Iconsax.moneys,
               color: AppColors.expenseColor.withAlpha(210),
               size: 20.sp,
@@ -47,23 +65,7 @@ class SpendingInsights extends StatelessWidget {
             margin: EdgeInsets.symmetric(vertical: 14.h),
             color: Colors.white,
           ),
-          InsightRow(
-            icon: Icon(
-              Iconsax.wallet_3,
-              color: AppColors.tertiaryColor.withAlpha(210),
-              size: 20.sp,
-            ),
-            title: 'Savings Rate',
-            subTitle: 'percentage of income saved',
-            value: '${savingsRate.toStringAsFixed(1)} %',
-          ),
-          // SizedBox(height: 12.h),
-          Container(
-            height: 1.1.h,
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(vertical: 14.h),
-            color: Colors.white,
-          ),
+
           InsightRow(
             icon: Image.asset(
               largestExpenseTransaction.category.iconPath,

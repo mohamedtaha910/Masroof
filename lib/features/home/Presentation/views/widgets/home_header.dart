@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/utils/helper.dart';
+import 'package:masroof/features/auth/domain/entities/user_entity.dart';
+import 'package:masroof/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import 'package:masroof/features/home/Presentation/views/widgets/header_badge.dart';
+import 'package:masroof/features/home/Presentation/views/widgets/home_app_bar.dart';
 import 'package:masroof/features/home/domain/entities/home_summary_entity.dart';
 
 class HomeHeader extends StatelessWidget {
@@ -12,6 +16,7 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserEntity? user = BlocProvider.of<AuthCubit>(context).getCurrentUser();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w),
       height: 360.h,
@@ -20,7 +25,9 @@ class HomeHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 90.h),
+          SizedBox(height: 36.h),
+          HomeAppBar(name: user?.displayName),
+          SizedBox(height: 30.h),
           Text(
             'Total Balance ',
             style: TextStyle(

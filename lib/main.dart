@@ -70,10 +70,7 @@ class MyApp extends StatelessWidget {
                     analyticsRepo: AnalyticsRepoImpl(
                       transactionRepo: getIt.get<TransactionRepoImpl>(),
                     ),
-                  )..loadAnalytics(
-                    startDate: DateTime(now.year, now.month),
-                    endDate: DateTime(now.year, now.month + 1),
-                  ),
+                  )..getAllTransactions()
             ),
           ],
           child: MaterialApp.router(

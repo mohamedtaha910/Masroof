@@ -60,7 +60,10 @@ class _LoginFormState extends State<LoginForm> {
                 SizedBox(height: 5.h),
                 Text(
                   'Welcome back! Login to your account',
-                  style: TextStyle(fontSize: 12.sp, color: Colors.black38),
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    color: AppColors.mutedColor,
+                  ),
                 ),
                 SizedBox(height: 38.h),
                 Text(

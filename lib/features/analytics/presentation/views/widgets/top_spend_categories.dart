@@ -25,7 +25,24 @@ class TopSpendCategories extends StatelessWidget {
     final topThree = topCategories.take(3).toList();
 
     if (topThree.isEmpty || totalExpense <= 0) {
-      return const SizedBox.shrink();
+      return Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white.withAlpha(120),
+          border: Border.all(color: Colors.white),
+          borderRadius: BorderRadius.all(Radius.circular(12.r)),
+        ),
+        child: Center(
+          child: Text(
+            'No spending data available',
+            style: TextStyle(
+              fontSize: 12,
+              color: AppColors.mutedColor,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      );
     }
 
     return Container(
