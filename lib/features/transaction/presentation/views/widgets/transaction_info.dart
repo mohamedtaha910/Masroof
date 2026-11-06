@@ -88,9 +88,9 @@ class Horizintalline extends StatelessWidget {
     return Center(
       child: Container(
         height: 1.h,
-        width: 250.w,
+        // width: 250.w,
         decoration: BoxDecoration(
-          color: Colors.black12,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(100),
         ),
       ),

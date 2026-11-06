@@ -4,6 +4,7 @@ import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/features/auth/presentation/views/pages/login_page.dart';
 import 'package:masroof/features/auth/presentation/views/pages/sign_up_page.dart';
 import 'package:masroof/features/analytics/presentation/views/pages/analytics_page.dart';
+import 'package:masroof/features/budget/presentation/views/pages/budgets_page.dart';
 import 'package:masroof/features/home/Presentation/views/pages/app_root.dart';
 import 'package:masroof/features/home/Presentation/views/pages/home_page.dart';
 import 'package:masroof/features/profile/presentation/views/profile_page.dart';
@@ -31,6 +32,7 @@ abstract class AppRoutes {
   static const kTransactionDetails = '/TransactionDetails';
   static const kEditTransactionPage = '/EditTransactionPage';
   static const kCategoriesSelect = '/categoriesSelect';
+  static const kBudgetsPage = '/budgetsPage';
 
   static final GoRouter router = GoRouter(
     routes: <RouteBase>[
@@ -101,6 +103,10 @@ abstract class AppRoutes {
                 extra['onCategorySelected'] as ValueChanged<Category>,
           );
         },
+      ),
+      GoRoute(
+        path: kBudgetsPage,
+        builder: (context, state) => const BudgetsPage(),
       ),
 
       // GoRoute(

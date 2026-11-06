@@ -48,11 +48,13 @@ class OnBoarding2Page extends StatelessWidget {
                   Container(
                     height: 200.h,
                     decoration: BoxDecoration(
-                      color: AppColors.secondaryColor.withAlpha(40),
+                      // color: AppColors.secondaryColor.withAlpha(40),
+                      color: Colors.white.withAlpha(120),
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: AppColors.secondaryColor.withAlpha(40),
-                        width: 0.8.w,
+                        // color: AppColors.secondaryColor.withAlpha(40),
+                        color: Colors.white,
+                        // width: 0.8.w,
                       ),
                     ),
                   ),

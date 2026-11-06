@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 import 'package:masroof/core/utils/app_colors.dart';
@@ -26,22 +27,29 @@ class OnBoardingPage extends StatelessWidget {
                   Container(
                     height: 200.h,
                     decoration: BoxDecoration(
-                      color: AppColors.secondaryColor.withAlpha(40),
+                      // color: AppColors.secondaryColor.withAlpha(40),
+                      color: Colors.white.withAlpha(120),
+
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: AppColors.secondaryColor.withAlpha(40),
-                        width: 0.8.w,
+                        // color: AppColors.secondaryColor.withAlpha(40),
+                        color: Colors.white,
+                        // width: 0.8.w,
                       ),
                     ),
                   ),
                   Positioned(
-                    right: 8.w,
+                    right: 10.w,
                     left: 0,
-                    bottom: 33.h,
+                    bottom: 34.h,
                     child: Image.asset(
                       'assets/on_boarding_icons/hand_money.png',
                       height: 200.h,
                     ),
+                    // child: SvgPicture.asset(
+                    //   'assets/on_boarding_icons/hand_money.svg',
+                    //   height: 200.h,
+                    // ),
                   ),
                 ],
               ),
@@ -69,7 +77,7 @@ class OnBoardingPage extends StatelessWidget {
               CustomButton(
                 width: double.infinity,
                 borderRadius: 100,
-                colors:[ AppColors.primaryColor],
+                colors: [AppColors.primaryColor],
                 horizontalPadding: 20,
                 verticalPadding: 10,
                 onTap: () {

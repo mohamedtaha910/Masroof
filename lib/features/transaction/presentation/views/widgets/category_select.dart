@@ -159,17 +159,21 @@ class CategoryShip extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 12.w),
       decoration: BoxDecoration(
         color: isSelected
-            ? AppColors.primaryColor.withAlpha(200)
+            ? AppColors.primaryColor.withAlpha(180)
             : AppColors.neutralColor,
         borderRadius: BorderRadius.circular(10.r),
-        border: Border.all(color: Colors.grey.shade300.withAlpha(200)),
+        border: Border.all(
+          color: isSelected
+              ? AppColors.neutralColor
+              : Colors.grey.shade300.withAlpha(200),
+        ),
       ),
       child: Row(
         children: [
           Container(
             padding: EdgeInsets.all(8.h),
             decoration: BoxDecoration(
-              color: Colors.white.withAlpha(120),
+              color: isSelected ? Colors.white : Colors.white.withAlpha(120),
               shape: BoxShape.circle,
               border: Border.all(color: Colors.white),
             ),
@@ -184,7 +188,11 @@ class CategoryShip extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          Icon(Icons.chevron_right_rounded, size: 22.sp, color: Colors.black54),
+          Icon(
+            Icons.chevron_right_rounded,
+            size: 22.sp,
+            color: isSelected ? Colors.white : Colors.black54,
+          ),
         ],
       ),
     );
