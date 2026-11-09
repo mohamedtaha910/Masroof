@@ -34,9 +34,9 @@ class _BudgetMonthSelectorState extends State<BudgetMonthSelector> {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 1.h),
             decoration: BoxDecoration(
-              color: AppColors.primaryColor.withAlpha(150),
+              color: AppColors.neutralColor.withAlpha(180),
               borderRadius: BorderRadius.circular(120.r),
-              border: Border.all(color: Colors.grey.shade300),
+              border: Border.all(color: Colors.white),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,14 +45,14 @@ class _BudgetMonthSelectorState extends State<BudgetMonthSelector> {
                   onPressed: () => changeMonth(-1),
                   icon: Icon(
                     Icons.chevron_left_rounded,
-                    color: Colors.white,
+                    color: Colors.black,
                     size: 26.sp,
                   ),
                 ),
                 Text(
                   '${_monthName(selectedMonth.month)} ${selectedMonth.year}',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w600,
                   ),
@@ -61,7 +61,7 @@ class _BudgetMonthSelectorState extends State<BudgetMonthSelector> {
                   onPressed: () => changeMonth(1),
                   icon: Icon(
                     Icons.chevron_right_rounded,
-                    color: Colors.white,
+                    color: Colors.black,
                     size: 26.sp,
                   ),
                 ),

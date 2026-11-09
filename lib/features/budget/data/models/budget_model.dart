@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:masroof/core/utils/categories.dart';
-import 'package:masroof/features/budget/domain/budget_entity.dart';
+import 'package:masroof/features/budget/domain/entities/budget_entity.dart';
 
 class BudgetModel extends BudgetEntity {
   const BudgetModel({
