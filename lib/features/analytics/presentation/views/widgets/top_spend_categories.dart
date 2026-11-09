@@ -85,23 +85,18 @@ class TopSpendCategories extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 10.h),
-                ClipRRect(
+                LinearProgressIndicator(
+                  value: totalExpense == 0 ? 0 : category.value / totalExpense,
+                  minHeight: 6.h,
+                  // backgroundColor: const Color(0xFFEDF1F7),
+                  backgroundColor: AppColors.neutralColor,
+                  // backgroundColor: Colors.grey.shade200,
+                  valueColor: AlwaysStoppedAnimation(category.key.color),
                   borderRadius: BorderRadius.circular(20.r),
-                  child: LinearProgressIndicator(
-                    value: totalExpense == 0
-                        ? 0
-                        : category.value / totalExpense,
-                    minHeight: 7.h,
-                    // backgroundColor: const Color(0xFFEDF1F7),
-                    backgroundColor: AppColors.neutralColor,
-                    // backgroundColor: Colors.grey.shade200,
-                    valueColor: AlwaysStoppedAnimation(category.key.color),
-                  ),
                 ),
               ],
             ),
           );
-          ;
         },
       ),
     );

@@ -23,8 +23,8 @@ class EditTransactionPage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size(double.infinity, kToolbarHeight),
         child: CustomBlur(
-          sigmaX: 12,
-          sigmay: 12,
+          sigmaX: 8,
+          sigmay: 8,
           radius: 0,
           child: AppBar(
             title: Row(
@@ -51,7 +51,7 @@ class EditTransactionPage extends StatelessWidget {
 
             // centerTitle: true,
             automaticallyImplyLeading: false,
-            backgroundColor: AppColors.neutralColor.withAlpha(120),
+            backgroundColor: AppColors.neutralColor.withAlpha(150),
             // surfaceTintColor: AppColors.neutralColor,
             // backgroundColor: Colors.transparent,
             surfaceTintColor: Colors.transparent,

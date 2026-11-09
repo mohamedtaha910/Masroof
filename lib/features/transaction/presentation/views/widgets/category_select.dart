@@ -41,8 +41,8 @@ class _CategoriesSelectState extends State<CategoriesSelect> {
       appBar: PreferredSize(
         preferredSize: Size(double.infinity, kToolbarHeight),
         child: CustomBlur(
-          sigmaX: 12,
-          sigmay: 12,
+          sigmaX: 8,
+          sigmay: 8,
           radius: 0,
           child: AppBar(
             title: Row(
@@ -69,7 +69,7 @@ class _CategoriesSelectState extends State<CategoriesSelect> {
 
             // centerTitle: true,
             automaticallyImplyLeading: false,
-            backgroundColor: AppColors.neutralColor.withAlpha(100),
+            backgroundColor: AppColors.neutralColor.withAlpha(150),
             surfaceTintColor: Colors.transparent,
             bottom: PreferredSize(
               preferredSize: Size(double.infinity, 1.h),

@@ -40,7 +40,7 @@ class TransactionInfo extends StatelessWidget {
             color: Colors.orange.withAlpha(40),
           ),
           SizedBox(height: 14.h),
-          Horizintalline(),
+          CustomHorizintalline(),
           SizedBox(height: 14.h),
           InfoRow(
             label: 'TYPE',
@@ -65,7 +65,7 @@ class TransactionInfo extends StatelessWidget {
                 : AppColors.expenseColor.withAlpha(40),
           ),
           SizedBox(height: 14.h),
-          Horizintalline(),
+          CustomHorizintalline(),
           SizedBox(height: 14.h),
           InfoRow(
             label: 'CATEGORY',
@@ -80,17 +80,49 @@ class TransactionInfo extends StatelessWidget {
   }
 }
 
-class Horizintalline extends StatelessWidget {
-  const Horizintalline({super.key});
+class CustomHorizintalline extends StatelessWidget {
+  const CustomHorizintalline({
+    super.key,
+    this.color = Colors.white,
+    this.height = 1,
+  });
+  final Color color;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: 1.h,
+        height: height.h,
         // width: 250.w,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: color,
+          borderRadius: BorderRadius.circular(100),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomVerticalline extends StatelessWidget {
+  const CustomVerticalline({
+    super.key,
+    this.color = Colors.white,
+    this.height = 10,
+    this.width = 1.2,
+  });
+  final Color color;
+  final double height;
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        height: height.h,
+        width: width.w,
+        decoration: BoxDecoration(
+          color: color,
           borderRadius: BorderRadius.circular(100),
         ),
       ),

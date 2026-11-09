@@ -20,13 +20,13 @@ class TransactionDetails extends StatelessWidget {
         preferredSize: Size(double.infinity, kToolbarHeight),
         child: CustomBlur(
           radius: 0,
-          sigmaX: 12,
-          sigmay: 12,
+          sigmaX: 8,
+          sigmay: 8,
           child: AppBar(
             title: TransactionDeatilsAppBar(transaction: transaction),
             // centerTitle: true,
             automaticallyImplyLeading: false,
-            backgroundColor: AppColors.neutralColor.withAlpha(120),
+            backgroundColor: AppColors.neutralColor.withAlpha(150),
             surfaceTintColor: Colors.transparent,
             bottom: PreferredSize(
               preferredSize: Size(double.infinity, 1.h),

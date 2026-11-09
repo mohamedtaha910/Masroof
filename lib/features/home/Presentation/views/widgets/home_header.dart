@@ -62,7 +62,14 @@ class HomeHeader extends StatelessWidget {
               ),
 
               SizedBox(width: 6.w),
-              SvgPicture.asset('assets/icons/expense.svg', height: 8.h),
+              SvgPicture.asset(
+                'assets/icons/expense.svg',
+                height: 8.h,
+                colorFilter: ColorFilter.mode(
+                  AppColors.expenseColor.withAlpha(240),
+                  BlendMode.srcIn,
+                ),
+              ),
               SizedBox(width: 6.w),
 
               Text(

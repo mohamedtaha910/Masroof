@@ -20,8 +20,8 @@ class AddTransactionPage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size(double.infinity, kToolbarHeight),
         child: CustomBlur(
-          sigmaX: 12,
-          sigmay: 12,
+          sigmaX: 8,
+          sigmay: 8,
           radius: 0,
           child: AppBar(
             title: Row(
