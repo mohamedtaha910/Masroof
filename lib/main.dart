@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       },
       autoRebuild: true,
       builder: (context, child) {
-        DateTime now = DateTime.now();
+        // DateTime now = DateTime.now();
         return MultiBlocProvider(
           providers: [
             BlocProvider(
@@ -66,11 +66,7 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider(
               create: (context) =>
-                  AnalyticsCubit(
-                    analyticsRepo: AnalyticsRepoImpl(
-                      transactionRepo: getIt.get<TransactionRepoImpl>(),
-                    ),
-                  )..getAllTransactions()
+                  getIt.get<AnalyticsCubit>()..getAllTransactions(),
             ),
           ],
           child: MaterialApp.router(
@@ -85,7 +81,7 @@ class MyApp extends StatelessWidget {
 
               scaffoldBackgroundColor: AppColors.neutralColor,
               textTheme: GoogleFonts.poppinsTextTheme(
-                Theme.of(context).textTheme, 
+                Theme.of(context).textTheme,
               ),
 
               // fontFamily: 'Poppins',

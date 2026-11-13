@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:masroof/features/analytics/data/repos/analytics_repo_impl.dart';
+import 'package:masroof/features/analytics/domain/repos/analytics_repo.dart';
+import 'package:masroof/features/analytics/presentation/manager/analytics_cubit/analytics_cubit.dart';
 import 'package:masroof/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:masroof/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:masroof/features/home/Presentation/manager/home_cubit/home_cubit.dart';
@@ -50,4 +53,12 @@ void setUpServiceLocator() {
   getIt.registerSingleton<TransactionsCubit>(
     TransactionsCubit(transactionRepo: getIt.get<TransactionRepoImpl>()),
   );
+
+  getIt.registerSingleton<AnalyticsRepoImpl>(
+    AnalyticsRepoImpl(transactionRepo: getIt.get<TransactionRepoImpl>()),
+  );
+  getIt.registerSingleton<AnalyticsCubit>(
+    AnalyticsCubit(analyticsRepo: getIt.get<AnalyticsRepoImpl>()),
+  );
+  
 }
