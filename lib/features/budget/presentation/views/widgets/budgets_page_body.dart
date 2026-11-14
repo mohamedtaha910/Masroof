@@ -4,8 +4,8 @@ import 'package:masroof/features/budget/presentation/views/widgets/budget_header
 import 'package:masroof/features/budget/presentation/views/widgets/categories_budget_list.dart';
 
 class BudgetsPageBody extends StatelessWidget {
-  const BudgetsPageBody({super.key});
-
+  const BudgetsPageBody({super.key, required this.selectedMonth});
+  final DateTime selectedMonth ;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,7 +17,10 @@ class BudgetsPageBody extends StatelessWidget {
             SizedBox(height: 95.h),
             BudgetsHeader(),
             SizedBox(height: 16.h),
-            CategoriesBudgettList(),
+            CategoriesBudgettList(
+              budgets: [],
+              expensesByCategory: Map(),
+            ),
             SizedBox(height: 80.h),
           ],
         ),

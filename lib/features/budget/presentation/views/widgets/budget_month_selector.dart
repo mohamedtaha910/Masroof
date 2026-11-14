@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/widgets/custom_blur.dart';
 import 'package:masroof/core/widgets/custom_glass.dart';
 
 class BudgetMonthSelector extends StatefulWidget {
-  const BudgetMonthSelector({super.key});
+  const BudgetMonthSelector({super.key, required this.onMonthSelected});
+  final ValueChanged<DateTime> onMonthSelected;
 
   @override
   State<BudgetMonthSelector> createState() => _BudgetMonthSelectorState();
@@ -18,6 +18,7 @@ class _BudgetMonthSelectorState extends State<BudgetMonthSelector> {
   void changeMonth(int value) {
     setState(() {
       selectedMonth = DateTime(selectedMonth.year, selectedMonth.month + value);
+      widget.onMonthSelected(selectedMonth);
     });
   }
 
@@ -27,6 +28,7 @@ class _BudgetMonthSelectorState extends State<BudgetMonthSelector> {
       // padding: EdgeInsets.fromLTRB(40.w, 0, 40.w, 12.h),
       padding: EdgeInsetsGeometry.only(left: 30.w),
       child: CustomGlass(
+        // refractionWidth: 1,
         child: CustomBlur(
           radius: 120,
           sigmaX: 2,
@@ -34,9 +36,9 @@ class _BudgetMonthSelectorState extends State<BudgetMonthSelector> {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 1.h),
             decoration: BoxDecoration(
-              color: AppColors.neutralColor.withAlpha(180),
+              color: AppColors.neutralColor.withAlpha(80),
               borderRadius: BorderRadius.circular(120.r),
-              border: Border.all(color: Colors.white),
+              border: Border.all(color: Colors.white, width: 1.3.w),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

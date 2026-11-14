@@ -11,12 +11,13 @@ class CategoryBudgetItem extends StatelessWidget {
     required this.category,
     required this.spent,
     required this.onSetBudget,
-    this.budget,
+    this.budget, required this.left,
   });
 
   final Category category;
   final BudgetEntity? budget;
   final double spent;
+  final double? left;
   final VoidCallback onSetBudget;
 
   @override

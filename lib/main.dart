@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +11,12 @@ import 'package:masroof/core/utils/app_routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:masroof/core/utils/bloc_observer.dart';
 import 'package:masroof/core/utils/service_locator.dart';
-import 'package:masroof/features/analytics/data/repos/analytics_repo_impl.dart';
 import 'package:masroof/features/analytics/presentation/manager/analytics_cubit/analytics_cubit.dart';
 import 'package:masroof/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:masroof/features/auth/presentation/manager/cubit/auth_cubit.dart';
+import 'package:masroof/features/budget/data/data_sources/budget_remote_data_source_impl.dart';
+import 'package:masroof/features/budget/data/repos/budget_repo_impl.dart';
+import 'package:masroof/features/budget/presentation/manager/budget_cubit/budget_cubit.dart';
 import 'package:masroof/features/home/Presentation/manager/home_cubit/home_cubit.dart';
 import 'package:masroof/features/transaction/data/repos/transaction_repo_impl.dart';
 import 'package:masroof/features/transaction/presentation/manager/transaction_cubit/transaction_cubit.dart';
@@ -68,6 +72,17 @@ class MyApp extends StatelessWidget {
               create: (context) =>
                   getIt.get<AnalyticsCubit>()..getAllTransactions(),
             ),
+            BlocProvider(
+              create: (context) => BudgetsCubit(
+                budgetRepo: BudgetRepoImpl(
+                  transactionRepo: getIt.get<TransactionRepoImpl>(),
+                  remoteDataSource: BudgetRemoteDataSourceImpl(
+                    firestore: getIt.get<FirebaseFirestore>(),
+                    auth: getIt.get<FirebaseAuth>(),
+                  ),
+                ),
+              ),
+            ),
           ],
           child: MaterialApp.router(
             theme: ThemeData(
@@ -83,10 +98,8 @@ class MyApp extends StatelessWidget {
               textTheme: GoogleFonts.poppinsTextTheme(
                 Theme.of(context).textTheme,
               ),
-
               // fontFamily: 'Poppins',
             ),
-
             routerConfig: AppRoutes.router,
             debugShowCheckedModeBanner: false,
           ),

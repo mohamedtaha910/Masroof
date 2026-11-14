@@ -6,7 +6,13 @@ import 'package:masroof/features/budget/presentation/views/widgets/add_budget_sh
 import 'package:masroof/features/budget/presentation/views/widgets/category_budget_item.dart';
 
 class CategoriesBudgettList extends StatelessWidget {
-  const CategoriesBudgettList({super.key});
+  const CategoriesBudgettList({
+    super.key,
+    required this.budgets,
+    required this.expensesByCategory,
+  });
+  final List<BudgetEntity> budgets;
+  final Map<Category, double> expensesByCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +24,14 @@ class CategoriesBudgettList extends StatelessWidget {
       itemCount: categories.length,
       itemBuilder: (context, index) {
         final category = categories[index];
+        final categoryExpense = expensesByCategory[category] ?? 0;
+        final BudgetEntity? budget = budgets.firstWhere(
+          (element) => element.category == category,
+        );
+        final double? left = budget == null
+            ? null
+            : budget.limit - categoryExpense;
+
         return CategoryBudgetItem(
           onSetBudget: () {
             showModalBottomSheet(
@@ -39,14 +53,9 @@ class CategoriesBudgettList extends StatelessWidget {
             );
           },
           category: category,
-          spent: 1300,
-          budget: index > 5
-              ? null
-              : BudgetEntity(
-                  category: category,
-                  limit: 3000,
-                  month: DateTime.now(),
-                ),
+          left: left,
+          budget: budget,
+          spent: categoryExpense,
         );
       },
     );

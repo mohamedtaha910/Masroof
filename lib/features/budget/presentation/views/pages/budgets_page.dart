@@ -6,9 +6,15 @@ import 'package:masroof/features/budget/presentation/views/widgets/budget_app_ba
 import 'package:masroof/features/budget/presentation/views/widgets/budget_month_selector.dart';
 import 'package:masroof/features/budget/presentation/views/widgets/budgets_page_body.dart';
 
-class BudgetsPage extends StatelessWidget {
+class BudgetsPage extends StatefulWidget {
   const BudgetsPage({super.key});
 
+  @override
+  State<BudgetsPage> createState() => _BudgetsPageState();
+}
+
+class _BudgetsPageState extends State<BudgetsPage> {
+  DateTime selectedMonth = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,9 +43,15 @@ class BudgetsPage extends StatelessWidget {
         ),
       ),
 
-      body: BudgetsPageBody(),
+      body: BudgetsPageBody(selectedMonth: selectedMonth),
 
-      floatingActionButton: BudgetMonthSelector(),
+      floatingActionButton: BudgetMonthSelector(
+        onMonthSelected: (value) {
+          setState(() {
+            selectedMonth = value;
+          });
+        },
+      ),
     );
   }
 }

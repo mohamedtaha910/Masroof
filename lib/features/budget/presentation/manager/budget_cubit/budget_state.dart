@@ -1,3 +1,4 @@
+import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/features/budget/domain/entities/budget_entity.dart';
 
 abstract class BudgetsState {}
@@ -8,8 +9,9 @@ class BudgetsLoading extends BudgetsState {}
 
 class BudgetsSuccess extends BudgetsState {
   final List<BudgetEntity> budgets;
+   final Map<Category, double> expensesByCategory;
 
-  BudgetsSuccess({required this.budgets});
+  BudgetsSuccess({required this.budgets, required this.expensesByCategory});
 }
 
 class BudgetsError extends BudgetsState {
