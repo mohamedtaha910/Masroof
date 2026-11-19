@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/widgets/custom_blur.dart';
 import 'package:masroof/core/widgets/custom_glass.dart';
+import 'package:masroof/features/budget/presentation/manager/budget_cubit/budget_cubit.dart';
 
 class BudgetMonthSelector extends StatefulWidget {
   const BudgetMonthSelector({super.key, required this.onMonthSelected});
@@ -19,6 +21,7 @@ class _BudgetMonthSelectorState extends State<BudgetMonthSelector> {
     setState(() {
       selectedMonth = DateTime(selectedMonth.year, selectedMonth.month + value);
       widget.onMonthSelected(selectedMonth);
+      BlocProvider.of<BudgetsCubit>(context).getBudgets(month: selectedMonth);
     });
   }
 

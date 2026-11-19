@@ -57,7 +57,7 @@ class CategoryBudgetItem extends StatelessWidget {
             children: [
               Text(category.name, style: TextStyle(fontSize: 12.5.sp)),
               Text(
-                '£ ${spent.toStringAsFixed(0)} SPENT, No Limit',
+                '£ $spent SPENT, No Limit',
                 style: TextStyle(fontSize: 11.sp, color: AppColors.mutedColor),
               ),
             ],
@@ -158,7 +158,7 @@ class CategoryBudgetItem extends StatelessWidget {
         Row(
           children: [
             Text(
-              '£ ${spent.toStringAsFixed(0)} SPENT',
+              '£ $spent SPENT',
               style: TextStyle(fontSize: 11.sp, color: AppColors.mutedColor),
             ),
             const Spacer(),

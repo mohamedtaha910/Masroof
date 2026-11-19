@@ -8,20 +8,18 @@ class BudgetsCubit extends Cubit<BudgetsState> {
   final BudgetRepo budgetRepo;
 
   BudgetsCubit({required this.budgetRepo}) : super(BudgetsInitial());
-  
 
   Future<void> getBudgets({required DateTime month}) async {
-   emit(BudgetsLoading());
+    emit(BudgetsLoading());
 
     try {
-      final results =([
-        await budgetRepo.getBudgets(month: month),
-        budgetRepo.getExpensesByCategory(month: month),
-      ]);
+      // final results = ([
+      //   await budgetRepo.getBudgets(month: month),
+      //   budgetRepo.getExpensesByCategory(month: month),
+      // ]);
 
-      final budgets = results[0] as List<BudgetEntity>;
-      final expensesByCategory =
-          results[1] as Map<Category, double>;
+      final budgets = await budgetRepo.getBudgets(month: month);
+      final expensesByCategory = budgetRepo.getExpensesByCategory(month: month);
 
       emit(
         BudgetsSuccess(
@@ -32,7 +30,6 @@ class BudgetsCubit extends Cubit<BudgetsState> {
     } catch (e) {
       emit(BudgetsError(message: e.toString()));
     }
-  
   }
 
   Future<void> addBudget({required BudgetEntity budget}) async {
@@ -79,6 +76,4 @@ class BudgetsCubit extends Cubit<BudgetsState> {
       emit(BudgetOperationError(message: e.toString()));
     }
   }
-
-  
 }

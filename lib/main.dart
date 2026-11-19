@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
       },
       autoRebuild: true,
       builder: (context, child) {
-        // DateTime now = DateTime.now();
+        DateTime now = DateTime.now();
         return MultiBlocProvider(
           providers: [
             BlocProvider(
@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
                     auth: getIt.get<FirebaseAuth>(),
                   ),
                 ),
-              ),
+              )..getBudgets(month: now),
             ),
           ],
           child: MaterialApp.router(

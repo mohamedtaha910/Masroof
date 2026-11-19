@@ -11,7 +11,7 @@ class CategoriesBudgettList extends StatelessWidget {
     required this.budgets,
     required this.expensesByCategory,
   });
-  final List<BudgetEntity> budgets;
+  final List<BudgetEntity?> budgets;
   final Map<Category, double> expensesByCategory;
 
   @override
@@ -24,10 +24,13 @@ class CategoriesBudgettList extends StatelessWidget {
       itemCount: categories.length,
       itemBuilder: (context, index) {
         final category = categories[index];
-        final categoryExpense = expensesByCategory[category] ?? 0;
-        final BudgetEntity? budget = budgets.firstWhere(
-          (element) => element.category == category,
-        );
+        final double categoryExpense = expensesByCategory[category] ?? 0 ;
+        final BudgetEntity? budget = budgets.isEmpty
+            ? null
+            : budgets.firstWhere(
+                (element) => element?.category == category,
+                orElse: () => null,
+              );
         final double? left = budget == null
             ? null
             : budget.limit - categoryExpense;
