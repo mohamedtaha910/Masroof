@@ -56,6 +56,7 @@ class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
     final amount = double.parse(_amountController.text.trim());
 
     widget.onCreate(amount);
+
     Navigator.pop(context);
   }
 
@@ -199,10 +200,19 @@ class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
               // Selected Month
               Row(
                 children: [
-                  Icon(
-                    Iconsax.calendar,
-                    color: AppColors.secondaryColor,
-                    size: 20.sp,
+                  Container(
+                    padding: EdgeInsets.all(4.h),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: AppColors.mutedColor.withAlpha(200),
+                      ),
+                    ),
+                    child: Icon(
+                      Iconsax.calendar,
+                      color: AppColors.mutedColor,
+                      size: 20.sp,
+                    ),
                   ),
                   SizedBox(width: 8.w),
                   Text(

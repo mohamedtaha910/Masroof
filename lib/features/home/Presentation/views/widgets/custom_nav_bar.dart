@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/widgets/custom_glass.dart';
 
 class CustomNavBar extends StatelessWidget {
@@ -47,14 +48,16 @@ class CustomNavBar extends StatelessWidget {
       // width: width,
       height: height,
       child: CustomGlass(
+        refractionIndex: 1.05,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(100),
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
             child: Container(
               decoration: BoxDecoration(
-                // color: Colors.white.withAlpha(150),
-                color: Colors.grey.shade100.withAlpha(60),
+                // color: AppColors.mutedColor.withAlpha(10),
+                // color: Colors.grey.shade100.withAlpha(60),
+                color: AppColors.neutralColor.withAlpha(80),
                 borderRadius: BorderRadius.circular(100),
                 border: Border.all(color: Colors.white.withAlpha(220)),
               ),

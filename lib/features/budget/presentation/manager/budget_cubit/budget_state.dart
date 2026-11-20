@@ -10,8 +10,10 @@ class BudgetsLoading extends BudgetsState {}
 class BudgetsSuccess extends BudgetsState {
   final List<BudgetEntity> budgets;
    final Map<Category, double> expensesByCategory;
+   final double totalBudget;
+   final double totalSpent;
 
-  BudgetsSuccess({required this.budgets, required this.expensesByCategory});
+  BudgetsSuccess({required this.budgets, required this.expensesByCategory, required this.totalBudget, required this.totalSpent});
 }
 
 class BudgetsError extends BudgetsState {

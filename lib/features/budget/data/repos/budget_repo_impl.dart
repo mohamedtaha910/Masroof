@@ -8,12 +8,15 @@ import 'package:masroof/features/transaction/domain/repos/transaction_repo.dart'
 
 class BudgetRepoImpl implements BudgetRepo {
   final BudgetRemoteDataSource remoteDataSource;
-    final TransactionRepo transactionRepo;
+  final TransactionRepo transactionRepo;
 
-
-  BudgetRepoImpl({required this.remoteDataSource, required this.transactionRepo});
+  BudgetRepoImpl({
+    required this.remoteDataSource,
+    required this.transactionRepo,
+  });
 
   final List<TransactionEntity> allTransactions = [];
+  final List<BudgetEntity> budgets = [];
 
   @override
   Future<String> addBudget({required BudgetEntity budget}) async {
@@ -28,9 +31,12 @@ class BudgetRepoImpl implements BudgetRepo {
 
   @override
   Future<List<BudgetEntity>> getBudgets({required DateTime month}) async {
-    return await remoteDataSource.getBudgets(
+    final allbudgets = await remoteDataSource.getBudgets(
       month: DateTime(month.year, month.month),
     );
+    budgets.clear();
+    budgets.addAll(allbudgets);
+    return budgets;
   }
 
   @override
@@ -51,8 +57,7 @@ class BudgetRepoImpl implements BudgetRepo {
   }
 
   @override
-  Map<Category, double> getExpensesByCategory({required DateTime month , }) {
-    
+  Map<Category, double> getExpensesByCategory({required DateTime month}) {
     final startDate = DateTime(month.year, month.month);
     final endDate = DateTime(month.year, month.month + 1);
 
@@ -78,9 +83,38 @@ class BudgetRepoImpl implements BudgetRepo {
 
   @override
   Future<List<TransactionEntity>> getAllTransactions() async {
-     final transactions = await transactionRepo.getTransactions();
+    final transactions = await transactionRepo.getTransactions();
     allTransactions.clear();
     allTransactions.addAll(transactions);
     return allTransactions;
+  }
+
+  @override
+  double getTotlaBudget() {
+    double total = 0;
+    for (final budget in budgets) {
+      total += budget.limit;
+    }
+    return total;
+  }
+
+  @override
+  double getTotalSpent() {
+    final transactions = [];
+    List<Category> categories = [];
+    for (final budget in budgets) {
+      // if (!categories.contains(budget.category)) {
+        categories.add(budget.category);
+      // }
+    }
+    for (final transaction in allTransactions) {
+      if (categories.contains(transaction.category ) && transaction.date.month == budgets.first.month.month ) {
+        transactions.add(transaction);
+      }
+    }
+    return transactions.fold<double>(
+      0,
+      (previousValue, element) => previousValue + element.amount,
+    );
   }
 }

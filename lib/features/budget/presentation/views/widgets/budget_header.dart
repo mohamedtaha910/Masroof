@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:masroof/core/utils/app_colors.dart';
+import 'package:masroof/core/utils/helper.dart';
 import 'package:masroof/features/transaction/presentation/views/widgets/transaction_info.dart';
 
 class BudgetsHeader extends StatelessWidget {
-  const BudgetsHeader({super.key});
+  const BudgetsHeader({
+    super.key,
+    required this.totalBudget,
+    required this.totalSpent,
+  });
+  final double totalBudget;
+  final double totalSpent;
 
   @override
   Widget build(BuildContext context) {
+    final percent = totalBudget > 0
+        ? (totalSpent / totalBudget * 100).round()
+        : 0;
+
+    final progress = totalBudget > 0
+        ? (totalSpent / totalBudget).clamp(0.0, 1.0).toDouble()
+        : 0.0;
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -34,7 +48,8 @@ class BudgetsHeader extends StatelessWidget {
                   ),
                   SizedBox(height: 6.h),
                   Text(
-                    '£ 3,250.0',
+                    // '£ 3,250.0',
+                    '£ ${AppHelpers.formatNumber(totalBudget)}',
                     style: TextStyle(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.w700,
@@ -62,7 +77,7 @@ class BudgetsHeader extends StatelessWidget {
 
           SizedBox(height: 16.h),
           LinearProgressIndicator(
-            value: 0.64,
+            value: progress,
             // backgroundColor: AppColors.incomeColor.withAlpha(40),
             backgroundColor: AppColors.mutedColor.withAlpha(50),
             valueColor: AlwaysStoppedAnimation(
@@ -76,7 +91,7 @@ class BudgetsHeader extends StatelessWidget {
           Row(
             children: [
               Text(
-                '£ 1,750.0 OF £ 5,000.0',
+                '£ ${AppHelpers.formatNumber(totalSpent)} OF £ ${AppHelpers.formatNumber(totalBudget)}',
                 style: TextStyle(
                   fontSize: 11.sp,
                   // fontWeight: FontWeight.w700,
@@ -86,7 +101,7 @@ class BudgetsHeader extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                '64% USED',
+                '$percent% USED',
                 style: TextStyle(
                   fontSize: 11.sp,
                   // fontWeight: FontWeight.w700,

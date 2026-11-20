@@ -235,7 +235,11 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                   CustomButton(
                     width: double.infinity,
                     borderRadius: 100,
-                    colors: [AppColors.primaryColor],
+                    colors: [
+                      AppColors.primaryColor,
+                      // AppColors.primaryColor.withAlpha(190),
+                      // AppColors.primaryColor.withAlpha(230),
+                    ],
                     horizontalPadding: 20,
                     verticalPadding: 10,
                     onTap: () {

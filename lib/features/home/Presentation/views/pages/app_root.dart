@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:go_router/go_router.dart';
+import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/utils/app_routes.dart';
 import 'package:masroof/core/widgets/custom_blur.dart';
 import 'package:masroof/core/widgets/custom_glass.dart';
@@ -41,6 +42,7 @@ class AppRoot extends StatelessWidget {
                 ),
                 SizedBox(width: 10.w),
                 CustomGlass(
+                  refractionIndex: 1.04,
                   child: CustomBlur(
                     radius: 100,
                     sigmaX: 2,
@@ -57,7 +59,8 @@ class AppRoot extends StatelessWidget {
                           vertical: 13.h,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade100.withAlpha(60),
+                          // color: Colors.grey.shade100.withAlpha(60),
+                          color: AppColors.neutralColor.withAlpha(80),
                           borderRadius: BorderRadius.circular(100.r),
                           border: Border.all(
                             color: Colors.white.withAlpha(220),

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/features/auth/presentation/views/widgets/custom_loading_indicator.dart';
 import 'package:masroof/features/budget/domain/entities/budget_entity.dart';
 import 'package:masroof/features/budget/presentation/manager/budget_cubit/budget_cubit.dart';
 import 'package:masroof/features/budget/presentation/manager/budget_cubit/budget_state.dart';
+import 'package:masroof/features/budget/presentation/views/widgets/budget_error_page.dart';
 import 'package:masroof/features/budget/presentation/views/widgets/budget_header.dart';
+import 'package:masroof/features/budget/presentation/views/widgets/budgets_loading_shimer.dart';
 import 'package:masroof/features/budget/presentation/views/widgets/categories_budget_list.dart';
 
 class BudgetsPageBody extends StatelessWidget {
@@ -17,14 +20,14 @@ class BudgetsPageBody extends StatelessWidget {
     return BlocBuilder<BudgetsCubit, BudgetsState>(
       builder: (context, state) {
         if (state is BudgetsLoading) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [Center(child: CustomLoadingIndicator())],
-          );
+          return BudgetsLoadingShimer();
         } else if (state is BudgetsSuccess) {
           final List<BudgetEntity> budgets = state.budgets;
           final Map<Category, double> expensesByCategory =
               state.expensesByCategory;
+          final double totalBudget = state.totalBudget;
+          final double totalSpent = state.totalSpent;
+
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 14.w),
             child: SingleChildScrollView(
@@ -32,9 +35,13 @@ class BudgetsPageBody extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 95.h),
-                  BudgetsHeader(),
+                  BudgetsHeader(
+                    totalBudget: totalBudget,
+                    totalSpent: totalSpent,
+                  ),
                   SizedBox(height: 16.h),
                   CategoriesBudgettList(
+                    selectedMonth: selectedMonth,
                     budgets: budgets,
                     expensesByCategory: expensesByCategory,
                   ),
@@ -44,7 +51,7 @@ class BudgetsPageBody extends StatelessWidget {
             ),
           );
         } else {
-          return Center(child: Text('Connection Error'));
+          return BudgetErrorPage();
         }
       },
     );

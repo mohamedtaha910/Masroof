@@ -15,4 +15,7 @@ abstract class BudgetRepo {
   Map<Category, double> getExpensesByCategory({
     required DateTime month,
   });
+  double getTotlaBudget();
+  double getTotalSpent();
+
 }
