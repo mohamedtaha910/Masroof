@@ -4,6 +4,7 @@ import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/core/widgets/custom_button.dart';
 import 'package:masroof/features/budget/domain/entities/budget_entity.dart';
+import 'package:masroof/features/budget/presentation/views/widgets/pop_up_menu_button.dart';
 
 class CategoryBudgetItem extends StatelessWidget {
   const CategoryBudgetItem({
@@ -11,7 +12,8 @@ class CategoryBudgetItem extends StatelessWidget {
     required this.category,
     required this.spent,
     required this.onSetBudget,
-    this.budget, required this.left,
+    this.budget,
+    required this.left,
   });
 
   final Category category;
@@ -23,7 +25,7 @@ class CategoryBudgetItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+      padding: EdgeInsets.only(left: 12.w, top: 10.h, bottom: 10.h),
       margin: EdgeInsets.symmetric(vertical: 6.h),
       decoration: BoxDecoration(
         color: Colors.white.withAlpha(120),
@@ -81,6 +83,7 @@ class CategoryBudgetItem extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(width: 12.w),
       ],
     );
   }
@@ -97,84 +100,100 @@ class CategoryBudgetItem extends StatelessWidget {
     final remaining = limit - spent;
     final isOverBudget = spent > limit;
 
-    return Column(
+    return Row(
       children: [
-        Row(
-          children: [
-            _buildCategoryIcon(),
-            SizedBox(width: 7.w),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        Expanded(
+          child: Column(
+            children: [
+              Row(
                 children: [
-                  Text(category.name, style: TextStyle(fontSize: 12.5.sp)),
+                  _buildCategoryIcon(),
+                  SizedBox(width: 7.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          category.name,
+                          style: TextStyle(fontSize: 12.5.sp),
+                        ),
+                        Text(
+                          isOverBudget ? 'Over Budget' : 'On Track',
+                          style: TextStyle(
+                            fontSize: 11.sp,
+                            color: isOverBudget
+                                ? AppColors.expenseColor
+                                : AppColors.mutedColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Text(
-                    isOverBudget ? 'Over Budget' : 'On Track',
+                    limit.toStringAsFixed(0),
+                    style: TextStyle(fontSize: 12.5.sp),
+                  ),
+                  Text(
+                    ' £',
+                    style: TextStyle(
+                      fontSize: 12.5.sp,
+                      color: AppColors.incomeColor.withAlpha(180),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    '$percentage% USED',
+                    style: TextStyle(
+                      fontSize: 10.sp,
+                      color: AppColors.expenseColor.withAlpha(180),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 4.h),
+              LinearProgressIndicator(
+                value: progress,
+                backgroundColor: AppColors.mutedColor.withAlpha(50),
+                valueColor: AlwaysStoppedAnimation(
+                  isOverBudget
+                      ? AppColors.expenseColor
+                      : category.color.withAlpha(180),
+                ),
+                borderRadius: BorderRadius.circular(20.r),
+                minHeight: 4.h,
+              ),
+              SizedBox(height: 8.h),
+              Row(
+                children: [
+                  Text(
+                    '£ $spent SPENT',
                     style: TextStyle(
                       fontSize: 11.sp,
-                      color: isOverBudget
+                      color: AppColors.mutedColor,
+                    ),
+                  ),
+                  const Spacer(),
+                  Text(
+                    remaining >= 0
+                        ? '£ ${remaining.toStringAsFixed(0)} LEFT'
+                        : '£ ${remaining.abs().toStringAsFixed(0)} OVER',
+                    style: TextStyle(
+                      fontSize: 11.sp,
+                      color: remaining < 0
                           ? AppColors.expenseColor
                           : AppColors.mutedColor,
                     ),
                   ),
                 ],
               ),
-            ),
-            Text(limit.toStringAsFixed(0), style: TextStyle(fontSize: 12.5.sp)),
-            Text(
-              ' £',
-              style: TextStyle(
-                fontSize: 12.5.sp,
-                color: AppColors.incomeColor.withAlpha(180),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text(
-              '$percentage% USED',
-              style: TextStyle(
-                fontSize: 10.sp,
-                color: AppColors.expenseColor.withAlpha(180),
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: 4.h),
-        LinearProgressIndicator(
-          value: progress,
-          backgroundColor: AppColors.mutedColor.withAlpha(50),
-          valueColor: AlwaysStoppedAnimation(
-            isOverBudget
-                ? AppColors.expenseColor
-                : category.color.withAlpha(180),
+            ],
           ),
-          borderRadius: BorderRadius.circular(20.r),
-          minHeight: 4.h,
         ),
-        SizedBox(height: 8.h),
-        Row(
-          children: [
-            Text(
-              '£ $spent SPENT',
-              style: TextStyle(fontSize: 11.sp, color: AppColors.mutedColor),
-            ),
-            const Spacer(),
-            Text(
-              remaining >= 0
-                  ? '£ ${remaining.toStringAsFixed(0)} LEFT'
-                  : '£ ${remaining.abs().toStringAsFixed(0)} OVER',
-              style: TextStyle(
-                fontSize: 11.sp,
-                color: remaining < 0
-                    ? AppColors.expenseColor
-                    : AppColors.mutedColor,
-              ),
-            ),
-          ],
-        ),
+        PopUpMenuButton(onSetBudget: onSetBudget),
       ],
     );
   }
