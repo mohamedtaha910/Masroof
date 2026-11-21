@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:masroof/core/utils/app_colors.dart';
 
 class PopUpMenuButton extends StatelessWidget {
-  const PopUpMenuButton({super.key, required this.onSetBudget});
+  const PopUpMenuButton({super.key, required this.onSetBudget, required this.onDeleteBudget});
   final VoidCallback onSetBudget;
+  final VoidCallback onDeleteBudget;
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +14,11 @@ class PopUpMenuButton extends StatelessWidget {
       // padding: EdgeInsetsGeometry.all(0),
       // menuPadding: EdgeInsets.all(0),
       // shadowColor: Colors.white,
-      color: Colors.white.withAlpha(220),
+      // color: Colors.white.withAlpha(220)
+      color: AppColors.neutralColor.withAlpha(245),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
-        side: BorderSide(color: Colors.white),
+        side: BorderSide(color: Colors.white.withAlpha(180)),
       ),
       // popUpAnimationStyle: AnimationStyle(curve: ElasticInOutCurve()),
       position: PopupMenuPosition.under,
@@ -25,7 +28,7 @@ class PopUpMenuButton extends StatelessWidget {
         if (value == 'Edit') {
           onSetBudget();
         } else if (value == 'Delete') {
-          // Show Delete Confirmation Dialog
+          onDeleteBudget();
         }
       },
       itemBuilder: (context) => [
@@ -39,13 +42,16 @@ class PopUpMenuButton extends StatelessWidget {
             ],
           ),
         ),
-        const PopupMenuItem(
+        PopupMenuItem(
           value: 'Delete',
           child: Row(
             children: [
-              Icon(Iconsax.trash_copy, color: Colors.red),
-              SizedBox(width: 8),
-              Text('Delete'),
+              Icon(Iconsax.trash_copy, color: Colors.red.withAlpha(200)),
+              SizedBox(width: 10),
+              Text(
+                'Delete',
+                style: TextStyle(color: Colors.red.withAlpha(200)),
+              ),
             ],
           ),
         ),

@@ -33,7 +33,7 @@ void confirmDeleteTransaction(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  padding: EdgeInsets.all(14.h),
+                  padding: EdgeInsets.all(12.h),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100.r),
                     // color: Colors.white10,
@@ -58,7 +58,7 @@ void confirmDeleteTransaction(
                     ),
                   ),
                   // child: Icon(Iconsax.trash, color: Colors.white, size: 36),
-                  child: Image.asset('assets/icons/alert1.png', height: 42.h),
+                  child: Image.asset('assets/icons/alert1.png', height: 40.h),
                 ),
                 SizedBox(height: 24.h),
                 Text(
@@ -70,7 +70,7 @@ void confirmDeleteTransaction(
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 24.h),
+                SizedBox(height: 18.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

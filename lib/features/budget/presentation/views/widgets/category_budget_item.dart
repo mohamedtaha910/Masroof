@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:masroof/core/utils/app_colors.dart';
 import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/core/widgets/custom_button.dart';
 import 'package:masroof/features/budget/domain/entities/budget_entity.dart';
+import 'package:masroof/features/budget/presentation/manager/budget_cubit/budget_cubit.dart';
 import 'package:masroof/features/budget/presentation/views/widgets/pop_up_menu_button.dart';
 
 class CategoryBudgetItem extends StatelessWidget {
@@ -13,7 +15,7 @@ class CategoryBudgetItem extends StatelessWidget {
     required this.spent,
     required this.onSetBudget,
     this.budget,
-    required this.left,
+    required this.left, required this.onDeleteBudget,
   });
 
   final Category category;
@@ -21,6 +23,7 @@ class CategoryBudgetItem extends StatelessWidget {
   final double spent;
   final double? left;
   final VoidCallback onSetBudget;
+  final VoidCallback onDeleteBudget;
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +196,7 @@ class CategoryBudgetItem extends StatelessWidget {
             ],
           ),
         ),
-        PopUpMenuButton(onSetBudget: onSetBudget),
+        PopUpMenuButton(onSetBudget: onSetBudget , onDeleteBudget: onDeleteBudget),
       ],
     );
   }

@@ -7,6 +7,7 @@ import 'package:masroof/features/budget/domain/entities/budget_entity.dart';
 import 'package:masroof/features/budget/presentation/manager/budget_cubit/budget_cubit.dart';
 import 'package:masroof/features/budget/presentation/views/widgets/add_budget_sheet.dart';
 import 'package:masroof/features/budget/presentation/views/widgets/category_budget_item.dart';
+import 'package:masroof/features/budget/presentation/views/widgets/confirm_delete_budget.dart';
 
 class CategoriesBudgettList extends StatelessWidget {
   const CategoriesBudgettList({
@@ -45,6 +46,12 @@ class CategoriesBudgettList extends StatelessWidget {
             : budget.limit - categoryExpense;
 
         return CategoryBudgetItem(
+          onDeleteBudget: () {
+            // showAboutDialog(context: context)
+            if (budget != null) {
+              confirmDeleteBudget(context, budget: budget);
+            }
+          },
           onSetBudget: () {
             showModalBottomSheet(
               context: context,
