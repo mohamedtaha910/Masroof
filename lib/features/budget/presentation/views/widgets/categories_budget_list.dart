@@ -46,6 +46,7 @@ class CategoriesBudgettList extends StatelessWidget {
             : budget.limit - categoryExpense;
 
         return CategoryBudgetItem(
+          selectedMonth: selectedMonth,
           onDeleteBudget: () {
             // showAboutDialog(context: context)
             if (budget != null) {

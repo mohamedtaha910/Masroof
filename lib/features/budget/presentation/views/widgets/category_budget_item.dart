@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:go_router/go_router.dart';
 import 'package:masroof/core/utils/app_colors.dart';
+import 'package:masroof/core/utils/app_routes.dart';
 import 'package:masroof/core/utils/categories.dart';
+import 'package:masroof/core/utils/helper.dart';
 import 'package:masroof/core/widgets/custom_button.dart';
 import 'package:masroof/features/budget/domain/entities/budget_entity.dart';
 import 'package:masroof/features/budget/presentation/manager/budget_cubit/budget_cubit.dart';
@@ -15,9 +18,12 @@ class CategoryBudgetItem extends StatelessWidget {
     required this.spent,
     required this.onSetBudget,
     this.budget,
-    required this.left, required this.onDeleteBudget,
+    required this.left,
+    required this.onDeleteBudget,
+    required this.selectedMonth,
   });
 
+  final DateTime selectedMonth;
   final Category category;
   final BudgetEntity? budget;
   final double spent;
@@ -35,7 +41,7 @@ class CategoryBudgetItem extends StatelessWidget {
         border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(12.r),
       ),
-      child: budget == null ? _buildNoBudgetItem() : _buildBudgetItem(),
+      child: budget == null ? _buildNoBudgetItem() : _buildBudgetItem(context),
     );
   }
 
@@ -61,6 +67,7 @@ class CategoryBudgetItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(category.name, style: TextStyle(fontSize: 12.5.sp)),
+              SizedBox(height: 1.h),
               Text(
                 '£ $spent SPENT, No Limit',
                 style: TextStyle(fontSize: 11.sp, color: AppColors.mutedColor),
@@ -91,7 +98,7 @@ class CategoryBudgetItem extends StatelessWidget {
     );
   }
 
-  Widget _buildBudgetItem() {
+  Widget _buildBudgetItem(BuildContext context) {
     final limit = budget!.limit;
 
     final progress = limit > 0
@@ -102,6 +109,8 @@ class CategoryBudgetItem extends StatelessWidget {
 
     final remaining = limit - spent;
     final isOverBudget = spent > limit;
+    final isReachBudget = spent == limit;
+    final isAlmost = percentage >= 75 && percentage < 100;
 
     return Row(
       children: [
@@ -120,12 +129,21 @@ class CategoryBudgetItem extends StatelessWidget {
                           category.name,
                           style: TextStyle(fontSize: 12.5.sp),
                         ),
+                        SizedBox(height: 1.h),
                         Text(
-                          isOverBudget ? 'Over Budget' : 'On Track',
+                          isOverBudget
+                              ? 'Over Budget'
+                              : isReachBudget
+                              ? 'Budget Reached'
+                              : isAlmost
+                              ? 'Almost There'
+                              : 'On Track',
                           style: TextStyle(
                             fontSize: 11.sp,
-                            color: isOverBudget
-                                ? AppColors.expenseColor
+                            color: isOverBudget || isReachBudget
+                                ? AppColors.expenseColor.withAlpha(180)
+                                : isAlmost
+                                ? Colors.orange.withAlpha(180)
                                 : AppColors.mutedColor,
                           ),
                         ),
@@ -152,7 +170,11 @@ class CategoryBudgetItem extends StatelessWidget {
                     '$percentage% USED',
                     style: TextStyle(
                       fontSize: 10.sp,
-                      color: AppColors.expenseColor.withAlpha(180),
+                      color: isOverBudget || isReachBudget
+                          ? AppColors.expenseColor.withAlpha(180)
+                          : isAlmost
+                          ? Colors.orange.withAlpha(180)
+                          : AppColors.mutedColor,
                     ),
                   ),
                 ],
@@ -163,7 +185,7 @@ class CategoryBudgetItem extends StatelessWidget {
                 backgroundColor: AppColors.mutedColor.withAlpha(50),
                 valueColor: AlwaysStoppedAnimation(
                   isOverBudget
-                      ? AppColors.expenseColor
+                      ? AppColors.expenseColor.withAlpha(220)
                       : category.color.withAlpha(180),
                 ),
                 borderRadius: BorderRadius.circular(20.r),
@@ -182,12 +204,12 @@ class CategoryBudgetItem extends StatelessWidget {
                   const Spacer(),
                   Text(
                     remaining >= 0
-                        ? '£ ${remaining.toStringAsFixed(0)} LEFT'
-                        : '£ ${remaining.abs().toStringAsFixed(0)} OVER',
+                        ? '£ ${AppHelpers.formatNumber(remaining)} LEFT'
+                        : '£ ${AppHelpers.formatNumber(remaining.abs())} OVER',
                     style: TextStyle(
                       fontSize: 11.sp,
                       color: remaining < 0
-                          ? AppColors.expenseColor
+                          ? AppColors.expenseColor.withAlpha(180)
                           : AppColors.mutedColor,
                     ),
                   ),
@@ -196,179 +218,22 @@ class CategoryBudgetItem extends StatelessWidget {
             ],
           ),
         ),
-        PopUpMenuButton(onSetBudget: onSetBudget , onDeleteBudget: onDeleteBudget),
+        PopUpMenuButton(
+          onBudgetInfo: () {
+            GoRouter.of(context).push(
+              AppRoutes.kBudgetDetailsPage,
+              extra: {
+                'month': selectedMonth,
+                'category': category,
+                'budget': budget,
+                'spent': spent,
+              },
+            );
+          },
+          onSetBudget: onSetBudget,
+          onDeleteBudget: onDeleteBudget,
+        ),
       ],
     );
   }
 }
-
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-// import 'package:masroof/core/utils/app_colors.dart';
-// import 'package:masroof/core/utils/categories.dart';
-// import 'package:masroof/core/widgets/custom_button.dart';
-
-// class CategoryBudgetItem extends StatelessWidget {
-//   const CategoryBudgetItem({
-//     super.key,
-//     required this.category,
-//     required this.isBudget,
-//   });
-//   final bool isBudget;
-//   final Category category;
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
-//       margin: EdgeInsets.symmetric(vertical: 6.h),
-//       decoration: BoxDecoration(
-//         color: Colors.white.withAlpha(120),
-//         border: Border.all(color: Colors.white),
-//         borderRadius: BorderRadius.all(Radius.circular(12.r)),
-//       ),
-//       child: !isBudget
-//           ? Row(
-//               children: [
-//                 Container(
-//                   padding: EdgeInsets.all(8),
-
-//                   decoration: BoxDecoration(
-//                     color: AppColors.neutralColor,
-//                     border: Border.all(color: Colors.white),
-//                     borderRadius: BorderRadius.all(Radius.circular(120.r)),
-//                   ),
-//                   child: Image.asset(category.iconPath, height: 22.h),
-//                 ),
-//                 SizedBox(width: 7.h),
-//                 Column(
-//                   mainAxisAlignment: MainAxisAlignment.start,
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Text(category.name, style: TextStyle(fontSize: 12.5.sp)),
-//                     Text(
-//                       '£ 1300 SPENT, No Limit',
-//                       style: TextStyle(
-//                         fontSize: 11.sp,
-//                         color: AppColors.mutedColor,
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//                 Spacer(),
-//                 CustomButton(
-//                   // width: ,
-//                   borderRadius: 8,
-//                   colors: [
-//                     AppColors.primaryColor.withAlpha(180),
-//                     AppColors.primaryColor.withAlpha(220),
-//                   ],
-//                   horizontalPadding: 16,
-//                   verticalPadding: 4,
-//                   onTap: () {},
-//                   child: Text(
-//                     'Set',
-//                     style: TextStyle(
-//                       fontSize: 12.sp,
-//                       fontWeight: FontWeight.bold,
-//                       color: Colors.white,
-//                     ),
-//                     textAlign: TextAlign.center,
-//                   ),
-//                 ),
-//               ],
-//             )
-//           : Column(
-//               children: [
-//                 Row(
-//                   children: [
-//                     Container(
-//                       padding: EdgeInsets.all(8),
-
-//                       decoration: BoxDecoration(
-//                         color: AppColors.neutralColor,
-//                         border: Border.all(color: Colors.white),
-//                         borderRadius: BorderRadius.all(Radius.circular(120.r)),
-//                       ),
-//                       child: Image.asset(category.iconPath, height: 22.h),
-//                     ),
-//                     SizedBox(width: 7.h),
-//                     Column(
-//                       mainAxisAlignment: MainAxisAlignment.start,
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         Text(
-//                           category.name,
-//                           style: TextStyle(fontSize: 12.5.sp),
-//                         ),
-//                         Text(
-//                           'On Track',
-//                           style: TextStyle(
-//                             fontSize: 11.sp,
-//                             color: AppColors.mutedColor,
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                     Spacer(),
-//                     Text('3000', style: TextStyle(fontSize: 12.5.sp)),
-//                     Text(
-//                       ' £',
-//                       style: TextStyle(
-//                         fontSize: 12.5.sp,
-//                         color: AppColors.incomeColor.withAlpha(180),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//                 // SizedBox(height: 3.h),
-//                 Row(
-//                   mainAxisAlignment: MainAxisAlignment.end,
-//                   children: [
-//                     Text(
-//                       '44% USED',
-//                       style: TextStyle(
-//                         fontSize: 10.sp,
-//                         // fontWeight: FontWeight.w700,
-//                         color: AppColors.expenseColor.withAlpha(180),
-//                         // color: textColor,
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//                 SizedBox(height: 4.h),
-//                 LinearProgressIndicator(
-//                   value: 0.44,
-
-//                   backgroundColor: AppColors.mutedColor.withAlpha(50),
-//                   valueColor: AlwaysStoppedAnimation(
-//                     category.color.withAlpha(180),
-//                   ),
-//                   borderRadius: BorderRadius.circular(20.r),
-//                   minHeight: 4.h,
-//                 ),
-//                 SizedBox(height: 8.h),
-//                 Row(
-//                   children: [
-//                     Text(
-//                       '£ 1300 SPENT',
-//                       style: TextStyle(
-//                         fontSize: 11.sp,
-//                         color: AppColors.mutedColor,
-//                       ),
-//                     ),
-//                     Spacer(),
-//                     Text(
-//                       '£ 1800 LEFT',
-//                       style: TextStyle(
-//                         fontSize: 11.sp,
-//                         color: AppColors.mutedColor,
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//                 // SizedBox(height: 8.h),
-//               ],
-//             ),
-//     );
-//   }
-// }

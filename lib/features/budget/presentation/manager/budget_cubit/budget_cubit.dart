@@ -1,7 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/features/budget/domain/entities/budget_entity.dart';
 import 'package:masroof/features/budget/domain/repos/budget_repo.dart';
 import 'package:masroof/features/budget/presentation/manager/budget_cubit/budget_state.dart';
+import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 
 class BudgetsCubit extends Cubit<BudgetsState> {
   final BudgetRepo budgetRepo;
@@ -27,6 +29,7 @@ class BudgetsCubit extends Cubit<BudgetsState> {
       final totalBudget = budgetRepo.getTotlaBudget();
       final totalSpent = budgetRepo.getTotalSpent();
 
+
       emit(
         BudgetsSuccess(
           totalSpent: totalSpent,
@@ -39,6 +42,16 @@ class BudgetsCubit extends Cubit<BudgetsState> {
       emit(BudgetsError(message: e.toString()));
     }
   }
+  List<TransactionEntity> getTransactionsByCategory({
+    required Category category,
+    required DateTime month,
+  }) {
+    return budgetRepo.getTransactionsByCategory(
+      category: category,
+      month: month,
+    );
+  }
+ 
 
   Future<void> addBudget({required BudgetEntity budget}) async {
     emit(BudgetsLoading());

@@ -90,6 +90,31 @@ class BudgetRepoImpl implements BudgetRepo {
   }
 
   @override
+  List<TransactionEntity> getTransactionsByCategory({
+    required Category category,
+    required DateTime month,
+  }) {
+    final startDate = DateTime(month.year, month.month);
+    final endDate = DateTime(month.year, month.month + 1);
+
+    final transactions = allTransactions.where((transaction) {
+      final isExpense = transaction.type == TransactionType.expense;
+
+      final isSameCategory = transaction.category.name == category.name;
+
+      final isInSelectedMonth =
+          !transaction.date.isBefore(startDate) &&
+          transaction.date.isBefore(endDate);
+
+      return isExpense && isSameCategory && isInSelectedMonth;
+    }).toList();
+
+    transactions.sort((a, b) => b.date.compareTo(a.date));
+
+    return transactions;
+  }
+
+  @override
   double getTotlaBudget() {
     double total = 0;
     for (final budget in budgets) {

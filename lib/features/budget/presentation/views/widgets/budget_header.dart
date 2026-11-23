@@ -22,6 +22,11 @@ class BudgetsHeader extends StatelessWidget {
     final progress = totalBudget > 0
         ? (totalSpent / totalBudget).clamp(0.0, 1.0).toDouble()
         : 0.0;
+
+        final remaining = totalBudget - totalSpent;
+    final isOverBudget = totalSpent > totalBudget;
+    final isReachBudget = totalSpent == totalBudget;
+    final isAlmost = percent >= 85;
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -49,7 +54,7 @@ class BudgetsHeader extends StatelessWidget {
                   SizedBox(height: 6.h),
                   Text(
                     // '£ 3,250.0',
-                    '£ ${AppHelpers.formatNumber(totalBudget)}',
+                    '£ ${AppHelpers.formatNumber(totalBudget - totalSpent)}',
                     style: TextStyle(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.w700,

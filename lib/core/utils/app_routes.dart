@@ -4,6 +4,8 @@ import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/features/auth/presentation/views/pages/login_page.dart';
 import 'package:masroof/features/auth/presentation/views/pages/sign_up_page.dart';
 import 'package:masroof/features/analytics/presentation/views/pages/analytics_page.dart';
+import 'package:masroof/features/budget/domain/entities/budget_entity.dart';
+import 'package:masroof/features/budget/presentation/views/pages/budget_details_page.dart';
 import 'package:masroof/features/budget/presentation/views/pages/budgets_page.dart';
 import 'package:masroof/features/home/Presentation/views/pages/app_root.dart';
 import 'package:masroof/features/home/Presentation/views/pages/home_page.dart';
@@ -33,6 +35,7 @@ abstract class AppRoutes {
   static const kEditTransactionPage = '/EditTransactionPage';
   static const kCategoriesSelect = '/categoriesSelect';
   static const kBudgetsPage = '/budgetsPage';
+  static const kBudgetDetailsPage = '/budgetdetailspage';
 
   static final GoRouter router = GoRouter(
     routes: <RouteBase>[
@@ -106,7 +109,22 @@ abstract class AppRoutes {
       ),
       GoRoute(
         path: kBudgetsPage,
-        builder: (context, state) => const BudgetsPage(),
+        pageBuilder: (context, state) =>
+            MaterialPage(child: const BudgetsPage()),
+      ),
+      GoRoute(
+        path: kBudgetDetailsPage,
+        pageBuilder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>;
+          return MaterialPage(
+            child: BudgetDetailsPage(
+              category: extra['category'] as Category,
+              selectedMonth: extra['month'] as DateTime,
+              spent: extra['spent'] as double,
+              budget: extra['budget'] as BudgetEntity?,
+            ),
+          );
+        },
       ),
 
       // GoRoute(
@@ -144,7 +162,7 @@ abstract class AppRoutes {
           return AppRoot(navigationShell: navigationShell);
         },
         branches: [
-          // Tab 0: Dashboard
+          // Tab 0: Home
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -164,7 +182,7 @@ abstract class AppRoutes {
             ],
           ),
 
-          // Tab 2: Profile
+          // Tab 2: Analytics
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -173,6 +191,7 @@ abstract class AppRoutes {
               ),
             ],
           ),
+          // Tab 3: Profile
           StatefulShellBranch(
             routes: [
               GoRoute(
