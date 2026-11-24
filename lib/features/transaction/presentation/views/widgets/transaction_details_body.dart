@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:masroof/core/utils/app_colors.dart';
+import 'package:masroof/core/utils/helper.dart';
 import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 import 'package:masroof/features/transaction/presentation/views/widgets/info_row.dart';
 import 'package:masroof/features/transaction/presentation/views/widgets/transaction_details_header.dart';
@@ -24,7 +25,7 @@ class TransactionDetailsBoby extends StatelessWidget {
             TransactionDetailsHeader(
               category: transaction.category,
               title: transaction.title,
-              amout: transaction.amount.toString(),
+              amout: AppHelpers.formatNumber(transaction.amount),
               type: transaction.type,
             ),
             SizedBox(height: 16.h),

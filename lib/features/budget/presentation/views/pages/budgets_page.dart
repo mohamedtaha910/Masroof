@@ -27,6 +27,8 @@ class _BudgetsPageState extends State<BudgetsPage> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('MediaQuery size: ${MediaQuery.sizeOf(context)}');
+    debugPrint('ScreenUtil size: ${ScreenUtilPlus().screenWidth}');
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(

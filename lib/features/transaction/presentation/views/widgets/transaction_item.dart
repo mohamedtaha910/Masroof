@@ -21,8 +21,8 @@ class TransactionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isIncome = transaction.type == TransactionType.income;
 
-    // debugPrint('MediaQuery size: ${MediaQuery.sizeOf(context)}');
-    // debugPrint('ScreenUtil size: ${ScreenUtilPlus().screenWidth}');
+    debugPrint('MediaQuery size: ${MediaQuery.sizeOf(context)}');
+    debugPrint('ScreenUtil size: ${ScreenUtilPlus().screenWidth}');
     return GestureDetector(
       onTap: () => GoRouter.of(
         context,
@@ -127,9 +127,14 @@ class TransactionItem extends StatelessWidget {
             Row(
               children: [
                 SizedBox(
-                  width: 64.w,
+                  // width: 64.w,
                   child: Text(
-                    AppHelpers.formatNumber(transaction.amount),
+                    transaction.amount.toString().length > 8
+                        ? AppHelpers.formatNumber(
+                                transaction.amount,
+                              ).substring(0, 7) +
+                              '...'
+                        : AppHelpers.formatNumber(transaction.amount),
 
                     style: TextStyle(fontSize: 12.5.sp),
                     textAlign: TextAlign.end,

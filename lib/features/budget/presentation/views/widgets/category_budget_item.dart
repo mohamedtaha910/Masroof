@@ -143,7 +143,7 @@ class CategoryBudgetItem extends StatelessWidget {
                             color: isOverBudget || isReachBudget
                                 ? AppColors.expenseColor.withAlpha(180)
                                 : isAlmost
-                                ? Colors.orange.withAlpha(180)
+                                ? Colors.orange.withAlpha(190)
                                 : AppColors.mutedColor,
                           ),
                         ),

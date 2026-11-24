@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:masroof/core/utils/app_colors.dart';
@@ -6,8 +7,11 @@ import 'package:masroof/core/utils/categories.dart';
 import 'package:masroof/core/utils/helper.dart';
 import 'package:masroof/core/widgets/custom_blur.dart';
 import 'package:masroof/features/budget/domain/entities/budget_entity.dart';
+import 'package:masroof/features/budget/presentation/manager/budget_cubit/budget_cubit.dart';
 import 'package:masroof/features/budget/presentation/views/widgets/budget_details_app_bar.dart';
 import 'package:masroof/features/budget/presentation/views/widgets/category_header.dart';
+import 'package:masroof/features/budget/presentation/views/widgets/category_transaction.dart';
+import 'package:masroof/features/transaction/domain/entities/tranaction_entity.dart';
 import 'package:masroof/features/transaction/presentation/views/widgets/transaction_info.dart';
 
 class BudgetDetailsPage extends StatelessWidget {
@@ -75,6 +79,11 @@ class BudgetDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('MediaQuery size: ${MediaQuery.sizeOf(context)}');
+    debugPrint('ScreenUtil size: ${ScreenUtilPlus().screenWidth}');
+    List<TransactionEntity> transactions = BlocProvider.of<BudgetsCubit>(
+      context,
+    ).getTransactionsByCategory(category: category, month: selectedMonth);
     return Scaffold(
       extendBodyBehindAppBar: true,
       // backgroundColor: AppColors.neutralColor,
@@ -102,185 +111,34 @@ class BudgetDetailsPage extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 80.h),
-            _buildCategoryHeader(),
-            // CategoryHeader(
-            //   category: category,
-            //   monthName: monthName,
-            //   statusColor: statusColor,
-            //   budgetStatus: budgetStatus,
-            // ),
-            SizedBox(height: 20.h),
+            // _buildCategoryHeader(),
+            CategoryHeader(
+              limit: budget != null ? '${budget?.limit} £' : 'No Limit',
+              category: category,
+              monthName: monthName,
+              statusColor: statusColor,
+              budgetStatus: budgetStatus,
+            ),
+            SizedBox(height: 12.h),
             _buildOverviewCard(),
-            SizedBox(height: 20.h),
+            SizedBox(height: 16.h),
             _buildSectionTitle('Budget Breakdown'),
             SizedBox(height: 12.h),
             _buildBreakdown(),
-            SizedBox(height: 20.h),
+            SizedBox(height: 16.h),
             _buildStatusCard(),
+            SizedBox(height: 16.h),
+            _buildSectionTitle('Recent Transaction'),
+            SizedBox(height: 12.h),
+            CategoryTransaction(transactions: transactions),
             SizedBox(height: 20.h),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildCategoryHeader() {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(16.r),
-      decoration: BoxDecoration(
-        color: Colors.white.withAlpha(120),
-        borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: Colors.white),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: EdgeInsets.all(14.w),
-                decoration: BoxDecoration(
-                  // color: category.color.withAlpha(25),
-                  border: Border.all(color: Colors.white),
-                  borderRadius: BorderRadius.circular(200.r),
-                ),
-                child: Image.asset(category.iconPath, height: 26.h),
-              ),
-              SizedBox(width: 14.w),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      category.name,
-                      style: TextStyle(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primaryColor,
-                      ),
-                    ),
-                    SizedBox(height: 5.h),
-                    Text(
-                      monthName,
-                      style: TextStyle(
-                        fontSize: 11.sp,
-                        color: AppColors.mutedColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
-                decoration: BoxDecoration(
-                  color: statusColor.withAlpha(20),
-                  borderRadius: BorderRadius.circular(20.r),
-                  border: Border.all(color: statusColor.withAlpha(30)),
-                ),
-                child: Text(
-                  budgetStatus,
-                  style: TextStyle(
-                    fontSize: 10.sp,
-                    fontWeight: FontWeight.w600,
-                    color: statusColor,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 16.h),
-          CustomHorizintalline(),
-          SizedBox(height: 16.h),
-
-          Row(
-            children: [
-              Column(
-                children: [
-                  Text(
-                    'Total Spent',
-                    style: TextStyle(
-                      fontSize: 13.sp,
-                      color: AppColors.mutedColor,
-                    ),
-                  ),
-                  SizedBox(height: 8.h),
-                  Text(
-                    '£ ${AppHelpers.formatNumber(spent)}',
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-              Spacer(),
-
-              // Container(
-              //   padding: EdgeInsets.all(14.w),
-              //   decoration: BoxDecoration(
-              //     color: AppColors.neutralColor,
-              //     border: Border.all(color: Colors.white),
-              //     borderRadius: BorderRadius.circular(200.r),
-              //   ),
-              //   child: Image.asset(category.iconPath, height: 27.h),
-              // ),
-            ],
-          ),
-          SizedBox(height: 20.h),
-          if (hasBudget) ...[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '${percentage.round()}% Used',
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.mutedColor,
-                  ),
-                ),
-                Text(
-                  '£ ${AppHelpers.formatNumber(limit)}',
-                  style: TextStyle(fontSize: 12.sp, color: Colors.black54),
-                ),
-              ],
-            ),
-            SizedBox(height: 9.h),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.r),
-              child: LinearProgressIndicator(
-                value: progress,
-                minHeight: 7.h,
-                backgroundColor: AppColors.neutralColor,
-                valueColor: AlwaysStoppedAnimation(
-                  percentage > 100 ? AppColors.expenseColor : category.color,
-                ),
-              ),
-            ),
-            SizedBox(height: 10.h),
-            Text(
-              remaining >= 0
-                  ? '£ ${AppHelpers.formatNumber(remaining)} remaining'
-                  : '£ ${AppHelpers.formatNumber(remaining.abs())} over budget',
-              style: TextStyle(fontSize: 12.sp, color: AppColors.mutedColor),
-            ),
-          ] else
-            Text(
-              'You have spent this amount without setting a budget for this category.',
-              style: TextStyle(
-                fontSize: 12.sp,
-                height: 1.5,
-                color: AppColors.mutedColor,
-              ),
-            ),
-        ],
       ),
     );
   }
@@ -291,31 +149,44 @@ class BudgetDetailsPage extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [AppColors.primaryColor, AppColors.secondaryColor],
+          // colors: [AppColors.primaryColor, AppColors.secondaryColor],
+          colors: [
+            Colors.white.withAlpha(200),
+            Colors.white.withAlpha(150),
+            Colors.white.withAlpha(130),
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(12.r),
-        // border: Border.all(color: Colors.),
+        border: Border.all(color: Colors.white),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Total Spent',
-            style: TextStyle(
-              fontSize: 13.sp,
-              color: Colors.white.withAlpha(180),
-            ),
-          ),
-          SizedBox(height: 8.h),
-          Text(
-            '£ ${AppHelpers.formatNumber(spent)}',
-            style: TextStyle(
-              fontSize: 30.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+          Row(
+            children: [
+              Column(
+                children: [
+                  Text(
+                    'TOTAL SPENT',
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: AppColors.mutedColor,
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    '£ ${AppHelpers.formatNumber(spent)}',
+                    style: TextStyle(
+                      fontSize: 22.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
           SizedBox(height: 20.h),
           if (hasBudget) ...[
@@ -323,43 +194,38 @@ class BudgetDetailsPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '${percentage.round()}% Used',
+                  '${percentage.round()}% USED',
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                    color: AppColors.mutedColor,
                   ),
                 ),
                 Text(
-                  '£ ${AppHelpers.formatNumber(limit)}',
+                  '${AppHelpers.formatNumber(limit)} £',
                   style: TextStyle(
                     fontSize: 12.sp,
-                    color: Colors.white.withAlpha(180),
+                    color: AppColors.mutedColor,
                   ),
                 ),
               ],
             ),
             SizedBox(height: 9.h),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.r),
-              child: LinearProgressIndicator(
-                value: progress,
-                minHeight: 8.h,
-                backgroundColor: Colors.white.withAlpha(35),
-                valueColor: AlwaysStoppedAnimation(
-                  percentage > 100 ? AppColors.expenseColor : category.color,
-                ),
+            LinearProgressIndicator(
+              borderRadius: BorderRadius.circular(100),
+              value: progress,
+              minHeight: 6.h,
+              backgroundColor: AppColors.neutralColor,
+              valueColor: AlwaysStoppedAnimation(
+                percentage > 100 ? AppColors.expenseColor : category.color,
               ),
             ),
             SizedBox(height: 10.h),
             Text(
               remaining >= 0
-                  ? '£ ${AppHelpers.formatNumber(remaining)} remaining'
-                  : '£ ${AppHelpers.formatNumber(remaining.abs())} over budget',
-              style: TextStyle(
-                fontSize: 12.sp,
-                color: Colors.white.withAlpha(200),
-              ),
+                  ? '£ ${AppHelpers.formatNumber(remaining)} LEFT'
+                  : '£ ${AppHelpers.formatNumber(remaining.abs())} Over Budget',
+              style: TextStyle(fontSize: 12.sp, color: AppColors.mutedColor),
             ),
           ] else
             Text(
@@ -367,7 +233,7 @@ class BudgetDetailsPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 12.sp,
                 height: 1.5,
-                color: Colors.white.withAlpha(190),
+                color: AppColors.mutedColor,
               ),
             ),
         ],
